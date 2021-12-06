@@ -1,21 +1,26 @@
 package com.techelevator.model;
 
+import java.util.ArrayList;
+
 public class Comic {
 
     private long comicId;
-    private String comicName;
-    private long characterId;
-    private String characterName;
-    private long teamId;
+    private String title;
+    private String imgUrl;
+    private ArrayList<Integer> characterIds;
+    private ArrayList<String> characterNames;
+    private int teamId;
     private String teamName;
-    private long seriesId;
+    private int seriesId;
     private String seriesName;
 
-    public Comic(long comicId, String comicName, long characterId, String characterName, long teamId, String teamName, long seriesId, String seriesName) {
+    public Comic(long comicId, String title, String imgUrl, ArrayList<Integer> characterIds, ArrayList<String> characterNames,
+                 int teamId, String teamName, int seriesId, String seriesName) {
         this.comicId = comicId;
-        this.comicName = comicName;
-        this.characterId = characterId;
-        this.characterName = characterName;
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.characterIds = characterIds;
+        this.characterNames = characterNames;
         this.teamId = teamId;
         this.teamName = teamName;
         this.seriesId = seriesId;
@@ -30,35 +35,43 @@ public class Comic {
         this.comicId = comicId;
     }
 
-    public String getComicName() {
-        return comicName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setComicName(String comicName) {
-        this.comicName = comicName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public long getCharacterId() {
-        return characterId;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setCharacterId(long characterId) {
-        this.characterId = characterId;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public String getCharacterName() {
-        return characterName;
+    public ArrayList<Integer> getCharacterIds() {
+        return characterIds;
     }
 
-    public void setCharacterName(String characterName) {
-        this.characterName = characterName;
+    public void setCharacterIds(ArrayList<Integer> characterIds) {
+        this.characterIds = characterIds;
     }
 
-    public long getTeamId() {
+    public ArrayList<String> getCharacterNames() {
+        return characterNames;
+    }
+
+    public void setCharacterNames(ArrayList<String> characterNames) {
+        this.characterNames = characterNames;
+    }
+
+    public int getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(long teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 
@@ -70,11 +83,11 @@ public class Comic {
         this.teamName = teamName;
     }
 
-    public long getSeriesId() {
+    public int getSeriesId() {
         return seriesId;
     }
 
-    public void setSeriesId(long seriesId) {
+    public void setSeriesId(int seriesId) {
         this.seriesId = seriesId;
     }
 
