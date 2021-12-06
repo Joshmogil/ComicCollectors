@@ -14,7 +14,7 @@ public class JdbcComicDao implements ComicDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+//add to collection
 
     /*
     private Comic mapRowToComic(SqlRowSet rowset) {
