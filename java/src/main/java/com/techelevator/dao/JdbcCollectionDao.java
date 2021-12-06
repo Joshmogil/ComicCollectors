@@ -14,13 +14,15 @@ public class JdbcCollectionDao implements CollectionDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+//create
+
     /*
     private Collection mapRowToCollection(SqlRowSet rowset) {
         Collection collection = new Collection();
         collection.setUserId(rowset.getLong("user_id"));
 
         how to set a list?
-        
+
         return collection;
     }
 
