@@ -25,7 +25,6 @@ CREATE TABLE comics (
 
         comic_id int,
 	title varchar(60) not null,
-	series varchar(60),
 	img_url varchar(185),
 	
         constraint pk_comics primary key (comic_id)
@@ -34,6 +33,7 @@ CREATE TABLE comics (
 CREATE TABLE collections (
 
         collection_id serial,
+        name varchar(60),
 	user_id int not null,
 	
         constraint pk_collections primary key (collection_id),
@@ -59,6 +59,7 @@ CREATE TABLE characters (
         constraint pk_characters primary key (character_id)
 );
 
+
 CREATE TABLE comic_character (
 
         comic_id int not null,
@@ -68,5 +69,23 @@ CREATE TABLE comic_character (
         constraint fk_comic_character_characters foreign key(character_id) references characters(character_id)
         
 );
+
+CREATE TABLE series (
+
+        series_id int,
+	title varchar(60),
+	
+        constraint series_id primary key (series_id)
+);
+
+CREATE TABLE series_comic (
+
+        series_id int not null,
+        comic_id int not null,
+        
+        constraint fk_series_comic_series foreign key(series_id) references series(series_id),
+        constraint fk_series_comic_comic foreign key(comic_id) references comics(comic_id)
+);
+
 
 COMMIT TRANSACTION;

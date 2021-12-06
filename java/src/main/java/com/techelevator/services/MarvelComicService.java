@@ -31,13 +31,13 @@ public class MarvelComicService {
         this.publicKey = publicKey;
         this.timeStamp = (long)1;
     }
-/*
+
     public Comic getComic(long comicId){
         try{
             ResponseEntity<Comic> response =
                     restTemplate.exchange(API_BASE_URL+"");
         }
-    }*/
+    }
 
 
 
