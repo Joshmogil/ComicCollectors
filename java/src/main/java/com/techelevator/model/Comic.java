@@ -7,14 +7,14 @@ public class Comic {
     private long comicId;
     private String title;
     private String imgUrl;
-    private ArrayList<Integer> characterIds;
+    private ArrayList<Long> characterIds;
     private ArrayList<String> characterNames;
-    private int teamId;
+    private long teamId;
     private String teamName;
-    private int seriesId;
+    private long seriesId;
     private String seriesName;
 
-    public Comic(long comicId, String title, String imgUrl, ArrayList<Integer> characterIds, ArrayList<String> characterNames,
+    public Comic(long comicId, String title, String imgUrl, ArrayList<Long> characterIds, ArrayList<String> characterNames,
                  int teamId, String teamName, int seriesId, String seriesName) {
         this.comicId = comicId;
         this.title = title;
@@ -51,11 +51,11 @@ public class Comic {
         this.imgUrl = imgUrl;
     }
 
-    public ArrayList<Integer> getCharacterIds() {
+    public ArrayList<Long> getCharacterIds() {
         return characterIds;
     }
 
-    public void setCharacterIds(ArrayList<Integer> characterIds) {
+    public void setCharacterIds(ArrayList<Long> characterIds) {
         this.characterIds = characterIds;
     }
 
@@ -67,11 +67,11 @@ public class Comic {
         this.characterNames = characterNames;
     }
 
-    public int getTeamId() {
+    public long getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(long teamId) {
         this.teamId = teamId;
     }
 
@@ -83,11 +83,11 @@ public class Comic {
         this.teamName = teamName;
     }
 
-    public int getSeriesId() {
+    public long getSeriesId() {
         return seriesId;
     }
 
-    public void setSeriesId(int seriesId) {
+    public void setSeriesId(long seriesId) {
         this.seriesId = seriesId;
     }
 
