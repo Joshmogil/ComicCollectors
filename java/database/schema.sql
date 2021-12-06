@@ -24,7 +24,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 CREATE TABLE comics (
 
         comic_id int,
-	title varchar(60) not null,
+	comic_title varchar(60) not null,
 	img_url varchar(185),
 	
         constraint pk_comics primary key (comic_id)
@@ -33,7 +33,7 @@ CREATE TABLE comics (
 CREATE TABLE collections (
 
         collection_id serial,
-        name varchar(60),
+        collection_name varchar(60),
 	user_id int not null,
 	
         constraint pk_collections primary key (collection_id),
@@ -54,7 +54,7 @@ CREATE TABLE collection_comic (
 CREATE TABLE characters (
 
         character_id int,
-	name varchar(60) not null,
+	character_name varchar(60) not null,
 	
         constraint pk_characters primary key (character_id)
 );
@@ -73,7 +73,7 @@ CREATE TABLE comic_character (
 CREATE TABLE series (
 
         series_id int,
-	title varchar(60),
+	series_title varchar(60),
 	
         constraint series_id primary key (series_id)
 );
