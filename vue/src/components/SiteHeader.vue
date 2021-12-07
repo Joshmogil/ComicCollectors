@@ -26,9 +26,9 @@ export default {
 }
 .nav{
 font-size: 20px;
-align-content: bottom;
+align-items: flex-end;
 }
 #home{
-  justify-content: left;
+  justify-items: flex-start;
 }
 </style>
