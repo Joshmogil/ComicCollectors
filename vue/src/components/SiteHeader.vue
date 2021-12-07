@@ -1,9 +1,6 @@
 <template>
   <div id="header">
-      <router-link id="home" class="nav" v-bind:to="{ name: 'home' }">Home</router-link>
       <header> Comic Collectors</header>
-            <router-link id="logging" class="nav" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
-      <router-link id="logging" class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
     </div>
 </template>
 
