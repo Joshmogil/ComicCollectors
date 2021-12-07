@@ -10,11 +10,7 @@
 </template>
 
 <style>
-header{
-font: 'Comic Book';
-font-style: italic, bold ;
-align-content: center;
-}
+
  .loginbutton{
 
  }
@@ -22,4 +18,10 @@ align-content: center;
 body{
 
 }
+/* @font-face {
+  font-family: "SF Comic Strip";
+  src: local("SF Comic Strip"),
+ url(./src/Fonts/SFComicStrip-Bold.ttf) format("truetype");
+} */
+
 </style>

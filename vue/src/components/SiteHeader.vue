@@ -10,4 +10,13 @@ export default {
 
 <style>
 
+header{
+    display: flex;
+    justify-content: center;
+    font-size: 80px;
+    font: 'Comic Book','Times New Roman';
+    font-style: italic, bold ;
+
+
+}
 </style>
