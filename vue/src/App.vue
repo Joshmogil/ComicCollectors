@@ -3,6 +3,9 @@
     
     <SiteHeader></SiteHeader>
     <router-view />
+          <router-link id="home" class="nav" v-bind:to="{ name: 'home' }">Home</router-link>
+
+
   </div>
 </template>
 

@@ -6,12 +6,16 @@ const http = axios.create({
 
 export default {
 
+  getAllCollections(){
+    return http.get(`/collections`);
+  },
+  
   get(id) {
     return http.get(`/collections/${id}`);
   },
 
-  addCollection() {
-      return http.post(`/collections`);
+  addCollection(collection) {
+      return http.post(`/collections/${collection.collectionId}`);
   }
 
 }

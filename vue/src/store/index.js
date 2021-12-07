@@ -42,6 +42,9 @@ export default new Vuex.Store({
       state.collection = collection;
       localStorage.setItem('collection',JSON.stringify(collection));
     },
+    SET_ALL_COLLECTIONS(state, data) {
+      state.collections = data;
+    },
     SET_COMIC(state, comic) {
       state.comic = comic;
       localStorage.setItem('comic',JSON.stringify(comic));
