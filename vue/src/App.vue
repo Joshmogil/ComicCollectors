@@ -17,10 +17,10 @@
 <style>
 #app{
   display: grid;
-  grid-template-columns: 
-  1fr 7fr;
-  grid-template-areas: header header,
-  side other;
+  grid-template-columns: 1fr 7fr;
+  grid-template-areas: 
+  "header header"
+  "side other";
 }
 SiteHeader {
   grid-area: header;
