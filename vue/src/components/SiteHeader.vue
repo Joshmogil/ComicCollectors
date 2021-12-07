@@ -31,13 +31,12 @@ font-size: 20px;
 align-items: flex-end;
 }
 #home{
-  display: flex;
-  justify-content: flex-start;
+  justify-items: flex-start;
   
 }
 
 a:visited{
-  color: darkblue;
+  color: #806300;
 }
 
 
