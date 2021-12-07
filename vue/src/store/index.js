@@ -37,6 +37,14 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_COLLECTION(state, collection) {
+      state.collection = collection;
+      localStorage.setItem('collection',JSON.stringify(collection));
+    },
+    SET_COMIC(state, comic) {
+      state.comic = comic;
+      localStorage.setItem('comic',JSON.stringify(comic));
     }
   }
 })

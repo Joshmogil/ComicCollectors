@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import SiteHeader from '../components/SiteHeader'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/header",
+      name: "header",
+      component: SiteHeader
+    }
   ]
 })
 
