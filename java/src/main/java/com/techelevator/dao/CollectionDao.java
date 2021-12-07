@@ -13,7 +13,7 @@ public interface CollectionDao {
     List <Collection> getAllCollectionsByUser (long userId);
 
     //Need to add this in a new jdbcCollectionComic class?
-//    void addComicToCollection (long collectionId, long comicId);
+//
 
     boolean createCollection(String collection_name, long user_id ); //What do we need to pass in to create a collection? userid?
 

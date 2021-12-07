@@ -1,6 +1,7 @@
 package com.techelevator.services;
 
 import com.techelevator.model.Comic;
+import com.techelevator.model.MarvelComic;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -39,18 +40,18 @@ public class MarvelComicService {
         this.timeStamp = (long)1;
     }
 
-    public Comic getComic(long comicId){
+    public MarvelComic getComic(long comicId){
 
-        Comic marvelComic = null;
+        MarvelComic marvelComic = null;
 
         try{
 
             //API base URL = http://gateway.marvel.com/v1/public/comics?ts=
             List<String> marvelAuthInfo = generateAuthInfo();
-            String exchangeUrl = API_BASE_URL + marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(1)+"&hash"+marvelAuthInfo.get(3);
+            String exchangeUrl = API_BASE_URL + marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
 
-            ResponseEntity<Comic> response =
-                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), Comic.class);
+            ResponseEntity<MarvelComic> response =
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), MarvelComic.class);
             marvelComic = response.getBody();
 
             //comic class needs an id, title, thumbnail

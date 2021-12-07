@@ -11,7 +11,7 @@ class ApplicationTests {
     void contextLoads() {
     }
 
-    @Test
+    /*@Test
     void getComicRetrievesComic(){
         String API_BASE_URL = "http://gateway.marvel.com/v1/public/comics?ts=";
         String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";
@@ -21,6 +21,6 @@ class ApplicationTests {
         MarvelComicService comicService = new MarvelComicService(API_BASE_URL,privateKey,publicKey);
 
         comicService.getComic(89541);
-    }
+    }*/
 
 }

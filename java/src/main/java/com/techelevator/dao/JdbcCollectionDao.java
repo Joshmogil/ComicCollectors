@@ -66,19 +66,6 @@ public class JdbcCollectionDao implements CollectionDao{
         return collections;
     }
 
-    //Need to make jadbcCollectionComic class I think
-
-    /*@Override
-    public void addComicToCollection(long collection_id, long comic_id) {
-
-        String sql = "INSERT INTO collection_comic (collection_id, comic_id) " +
-                     "VALUES (?, ?);";
-
-    *//* NOT SURE WHAT ELSE WE WANT/NEED HERE *//*
-
-    }*/
-
-
     @Override
     public boolean createCollection(String collection_name, long user_id) {
 
