@@ -7,6 +7,8 @@ public class Collection {
     private String collectionName;
     private long userId;
 
+    public Collection() {}
+
     public Collection(long collectionId, String collectionName, long userId) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;

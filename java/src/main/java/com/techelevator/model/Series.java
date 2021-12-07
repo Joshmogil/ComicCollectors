@@ -5,6 +5,8 @@ public class Series {
     private long seriesId;
     private String seriesTitle;
 
+    public Series() {}
+
     public Series(long seriesId, String seriesTitle) {
         this.seriesId = seriesId;
         this.seriesTitle = seriesTitle;
