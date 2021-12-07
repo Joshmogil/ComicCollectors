@@ -1,10 +1,16 @@
 package com.techelevator.services;
 
 import com.techelevator.model.Comic;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -25,6 +31,7 @@ public class MarvelComicService {
     private Long timeStamp;
 
 
+    //grabs a comic by comic id ex) a thor comic : 89541
     public MarvelComicService(String API_BASE_URL, String privateKey,String publicKey){
         this.API_BASE_URL = API_BASE_URL;
         this.privateKey = privateKey;
@@ -33,18 +40,38 @@ public class MarvelComicService {
     }
 
     public Comic getComic(long comicId){
+
+        Comic marvelComic = null;
+
         try{
+
+            //API base URL = http://gateway.marvel.com/v1/public/comics?ts=
+            List<String> marvelAuthInfo = generateAuthInfo();
+            String exchangeUrl = API_BASE_URL + marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(1)+"&hash"+marvelAuthInfo.get(3);
+
             ResponseEntity<Comic> response =
-                    restTemplate.exchange(API_BASE_URL+"");
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), Comic.class);
+            marvelComic = response.getBody();
+
+            //comic class needs an id, title, thumbnail
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            System.out.println(e);
         }
+
+        return marvelComic;
     }
 
-
+    private HttpEntity<Void> makeHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        //headers.setBearerAuth(currentUser.getToken());
+        return new HttpEntity<>(headers);
+    }
 
     //This function needs to be called to get the timestamp, private key, public key, and hash of (ts + private key + public key)
     //These items are required to make a call to the marvel API from a backend server
     //They are returned in a List size 4 where element order is [0] = timestamp, [1] = private key, [2] = public key, [3] = hash of all three
-    public List<String> generateAuthInfo(String privateKey, String publicKey){
+    private List<String> generateAuthInfo(){
 
         List<String> listOfAuthInfo=new ArrayList<String>();
         timeStamp += 1; //global timestamp auto incremented each time function is called, Ie. a request to marvel api is made
