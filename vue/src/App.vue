@@ -18,7 +18,6 @@
 #app{
   display: grid;
   grid-template-columns: 
-  4fr 4fr,
   1fr 7fr;
   grid-template-areas: header header,
   side other;
