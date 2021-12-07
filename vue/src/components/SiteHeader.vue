@@ -1,8 +1,5 @@
 <template>
-   <div>
-
-   </div>
-
+  <header> Comic Collectors</header>
 </template>
 
 <script>

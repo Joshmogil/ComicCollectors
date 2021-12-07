@@ -7,3 +7,18 @@
     <router-view />
   </div>
 </template>
+
+<style>
+header{
+font: 'Comic Book';
+font-style: italic, bold ;
+align-content: center;
+}
+ .loginbutton{
+
+ }
+
+body{
+
+}
+</style>
