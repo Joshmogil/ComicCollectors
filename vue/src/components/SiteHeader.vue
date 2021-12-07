@@ -1,5 +1,9 @@
 <template>
-  <header> Comic Collectors</header>
+  <div id="header">
+      <router-link class="nav" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <header> Comic Collectors</header>
+      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+    </div>
 </template>
 
 <script>
@@ -10,14 +14,18 @@ export default {
 
 <style>
 
-header{
+#header{
     display: flex;
     justify-content: center;
     font-size: 80px;
     font: 'Comic Book','Times New Roman';
     font-style: italic, bold ;
-    background-color: yellow;
+    background-color: #DAD53A;
     color: black;
 
+}
+.nav{
+font-size: 20px;
+align-content: bottom;
 }
 </style>
