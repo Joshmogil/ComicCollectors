@@ -23,8 +23,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 
 CREATE TABLE comics (
 
-        comic_id serial,
-        marvel_id int,
+        comic_id int,
 	comic_title varchar(60) not null,
 	img_url varchar(185),
 	
