@@ -22,13 +22,21 @@ export default {
     font-style: italic, bold ;
     background-color: #DAD53A;
     color: black;
+    
 
 }
 .nav{
+  display: flex;
 font-size: 20px;
 align-items: flex-end;
 }
 #home{
-  justify-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  
+}
+
+a:visited{
+  color: darkblue;
 }
 </style>
