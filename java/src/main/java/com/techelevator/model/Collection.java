@@ -1,17 +1,16 @@
 package com.techelevator.model;
 
-import java.util.ArrayList;
 
 public class Collection {
 
     private long collectionId;
     private String collectionName;
-    private ArrayList<Comic> comics;
+    private long userId;
 
-    public Collection(long collectionId, String collectionName, ArrayList<Comic> comics) {
+    public Collection(long collectionId, String collectionName, long userId) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;
-        this.comics = comics;
+        this.userId = userId;
     }
 
     public long getCollectionId() {
@@ -30,11 +29,20 @@ public class Collection {
         this.collectionName = collectionName;
     }
 
-    public ArrayList<Comic> getComics() {
-        return comics;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setComics(ArrayList<Comic> comics) {
-        this.comics = comics;
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "collectionId=" + collectionId +
+                ", collectionName='" + collectionName + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }
