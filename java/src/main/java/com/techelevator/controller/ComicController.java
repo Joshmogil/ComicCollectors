@@ -53,7 +53,7 @@ public class ComicController {
         return comicFromMarvel;
     }
 
-    //Get list of comics in a collection by collectionID **NOT WORKING**
+    //Get list of comics in a collection by collectionID **NOT WORKING - NULL POINTER EXCEPTION**
     @RequestMapping(path = "collections/{collectionId}", method = RequestMethod.GET)
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable long collectionId) {
 
