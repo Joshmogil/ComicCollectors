@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/")
 //@PreAuthorize("isAuthenticated()")
 
 
@@ -26,13 +27,16 @@ public class ComicController {
 
     public ComicController() {}
 
-    public ComicController (CollectionComicDao collectionComicDao ){this.collectionComicDao = collectionComicDao;}
+    public ComicController (CollectionComicDao collectionComicDao, ComicDao comicDao ){
+        this.collectionComicDao = collectionComicDao;
+        this.comicDao = comicDao;
+    }
 
-    String API_BASE_URL = "http://gateway.marvel.com/v1/public/comics?ts=";
-    String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";
-    String publicKey = "20afbe7ebe8ad8af2c91b02a275e06cc";
+    // String API_BASE_URL = "http://gateway.marvel.com/v1/public/comics?ts=";
+    // String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";
+    // String publicKey = "20afbe7ebe8ad8af2c91b02a275e06cc";
 
-    MarvelComicService marvelComicService = new MarvelComicService(API_BASE_URL, privateKey,publicKey);
+    // MarvelComicService marvelComicService = new MarvelComicService(API_BASE_URL, privateKey,publicKey);
 
     /*@RequestMapping(path = "comic", method = RequestMethod.POST)
     public Boolean createTransfer(@RequestBody CollectionComic collectionComic) {
@@ -44,14 +48,6 @@ public class ComicController {
     }*/
 
 
-    //Test
-    @RequestMapping(path = "test/{comicId}", method = RequestMethod.GET)//make a transfer not found exception
-    public MarvelComic testGetComicId(@PathVariable long comicId){
-
-        MarvelComic comicFromMarvel = marvelComicService.getComic(comicId);
-
-        return comicFromMarvel;
-    }
 
     //Get list of comics in a collection by collectionID **NOT WORKING**
     @RequestMapping(path = "collections/{collectionId}", method = RequestMethod.GET)
@@ -65,8 +61,7 @@ public class ComicController {
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
     public Comic getSingleComicById(@PathVariable long comicId) {
 
-        Comic comic = comicDao.getSingleComicById(comicId);
-        return comic;
+        return comicDao.getSingleComicById(comicId);
     }
 
 
