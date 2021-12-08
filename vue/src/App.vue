@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    
+  <div id="app">  
     <SiteHeader></SiteHeader>
     <div class="side-nav">
       <SidebarItems></SidebarItems>
@@ -14,7 +13,7 @@
 </template>
 
   <script>
-    
+
 
   </script>
 
