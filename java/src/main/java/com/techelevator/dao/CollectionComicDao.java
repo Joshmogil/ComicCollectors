@@ -1,7 +1,11 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.CollectionComic;
+import com.techelevator.model.Comic;
+
+import java.util.List;
+
 public interface CollectionComicDao {
 
-    void addComicToCollection (long collectionId, long comicId);
-
+    List <Comic> getAllComicsInCollectionByCollectionId(long collectionId);
 }
