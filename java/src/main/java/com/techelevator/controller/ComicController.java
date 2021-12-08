@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@PreAuthorize("permitAll")
 @RestController
 @CrossOrigin
 @RequestMapping("http://localhost:8080")
