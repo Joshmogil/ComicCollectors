@@ -6,11 +6,11 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JDBCSeriesDao implements SeriesDao {
+public class JdbcSeriesDao implements SeriesDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JDBCSeriesDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public JdbcSeriesDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
     public Series getSingleSeriesByID(long series_id) {
