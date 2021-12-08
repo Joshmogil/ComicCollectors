@@ -2,6 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Series;
 
-public interface TempSeriesDao {
+public interface SeriesDao {
     Series getSingleSeriesByID(long seriesId);
 }
