@@ -24,6 +24,8 @@
         <button class="btn btn-submit" v-on:click="saveNewCollection">Save</button>
         <button class="btn btn-cancel" v-on:click="showNewCollection = !showNewCollection">Cancel</button>
       </form>
+
+      
     </div>
   </div>
 </template>
@@ -95,6 +97,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
 
 </style>

@@ -3,39 +3,34 @@
     
     <SiteHeader></SiteHeader>
     <div class="side-nav">
-          <SidebarItems></SidebarItems>
-            </div>
-
-           <router-view />
-
-
-
+      <SidebarItems></SidebarItems>
+    </div>
+      <nav class="links">
+        <router-link v-bind:to="{ name: 'login' }">Login</router-link> |
+        <router-link v-bind:to="{ name: 'collection' }">Collection</router-link>
+      </nav>
+         <router-view />
   </div>
 </template>
 
+  <script>
+    
+
+  </script>
+
 <style>
-#app{
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  grid-template-areas: 
-  "header header"
-  "side other";
+
+
+.links{
+  display: flex;
+  flex-direction: column;
 }
-SiteHeader {
-  grid-area: header;
-}
-.side-nav{
-  grid-area: side;
-justify-items: flex-start;
-}
-router-view{
-  grid-area: other;
-}
+
 /* @font-face {
   font-family: "SF Comic Strip";
   src: local("SF Comic Strip"),
  url(./src/Fonts/SFComicStrip-Bold.ttf) format("truetype");
-} */
+ */
 
 
 
