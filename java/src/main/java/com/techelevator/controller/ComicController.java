@@ -2,9 +2,14 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionComicDao;
 import com.techelevator.model.CollectionComic;
+import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class ComicController {
 
     private CollectionComicDao collectionComicDao;
+
+    public ComicController() {}
 
     public ComicController (CollectionComicDao collectionComicDao ){this.collectionComicDao = collectionComicDao;}
 
@@ -37,6 +44,13 @@ public class ComicController {
         MarvelComic comicFromMarvel = marvelComicService.getComic(comicId);
 
         return comicFromMarvel;
+    }
+
+    @RequestMapping(path = "collections/{collectionId}", method = RequestMethod.GET)
+    public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable long collectionId) {
+
+        List<Comic> comics = collectionComicDao.getAllComicsInCollectionByCollectionId(collectionId);
+        return comics;
     }
 
 
