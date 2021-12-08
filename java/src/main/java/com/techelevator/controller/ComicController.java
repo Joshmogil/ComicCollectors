@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("http://localhost:8080/")
+@RequestMapping("http://localhost:8080")
 //@PreAuthorize("isAuthenticated()")
 
 
@@ -50,7 +50,7 @@ public class ComicController {
 
 
     //Get list of comics in a collection by collectionID **NOT WORKING**
-    @RequestMapping(path = "collections/{collectionId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/collections/{collectionId}", method = RequestMethod.GET)
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable long collectionId) {
 
         List<Comic> comics = collectionComicDao.getAllComicsInCollectionByCollectionId(collectionId);
@@ -58,7 +58,7 @@ public class ComicController {
     }
 
     //Get single comic by id **NOT WORKING - NULL POINTER EXCEPTION**
-    @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/comics/{comicId}", method = RequestMethod.GET)
     public Comic getSingleComicById(@PathVariable long comicId) {
 
         return comicDao.getSingleComicById(comicId);
