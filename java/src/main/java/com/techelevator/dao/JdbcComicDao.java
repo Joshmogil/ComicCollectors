@@ -21,7 +21,7 @@ public class JdbcComicDao implements ComicDao {
     }
 
     @Override
-    public Comic getSingleComicById(long comic_id) {
+    public Comic getSingleComicById(long comicId) {
 
         Comic comic = null;
 
@@ -29,7 +29,7 @@ public class JdbcComicDao implements ComicDao {
                      "FROM comics " +
                      "WHERE comic_id = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comic_id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicId);
         if (results.next()) {
             comic = mapRowToComics(results);
         }
@@ -67,6 +67,7 @@ public class JdbcComicDao implements ComicDao {
         Comic comic = new Comic();
 
         comic.setComicId(rowSet.getLong("comic_id"));
+        comic.setMarvelId(rowSet.getLong("marvel_id"));
         comic.setComicTitle(rowSet.getString("comic_title"));
         comic.setImgUrl(rowSet.getString("img_url"));
 

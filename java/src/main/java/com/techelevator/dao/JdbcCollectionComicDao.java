@@ -20,7 +20,7 @@ public class JdbcCollectionComicDao implements CollectionComicDao {
     public List<Comic> getAllComicsInCollectionByCollectionId(long collection_id) {
         List <Comic> comics = new ArrayList<>();
 
-        String sql = "SELECT c.comic_id, c.comic_title, c.img_url FROM comics c " +
+        String sql = "SELECT c.comic_id, c.marvel_id, c.comic_title, c.img_url FROM comics c " +
                      "JOIN collection_comic l ON c.comic_id = l.comic_id" +
                      "WHERE collection_id = ?;";
 
@@ -47,6 +47,7 @@ public class JdbcCollectionComicDao implements CollectionComicDao {
         Comic comic = new Comic();
 
         comic.setComicId(rowSet.getLong("comic_id"));
+        comic.setMarvelId(rowSet.getLong("marvel_id"));
         comic.setComicTitle(rowSet.getString("comic_title"));
         comic.setImgUrl(rowSet.getString("img_url"));
 
