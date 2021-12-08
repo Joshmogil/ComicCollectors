@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -84,17 +85,25 @@ public class MarvelComicService {
         try {
             String hashString = timeStamp+privateKey+publicKey;
 
-            byte[] bytesOfMessage = hashString.getBytes("UTF-8");
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] theMD5digest = md.digest(bytesOfMessage);
 
-            String MD5ByteToString = new String(theMD5digest);
-            listOfAuthInfo.add(MD5ByteToString);
+            byte[] messageDigest = md.digest(hashString.getBytes());
 
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+
+            listOfAuthInfo.add(hashtext);
+
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             System.out.println("generateAuthInfo in MarvelComicService failed at generating hash");
         }
+
+        System.out.println(listOfAuthInfo.toString());
 
         return listOfAuthInfo;
 
