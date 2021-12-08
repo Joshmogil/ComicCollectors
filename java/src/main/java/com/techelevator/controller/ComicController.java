@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
+//@PreAuthorize("isAuthenticated()")
 @PreAuthorize("permitAll")
 @RestController
 @CrossOrigin
 @RequestMapping("http://localhost:8080")
-//@PreAuthorize("isAuthenticated()")
-
-
 public class ComicController {
 
     private CollectionComicDao collectionComicDao;
@@ -59,10 +59,9 @@ public class ComicController {
         return comics;
     }
 
-    //Get single comic by id **NOT WORKING - NULL POINTER EXCEPTION**
+    //Get single comic by id **NOT WORKING - 404**
     @RequestMapping(path = "/comics/{comicId}", method = RequestMethod.GET)
     public Comic getSingleComicById(@PathVariable long comicId) {
-
         return comicDao.getSingleComicById(comicId);
     }
 
