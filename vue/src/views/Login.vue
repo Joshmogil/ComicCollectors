@@ -1,7 +1,7 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="Promt">Please Sign In</h1>
       <div
         class="alert alert-danger"
         role="alert"
@@ -22,6 +22,7 @@
         required
         autofocus
       />
+      <div class="password">
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -31,6 +32,7 @@
         v-model="user.password"
         required
       />
+      </div>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
     </form>
@@ -74,3 +76,17 @@ export default {
   }
 };
 </script>
+
+<style>
+.text-center{
+  display: flex;
+ justify-content: flex-start;
+
+}
+
+.Promt{
+  display: flex;
+  justify-content: start;
+}
+
+</style>
