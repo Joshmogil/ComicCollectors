@@ -56,6 +56,7 @@ public class ComicController {
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable long collectionId) {
 
         List<Comic> comics = collectionComicDao.getAllComicsInCollectionByCollectionId(collectionId);
+
         return comics;
     }
 

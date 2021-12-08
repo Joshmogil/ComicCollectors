@@ -19,7 +19,8 @@ export default {
     font: 'Comic Book','Times New Roman';
     font-style: italic, bold ;
     background-color: #DAD53A;
-    color: black;
+    color: rgb(0, 0, 0);
+    background-image: url("../assets/diamond.jpg");
     
 
 }
