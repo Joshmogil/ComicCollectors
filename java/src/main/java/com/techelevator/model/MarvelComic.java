@@ -8,14 +8,27 @@ import java.util.Map;
 
 public class MarvelComic {
 
+
     private String copyright;
-    private Data data;
+    private Map<String,String> data;
+    private Long id;
+    private String title;
+    private String description;
+    private String thumbnail;
+    private String series;
 
-    public MarvelComic() {}
 
-    public MarvelComic(String copyright, Data data) {
+    public MarvelComic() {
+    }
+
+    public MarvelComic(String copyright, Map<String,String> data, Long id, String title, String series, String description, String thumbnail) {
         this.copyright = copyright;
         this.data = data;
+        this.id = id;
+        this.title = title;
+        this.series = series;
+        this.description = description;
+        this.thumbnail = thumbnail;
     }
 
     public String getCopyright() {
@@ -26,59 +39,11 @@ public class MarvelComic {
         this.copyright = copyright;
     }
 
-    public Data getData() {
-        return data;
-    }
-
-    public void setData(Data data) {
-        this.data = data;
-    }
-}
-
-class Data{
-
-    Data (){}
-
-    public Data(Results results) {
-        this.results = results;
-    }
-
-    private Results results;
-
-    public Results getResults() {
-        return results;
-    }
-
-    public void setResults(Results results) {
-        this.results = results;
-    }
-}
-
-class Results{
-
-    @JsonProperty("id")
-    private Integer id;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("description")
-    private String description;
-
-    private Thumbnail thumbnail;
-
-    Results () {}
-
-    public Results(Integer id, String title, String description, Thumbnail thumbnail) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.thumbnail = thumbnail;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -90,6 +55,14 @@ class Results{
         this.title = title;
     }
 
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -98,45 +71,166 @@ class Results{
         this.description = description;
     }
 
-    public Thumbnail getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(Thumbnail thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
-}
 
-class Thumbnail{
-
-    @JsonProperty("path")
-    private String path;
-    @JsonProperty("extension")
-    private String extension;
-
-    Thumbnail () {}
-
-    public Thumbnail(String path, String extension) {
-        this.path = path;
-        this.extension = extension;
+    public Map<String, String> getData() {
+        return data;
     }
 
-    public String getPath() {
-        return path;
+    public void setData(Map<String, String> data) {
+        this.data = data;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                "data=" + data +
+                "copyright=" + copyright +
+                "title=" + title +
+                "description=" + description +
+                "series=" + series +
+                "thumbnail=" + thumbnail +
+                '}';
     }
 }
+
+//
+//    private String copyright;
+//    private Data data;
+//
+//    public MarvelComic() {}
+//
+//    public MarvelComic(String copyright, Data data) {
+//        this.copyright = copyright;
+//        this.data = data;
+//    }
+//
+//    public String getCopyright() {
+//        return copyright;
+//    }
+//
+//    public void setCopyright(String copyright) {
+//        this.copyright = copyright;
+//    }
+//
+//    public Data getData() {
+//        return data;
+//    }
+//
+//    public void setData(Data data) {
+//        this.data = data;
+//    }
+//}
+//
+//class Data{
+//
+//    Data (){}
+//
+//    public Data(Results results) {
+//        this.results = results;
+//    }
+//
+//    private Results results;
+//
+//    public Results getResults() {
+//        return results;
+//    }
+//
+//    public void setResults(Results results) {
+//        this.results = results;
+//    }
+//}
+//
+//class Results{
+//
+//    @JsonProperty("id")
+//    private Integer id;
+//    @JsonProperty("title")
+//    private String title;
+//    @JsonProperty("description")
+//    private String description;
+//
+//    private Thumbnail thumbnail;
+//
+//    Results () {}
+//
+//    public Results(Integer id, String title, String description, Thumbnail thumbnail) {
+//        this.id = id;
+//        this.title = title;
+//        this.description = description;
+//        this.thumbnail = thumbnail;
+//    }
+//
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public Thumbnail getThumbnail() {
+//        return thumbnail;
+//    }
+//
+//    public void setThumbnail(Thumbnail thumbnail) {
+//        this.thumbnail = thumbnail;
+//    }
+//}
+//
+//class Thumbnail{
+//
+//    @JsonProperty("path")
+//    private String path;
+//    @JsonProperty("extension")
+//    private String extension;
+//
+//    Thumbnail () {}
+//
+//    public Thumbnail(String path, String extension) {
+//        this.path = path;
+//        this.extension = extension;
+//    }
+//
+//    public String getPath() {
+//        return path;
+//    }
+//
+//    public void setPath(String path) {
+//        this.path = path;
+//    }
+//
+//    public String getExtension() {
+//        return extension;
+//    }
+//
+//    public void setExtension(String extension) {
+//        this.extension = extension;
+//    }
+//}
 
 
 
