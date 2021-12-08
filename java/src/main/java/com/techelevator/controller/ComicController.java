@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("http://localhost:8080/")
 //@PreAuthorize("isAuthenticated()")
 
 
