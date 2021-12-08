@@ -1,17 +1,16 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Character;
 import com.techelevator.model.Series;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JDBCSeriesDAO implements SeriesDAO{
+public class JDBCSeriesDao implements SeriesDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JDBCSeriesDAO(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public JDBCSeriesDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
     public Series getSingleSeriesByID(long series_id) {

@@ -49,13 +49,10 @@ public class ComicController {
 
 
 
-<<<<<<< HEAD
+
     //Get list of comics in a collection by collectionID **NOT WORKING - NULL POINTER EXCEPTION**
     @RequestMapping(path = "collections/{collectionId}", method = RequestMethod.GET)
-=======
-    //Get list of comics in a collection by collectionID **NOT WORKING**
-    @RequestMapping(path = "/collections/{collectionId}", method = RequestMethod.GET)
->>>>>>> d9b6a1b60af786b4c9a52d6f465e2a3cd3be2048
+
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable long collectionId) {
 
         List<Comic> comics = collectionComicDao.getAllComicsInCollectionByCollectionId(collectionId);
