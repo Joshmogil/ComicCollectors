@@ -1,38 +1,36 @@
 package com.techelevator.dao;
 
+
 import com.techelevator.model.Collection;
-import com.techelevator.model.Comic;
-import com.techelevator.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcCollectionDao implements CollectionDao{
+public class JdbcCollectionDataDao implements CollectionDataDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
+    public JdbcCollectionDataDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Collection getSingleCollectionByCollectionId(long collection_id) {
-        Collection collection = null;
+    public Collection getCollectionById(long collectionId) {
+     Collection collection = null;
 
-        String sql = "SELECT * " +
-                     "FROM collections " +
-                     "WHERE collection_id = ?;";
+     String sql = "SELECT * " +
+             "FROM collections " +
+             "WHERE collection_id =?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collection_id);
-        if (results.next()) {
-            collection = mapRowToCollections(results);
-        }
+     SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
+     if (results.next()) {
+         collection = mapRowToCollections(results);
+     }
         return collection;
     }
 
@@ -47,20 +45,21 @@ public class JdbcCollectionDao implements CollectionDao{
             Collection collection = mapRowToCollections(results);
             collections.add(collection);
         }
+
         return collections;
     }
 
     @Override
-    public List<Collection> getAllCollectionsByUser(long user_id) {
+    public List<Collection> getUserCollections(long userId) {
         List <Collection> collections = new ArrayList<>();
 
         String sql = "SELECT * " +
-                     "FROM collections " +
-                     "WHERE user_id = ?;";
+                "FROM collections " +
+                "WHERE user_id = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
-            Collection collection = mapRowToCollections(results);
+            Collection collection= mapRowToCollections(results);
             collections.add(collection);
         }
         return collections;
@@ -70,33 +69,21 @@ public class JdbcCollectionDao implements CollectionDao{
     public boolean createCollection(String collection_name, long user_id) {
 
         String sql = "INSERT INTO collections (collection_name, user_id) " +
-                     "VALUES (?, ?) RETURNING collection_id;";
+                "VALUES (?, ?) RETURNING collection_id";
+
         Integer newCollectionId;
+
         try {
             newCollectionId = jdbcTemplate.queryForObject(sql, Integer.class, collection_name, user_id);
         } catch (DataAccessException e) {
             return false;
         }
+
         return true;
+
     }
-
-
-//create
-
-    /*
-    private Collection mapRowToCollection(SqlRowSet rowset) {
-        Collection collection = new Collection();
-        collection.setUserId(rowset.getLong("user_id"));
-
-        how to set a list?
-
-        return collection;
-    }
-
-     */
 
     private Collection mapRowToCollections(SqlRowSet rowSet) {
-
         Collection collection = new Collection();
 
         collection.setCollectionId(rowSet.getLong("collection_id"));
@@ -105,5 +92,4 @@ public class JdbcCollectionDao implements CollectionDao{
 
         return collection;
     }
-
 }

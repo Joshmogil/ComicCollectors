@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class XX_JdbcComicDao implements XX_ComicDao {
+public class
+XX_JdbcComicDao implements XX_ComicDao {
 
     private JdbcTemplate jdbcTemplate;
 
