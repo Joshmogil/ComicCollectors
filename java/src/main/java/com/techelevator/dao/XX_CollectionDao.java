@@ -4,7 +4,7 @@ import com.techelevator.model.Collection;
 
 import java.util.List;
 
-public interface CollectionDao {
+public interface XX_CollectionDao {
 
     Collection getSingleCollectionByCollectionId (long collectionId);
 

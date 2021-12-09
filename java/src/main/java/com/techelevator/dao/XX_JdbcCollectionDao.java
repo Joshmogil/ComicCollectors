@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcCollectionDao implements CollectionDao{
+public class XX_JdbcCollectionDao implements XX_CollectionDao{
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
+    public XX_JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
