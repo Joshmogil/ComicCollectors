@@ -19,14 +19,14 @@ import java.util.List;
 @PreAuthorize("permitAll")
 @RestController
 @CrossOrigin
-public class ComicController {
+public class XX_ComicController {
 
     private CollectionComicDao collectionComicDao;
     private XX_ComicDao comicDao;
 
-    public ComicController() {}
+    public XX_ComicController() {}
 
-    public ComicController (CollectionComicDao collectionComicDao, XX_ComicDao comicDao ){
+    public XX_ComicController (CollectionComicDao collectionComicDao, XX_ComicDao comicDao ){
         this.collectionComicDao = collectionComicDao;
         this.comicDao = comicDao;
     }
@@ -60,12 +60,10 @@ public class ComicController {
     }
 
     //Get single comic by id **NOT WORKING - 404**
-    @RequestMapping(path = "/comics/{comicId}", method = RequestMethod.GET)
-    public Comic getSingleComicById(@PathVariable long comicId) {
-        return comicDao.getSingleComicById(comicId);
-    }
-
-
+//    @RequestMapping(path = "/comics/{comicId}", method = RequestMethod.GET)
+//    public Comic getSingleComicById(@PathVariable long comicId) {
+//        return comicDao.getSingleComicById(comicId);
+//    }
 
 
 
