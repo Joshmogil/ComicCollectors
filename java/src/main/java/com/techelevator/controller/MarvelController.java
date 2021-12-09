@@ -22,7 +22,7 @@ public class MarvelController {
     @RequestMapping(path = "test/{comicId}", method = RequestMethod.GET)//make a transfer not found exception
     public MarvelComic testGetComicId(@PathVariable long comicId){
 
-        MarvelComic comicFromMarvel = marvelComicService.getComic(comicId);
+        MarvelComic comicFromMarvel = null;
 
         return comicFromMarvel;
     }
