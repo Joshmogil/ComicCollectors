@@ -1,7 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionComicDao;
-import com.techelevator.dao.ComicDao;
+import com.techelevator.dao.XX_ComicDao;
 import com.techelevator.model.CollectionComic;
 import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelComic;
@@ -19,15 +19,14 @@ import java.util.List;
 @PreAuthorize("permitAll")
 @RestController
 @CrossOrigin
-@RequestMapping("http://localhost:8080")
 public class ComicController {
 
     private CollectionComicDao collectionComicDao;
-    private ComicDao comicDao;
+    private XX_ComicDao comicDao;
 
     public ComicController() {}
 
-    public ComicController (CollectionComicDao collectionComicDao, ComicDao comicDao ){
+    public ComicController (CollectionComicDao collectionComicDao, XX_ComicDao comicDao ){
         this.collectionComicDao = collectionComicDao;
         this.comicDao = comicDao;
     }

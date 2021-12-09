@@ -4,7 +4,7 @@ import com.techelevator.model.Comic;
 
 import java.util.List;
 
-public interface ComicDao {
+public interface XX_ComicDao {
 
     Comic getSingleComicById(long comicId);
 

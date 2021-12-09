@@ -1,7 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionComicDao;
-import com.techelevator.dao.ComicDao;
+import com.techelevator.dao.XX_ComicDao;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class MarvelController {
     private CollectionComicDao collectionComicDao;
-    private ComicDao comicDao;
+    private XX_ComicDao comicDao;
 
     public MarvelController() {}
 

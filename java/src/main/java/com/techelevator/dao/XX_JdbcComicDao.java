@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcComicDao implements ComicDao {
+public class XX_JdbcComicDao implements XX_ComicDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcComicDao(JdbcTemplate jdbcTemplate) {
+    public XX_JdbcComicDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
