@@ -65,19 +65,23 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
         return collections;
     }
 
-//    @Override
-//    public Collection createCollection(String collection_name, long user_id) {
-//
-//        String sql = "INSERT INTO collections (collection_name, user_id) " +
-//                "VALUES (?, ?) RETURNING collection_id;";
-//        Integer newCollectionId;
-//        try{
-//            newCollectionId = jdbcTemplate.queryForObject(sql, Integer.class, collection_name, user_id);
-//        } catch (DataAccessException e) {
-//            System.out.println("Collection Creation Failed");
-//        }
-//
-//    }
+    @Override
+    public boolean createCollection(String collection_name, long user_id) {
+
+        String sql = "INSERT INTO collections (collection_name, user_id) " +
+                "VALUES (?, ?) RETURNING collection_id";
+
+        Integer newCollectionId;
+
+        try {
+            newCollectionId = jdbcTemplate.queryForObject(sql, Integer.class, collection_name, user_id);
+        } catch (DataAccessException e) {
+            return false;
+        }
+
+        return true;
+
+    }
 
     private Collection mapRowToCollections(SqlRowSet rowSet) {
         Collection collection = new Collection();

@@ -12,5 +12,5 @@ public interface CollectionDataDao {
 
     List <Collection> getUserCollections(long userId);
 
-//    Collection createCollection(String collection_name, long user_id);
+    boolean createCollection(String collection_name, long user_id);
 }

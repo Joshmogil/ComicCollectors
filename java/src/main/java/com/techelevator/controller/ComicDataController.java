@@ -4,9 +4,13 @@ import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.Collection;
 import com.techelevator.model.Comic;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -40,10 +44,19 @@ public class ComicDataController {
         return collectiondd.getUserCollections(userId);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "collections", method = RequestMethod.POST)
+    public boolean createCollection(@RequestBody Collection newCollection ){
+        if (!collectiondd.createCollection(newCollection.getCollectionName(), newCollection.getUserId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Collection Creation Failed");
+        }
+        return true;
+    }
+
+//    @ResponseStatus(HttpStatus.CREATED)
 //    @RequestMapping(path = "collections", method = RequestMethod.POST)
-//    public Collection createCollection(@RequestBody Collection collection){
-//        Collection createdCollection = collectiondd.createCollection(collection.getCollectionName(),collection.getUserId());
-//        return createdCollection;
+//    public boolean createCollection(@RequestBody String collectionName, Principal user) {
+//        return collectiondd.createCollection(collectionName, user.getId())
 //    }
 
 }
