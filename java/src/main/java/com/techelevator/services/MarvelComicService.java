@@ -2,6 +2,8 @@ package com.techelevator.services;
 
 import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelComic;
+import net.minidev.json.JSONObject;
+import netscape.javascript.JSObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -54,6 +56,9 @@ public class MarvelComicService {
             ResponseEntity<MarvelComic> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), MarvelComic.class);
             marvelComic = response.getBody();
+            System.out.println("Response body: " +response.getBody());
+            System.out.println("Response class: " + response.getBody().getClass());
+            System.out.println("Response body to string: " + response.getBody().toString());
 
             //comic class needs an id, title, thumbnail
 
@@ -63,6 +68,39 @@ public class MarvelComicService {
 
         return marvelComic;
     }
+
+    public JSONObject getComicJsonObj(long comicId){
+
+        JSONObject marvelComicJsonObj = null;
+
+        try{
+
+            //API base URL = http://gateway.marvel.com/v1/public/comics?ts=
+            List<String> marvelAuthInfo = generateAuthInfo();
+            String exchangeUrl = API_BASE_URL + marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+
+            ResponseEntity<JSONObject> response =
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), JSONObject.class);
+            marvelComicJsonObj = response.getBody();
+            System.out.println("Response body: " +response.getBody());
+            System.out.println("Response class: " + response.getBody().getClass());
+            System.out.println("Response body to string: " + response.getBody().toString());
+
+            //comic class needs an id, title, thumbnail
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            System.out.println(e);
+        }
+
+        return marvelComicJsonObj;
+    }
+
+
+
+
+
+
+
 
     private HttpEntity<Void> makeHeaders() {
         HttpHeaders headers = new HttpHeaders();
