@@ -1,19 +1,17 @@
-package com.techelevator.dao;
+package com.techelevator.XX;
 
+import com.techelevator.XX.XX_CollectionDao;
 import com.techelevator.model.Collection;
-import com.techelevator.model.Comic;
-import com.techelevator.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class XX_JdbcCollectionDao implements XX_CollectionDao{
+public class XX_JdbcCollectionDao implements XX_CollectionDao {
 
     private JdbcTemplate jdbcTemplate;
 

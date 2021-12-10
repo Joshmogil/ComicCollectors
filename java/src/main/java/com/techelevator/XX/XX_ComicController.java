@@ -1,18 +1,10 @@
-package com.techelevator.controller;
+package com.techelevator.XX;
 
-import com.techelevator.dao.XX_CollectionComicDao;
-import com.techelevator.dao.XX_ComicDao;
-import com.techelevator.model.CollectionComic;
-import com.techelevator.model.Comic;
-import com.techelevator.model.MarvelComic;
-import com.techelevator.services.MarvelComicService;
+import com.techelevator.XX.XX_CollectionComicDao;
+import com.techelevator.XX.XX_ComicDao;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 
 
 //@PreAuthorize("isAuthenticated()")

@@ -1,4 +1,4 @@
-package com.techelevator.dao;
+package com.techelevator.XX;
 
 import com.techelevator.model.Series;
 import org.springframework.jdbc.core.JdbcTemplate;

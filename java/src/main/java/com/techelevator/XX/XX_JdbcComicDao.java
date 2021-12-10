@@ -1,12 +1,10 @@
-package com.techelevator.dao;
+package com.techelevator.XX;
 
-import com.techelevator.model.Character;
+import com.techelevator.XX.XX_ComicDao;
 import com.techelevator.model.Comic;
-import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
