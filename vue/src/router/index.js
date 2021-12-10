@@ -5,7 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import Collection from '../components/CollectionDetails'
+import CollectionDetails from '../components/CollectionDetails'
+import UserDetails from '../components/UserDetails'
 
 Vue.use(Router)
 
@@ -55,9 +56,14 @@ const router = new Router({
       }
     },
     {
-      path: "/collection",
-      name: "collection",
-      component: Collection
+      path: "/users/:userId",
+      name: "userDetails",
+      component: UserDetails
+    },
+    {
+      path: "/collections/:collectionId",
+      name: "collectionDetails",
+      component: CollectionDetails
     }
   ]
 })

@@ -22,7 +22,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     collections:[
       {
-        id:1,
+        collectionId:1,
+        userId:1,
         name: "Josh's Fantastic Collection",
         comics:[
           {
@@ -52,7 +53,8 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        collectionId:2,
+        userId:2,
         name: "Jim's Awesome Collection",
         comics:[
           {
@@ -82,7 +84,8 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        collectionId:3,
+        userId:3,
         name: "Sav's Awesome Collection",
         comics:[
           {
@@ -112,7 +115,8 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        collectionId:4,
+        userId:4,
         name: "Dave's Awesome Collection",
         comics:[
           {
