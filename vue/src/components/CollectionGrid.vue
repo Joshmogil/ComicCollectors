@@ -16,12 +16,15 @@
     </table>  -->
     
     <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
-      <h3>{{collection.name}} </h3>
+      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.id } }">
+        {{collection.name}}
+        </router-link>  </h3>
+<!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
 
       <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
         <img :src='comic.img' alt="">
       </section>
-
+<!-- </vue-custom-scrollbar> -->
     </section>
 
 

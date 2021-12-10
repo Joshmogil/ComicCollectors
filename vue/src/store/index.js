@@ -52,7 +52,7 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        id:2,
         name: "Jim's Awesome Collection",
         comics:[
           {
@@ -82,7 +82,7 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        id:3,
         name: "Sav's Awesome Collection",
         comics:[
           {
@@ -112,7 +112,7 @@ export default new Vuex.Store({
 
       },
       {
-        id:1,
+        id:4,
         name: "Dave's Awesome Collection",
         comics:[
           {
