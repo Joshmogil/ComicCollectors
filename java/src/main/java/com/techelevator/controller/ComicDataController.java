@@ -1,11 +1,10 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.CharacterDataDao;
-import com.techelevator.dao.CollectionComicDataDao;
-import com.techelevator.dao.CollectionDataDao;
-import com.techelevator.dao.ComicDataDao;
+import com.techelevator.dao.*;
+import com.techelevator.model.Character;
 import com.techelevator.model.Collection;
 import com.techelevator.model.Comic;
+import com.techelevator.model.Series;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,12 +24,15 @@ public class ComicDataController {
     private CollectionDataDao collectiondd;
     private CollectionComicDataDao ccdd;
     private CharacterDataDao characterDataDao;
+    private SeriesDataDao sdd;
     
 
-    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd, CharacterDataDao characterDataDao) {
+    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd,
+                                CharacterDataDao characterDataDao, SeriesDataDao sdd) {
         this.cdd = cdd; this.collectiondd = collectiondd;
         this.ccdd = ccdd;
         this.characterDataDao = characterDataDao;
+        this.sdd = sdd;
     }
 
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
@@ -56,16 +58,26 @@ public class ComicDataController {
         return listComicsInCollection;
     }
 
+    @RequestMapping(path = "characters/id/{characterId}", method = RequestMethod.GET)
+    public Character getCharacterById(@PathVariable long characterId) {
+        return characterDataDao.getCharacterById(characterId);
+    }
+
     @RequestMapping(path = "characters/{characterName}", method = RequestMethod.GET)
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable String characterName) {
         List<Comic> listOfComicsWithCharacter = characterDataDao.getAllComicsWithCharacterName(characterName);
         return listOfComicsWithCharacter;
     }
 
+    @RequestMapping(path = "series/{seriesId}", method = RequestMethod.GET)
+    public Series getSingleSeriesById(@PathVariable long seriesId) {
+        return sdd.getSingleSeriesById(seriesId);
+    }
+
     //CREATE METHOD NOT WORKING
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "collections", method = RequestMethod.POST)
+    @RequestMapping(path = "collections/create", method = RequestMethod.POST)
     public boolean createCollection(@RequestBody Collection newCollection ){
         if (!collectiondd.createCollection(newCollection.getCollectionName(), newCollection.getUserId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Collection Creation Failed");

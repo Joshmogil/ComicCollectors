@@ -3,25 +3,23 @@ package com.techelevator.dao;
 import com.techelevator.model.Series;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class JdbcSeriesDao implements SeriesDao {
+@Service
+public class JdbcSeriesDataDao implements SeriesDataDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcSeriesDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public JdbcSeriesDataDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
-    public Series getSingleSeriesByID(long series_id) {
+    public Series getSingleSeriesById(long seriesId) {
 
         Series series = null;
 
-        String sql = "SELECT * " +
-                     "FROM series " +
-                     "WHERE series_id = ?;";
+        String sql = "SELECT * FROM series WHERE series_id = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, series_id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, seriesId);
         if (results.next()) {
             series = mapRowToSeries(results);
         }
@@ -36,5 +34,4 @@ public class JdbcSeriesDao implements SeriesDao {
 
         return series;
     }
-
 }

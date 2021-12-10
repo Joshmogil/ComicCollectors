@@ -6,11 +6,11 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JdbcCharacterDao implements CharacterDao {
+public class XX_JdbcCharacterDao implements XX_CharacterDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcCharacterDao(JdbcTemplate jdbcTemplate) {
+    public XX_JdbcCharacterDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
