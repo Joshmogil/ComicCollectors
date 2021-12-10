@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @RestController
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("permitAll")
 public class ComicDataController {
 
     private ComicDataDao cdd;
