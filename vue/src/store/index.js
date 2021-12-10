@@ -29,24 +29,28 @@ export default new Vuex.Store({
           {
             id: 1001,
             title: "Fantastic Spiderman",
-            img: require("../assets/Amazing_spiderman.jpg")
+            img: require("../assets/Amazing_spiderman.jpg"),
+            description: "description"
           },
           {
             id: 1002,
             title: "Gwen Stacy",
-            img: require("../assets/Aqua1.jpg")
+            img: require("../assets/Aqua1.jpg"),
+            description: "description"
 
           },
           {
             id: 1003,
             title: "Green Goblin",
-            img: require("../assets/Hulk1.jpg")
+            img: require("../assets/Hulk1.jpg"),
+            description: "description"
 
           },
           {
             id: 1004,
             title: "Spider Clones",
-            img: require("../assets/Hulk2.jpg")
+            img: require("../assets/Hulk2.jpg"),
+            description: "description"
 
           }
         ]
@@ -60,24 +64,28 @@ export default new Vuex.Store({
           {
             id: 1001,
             title: "Fantastic Spiderman",
-            img: require("../assets/Xmen1.jpg")
+            img: require("../assets/Xmen1.jpg"),
+            description: "description"
           },
           {
             id: 1002,
             title: "Gwen Stacy",
-            img: require("../assets/Xmen2.jpg")
+            img: require("../assets/Xmen2.jpg"),
+            description: "description"
 
           },
           {
             id: 1003,
             title: "Green Goblin",
-            img: require("../assets/Spiderman2.jpg")
+            img: require("../assets/Spiderman2.jpg"),
+            description: "description"
 
           },
           {
             id: 1004,
             title: "Spider Clones",
-            img: require("../assets/Amazing_spiderman.jpg")
+            img: require("../assets/Amazing_spiderman.jpg"),
+            description: "description"
 
           }
         ]
@@ -91,24 +99,28 @@ export default new Vuex.Store({
           {
             id: 1001,
             title: "Fantastic Spiderman",
-            img: require("../assets/Aqua2.jpg")
+            img: require("../assets/Aqua2.jpg"),
+            description: "description"
           },
           {
             id: 1002,
             title: "Gwen Stacy",
-            img: require("../assets/Thor3.jpg")
+            img: require("../assets/Thor3.jpg"),
+            description: "description"
 
           },
           {
             id: 1003,
             title: "Green Goblin",
-            img: require("../assets/Xmen2.jpg")
+            img: require("../assets/Xmen2.jpg"),
+            description: "description"
 
           },
           {
             id: 1004,
             title: "Spider Clones",
-            img: require("../assets/Spiderman3.jpg")
+            img: require("../assets/Spiderman3.jpg"),
+            description: "description"
 
           }
         ]
@@ -122,24 +134,28 @@ export default new Vuex.Store({
           {
             id: 1001,
             title: "Fantastic Spiderman",
-            img: require("../assets/wv3.jpg")
+            img: require("../assets/wv3.jpg"),
+            description: "description"
           },
           {
             id: 1002,
             title: "Gwen Stacy",
-            img: require("../assets/im1.jpg")
+            img: require("../assets/im1.jpg"),
+            description: "description"
 
           },
           {
             id: 1003,
             title: "Green Goblin",
-            img: require("../assets/ch1.jpg")
+            img: require("../assets/ch1.jpg"),
+            description: "description"
 
           },
           {
             id: 1004,
             title: "Spider Clones",
-            img: require("../assets/gl1.jpg")
+            img: require("../assets/gl1.jpg"),
+            description: "description"
 
           }
         ]
