@@ -1,11 +1,13 @@
 <template>
   <div class="collection">
     <h2> Test </h2>
-            <h1>{{collection.name}}</h1>
+            <h1>{{this.name}}</h1>
 
       <section id= "horizontal-collection" v-for="comic in this.comics" v-bind:key="comic.id">
         <img :src='comic.img' alt="">
       </section>
+            <h3><router-link v-bind:to="{ name: 'userDetails', params: { userId: this.userId } }">
+</router-link></h3>
   </div>
 </template>
 
@@ -16,7 +18,8 @@ export default {
   name: "collection",
   data() {
     return {
-      id: "",
+      collectionId: "",
+      userId: "",
       name: "",
       comics: [
         
@@ -38,10 +41,24 @@ export default {
           this.$router.push("/not-found");
         }
       }); */
-    this.data = this.$store.state.collections.find((collection) => {
+    /* this.data = this.$store.state.collections.find((collection) => {
         collection.id == this.$route.params.collectionId
-      });
+      }); */
+this.data = {
+  collectionId: 1,
+      userId: 1,
+      name: 'Practice',
+      comics: [
+        
+
+      ],
+
+}
+
+
   }
+
+  
 };
 </script>
 <style>

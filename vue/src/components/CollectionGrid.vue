@@ -16,7 +16,7 @@
     </table>  -->
     
     <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
-      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.id } }">
+      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionid } }">
         {{collection.name}}
         </router-link>  </h3>
 <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
