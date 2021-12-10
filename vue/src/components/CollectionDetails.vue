@@ -4,7 +4,14 @@
             <h1>{{this.collection.name}}</h1>
 
       <section id= "horizontal-collection" v-for="comic in this.collection.comics" v-bind:key="comic.id">
-        <img :src='comic.img' alt="">
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
+        <div class="card-container">
+  <div class="card">
+    <div class="side"><img :src='comic.img' alt=""></div>
+    <div class="side back">{{comic.description}}</div>
+  </div>
+</div>
+        </router-link>
       </section>
             <h3><router-link v-bind:to="{ name: 'userDetails', params: { userId: this.collection.userId } }">
               {{this.collection.userId}}
@@ -13,7 +20,7 @@
 </template>
 
 <script>
-//import collectionService from "@/services/CollectionService.js";
+import collectionService from "@/services/CollectionService.js";
 
 export default {
   name: "collection",
@@ -34,7 +41,12 @@ export default {
      /*  axios.get(`/collection`).then((response) => {
         this.collections = response.data.results;
       }); */
-      
+      collectionService.get(this.$route.params.collection).then(response =>{
+        this.collection.collectionid = response.data.collectionId;
+          this.collection.userId = response.data.userId;
+            this.collection.name = response.data.collectionName;
+          
+      })
     },
     findStoreData(){
       return this.$store.state.collections.find((collection) => {

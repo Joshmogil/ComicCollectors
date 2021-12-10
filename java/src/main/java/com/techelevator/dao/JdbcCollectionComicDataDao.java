@@ -30,7 +30,7 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
         List<Comic> comics = new ArrayList<>();
 //        Collection collection = new Collection();
 
-        String sql = "SELECT n.collection_name, c.comic_id, c.marvel_id, c.comic_title, c.img_url FROM comics c " +
+        String sql = "SELECT c.comic_id, c.marvel_id, c.comic_title, c.img_url, c.description FROM comics c " +
                 "JOIN collection_comic l ON c.comic_id = l.comic_id " +
                 "JOIN collections n ON n.collection_id = l.collection_id " +
                 "WHERE n.collection_id = ?;";

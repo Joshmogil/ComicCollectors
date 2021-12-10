@@ -7,14 +7,16 @@ public class Comic {
     private long marvelId;
     private String comicTitle;
     private String imgUrl;
+    private String description;
 
     public Comic(){}
 
-    public Comic(long comicId, long marvelId, String comicTitle, String imgUrl) {
+    public Comic(long comicId, long marvelId, String comicTitle, String imgUrl, String description) {
         this.comicId = comicId;
         this.marvelId = marvelId;
         this.comicTitle = comicTitle;
         this.imgUrl = imgUrl;
+        this.description = description;
 
 
     }
@@ -51,12 +53,22 @@ public class Comic {
         this.imgUrl = imgUrl;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Comic{" +
                 "comicId=" + comicId +
+                ", marvelId=" + marvelId +
                 ", comicTitle='" + comicTitle + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

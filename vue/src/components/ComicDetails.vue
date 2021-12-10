@@ -1,6 +1,12 @@
 <template>
-  <div class="collection">
-    
+  <div class="comic">
+    <h1>
+      {{this.title}}
+    </h1>
+            <img :src='this.img' alt="">
+<p>
+  {{this.description}}
+  </p>
   </div>
 </template>
 
@@ -9,6 +15,14 @@ import comicService from "@/services/ComicService.js";
 
 export default {
   name: "comic",
+  data() {
+    return {
+      id: "",
+      title: "",
+      img: "",
+      description: ""
+    }
+    },
   methods: {}, 
   created() {
     comicService
