@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.CharacterDataDao;
 import com.techelevator.dao.CollectionComicDataDao;
 import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
@@ -23,10 +24,13 @@ public class ComicDataController {
     private ComicDataDao cdd;
     private CollectionDataDao collectiondd;
     private CollectionComicDataDao ccdd;
+    private CharacterDataDao characterDataDao;
     
 
-    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd) {
-        this.cdd = cdd; this.collectiondd = collectiondd; this.ccdd = ccdd;
+    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd, CharacterDataDao characterDataDao) {
+        this.cdd = cdd; this.collectiondd = collectiondd;
+        this.ccdd = ccdd;
+        this.characterDataDao = characterDataDao;
     }
 
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
@@ -50,6 +54,12 @@ public class ComicDataController {
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable Long collectionId) {
         List<Comic> listComicsInCollection = ccdd.getAllComicsInCollectionByCollectionId(collectionId);
         return listComicsInCollection;
+    }
+
+    @RequestMapping(path = "characters/{characterName}", method = RequestMethod.GET)
+    public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable String characterName) {
+        List<Comic> listOfComicsWithCharacter = characterDataDao.getAllComicsWithCharacterName(characterName);
+        return listOfComicsWithCharacter;
     }
 
     //CREATE METHOD NOT WORKING

@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.CollectionComicDao;
+import com.techelevator.dao.XX_CollectionComicDao;
+import com.techelevator.dao.XX_CollectionComicDao;
 import com.techelevator.dao.XX_ComicDao;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
@@ -8,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 public class MarvelController {
-    private CollectionComicDao collectionComicDao;
+    private XX_CollectionComicDao collectionComicDao;
     private XX_ComicDao comicDao;
 
     public MarvelController() {}
 
-    public MarvelController (CollectionComicDao collectionComicDao ){this.collectionComicDao = collectionComicDao;}
+    public MarvelController (XX_CollectionComicDao collectionComicDao ){this.collectionComicDao = collectionComicDao;}
 
     String API_BASE_URL = "http://gateway.marvel.com/v1/public/comics?ts=";
     String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";

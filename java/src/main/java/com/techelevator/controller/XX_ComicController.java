@@ -1,6 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.CollectionComicDao;
+import com.techelevator.dao.XX_CollectionComicDao;
 import com.techelevator.dao.XX_ComicDao;
 import com.techelevator.model.CollectionComic;
 import com.techelevator.model.Comic;
@@ -21,12 +21,12 @@ import java.util.List;
 @CrossOrigin
 public class XX_ComicController {
 
-    private CollectionComicDao collectionComicDao;
+    private XX_CollectionComicDao collectionComicDao;
     private XX_ComicDao comicDao;
 
     public XX_ComicController() {}
 
-    public XX_ComicController (CollectionComicDao collectionComicDao, XX_ComicDao comicDao ){
+    public XX_ComicController (XX_CollectionComicDao collectionComicDao, XX_ComicDao comicDao ){
         this.collectionComicDao = collectionComicDao;
         this.comicDao = comicDao;
     }
