@@ -1,4 +1,4 @@
-package com.techelevator.dao;
+package com.techelevator.XX;
 
 import com.techelevator.model.CollectionComic;
 import com.techelevator.model.Comic;

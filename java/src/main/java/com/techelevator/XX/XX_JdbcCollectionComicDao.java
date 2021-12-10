@@ -1,6 +1,6 @@
-package com.techelevator.dao;
+package com.techelevator.XX;
 
-import com.techelevator.model.Collection;
+import com.techelevator.XX.XX_CollectionComicDao;
 import com.techelevator.model.CollectionComic;
 import com.techelevator.model.Comic;
 import org.springframework.jdbc.core.JdbcTemplate;

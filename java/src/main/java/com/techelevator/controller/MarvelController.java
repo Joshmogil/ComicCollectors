@@ -1,8 +1,7 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.XX_CollectionComicDao;
-import com.techelevator.dao.XX_CollectionComicDao;
-import com.techelevator.dao.XX_ComicDao;
+import com.techelevator.XX.XX_CollectionComicDao;
+import com.techelevator.XX.XX_ComicDao;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
 import org.springframework.web.bind.annotation.*;
