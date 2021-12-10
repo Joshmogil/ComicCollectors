@@ -63,6 +63,7 @@ public class ComicDataController {
     }
 
     //CREATE METHOD NOT WORKING
+    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "collections", method = RequestMethod.POST)
     public boolean createCollection(@RequestBody Collection newCollection ){
