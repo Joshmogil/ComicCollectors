@@ -1,12 +1,13 @@
 <template>
   <div class="collection">
     <h2> Test </h2>
-            <h1>{{this.name}}</h1>
+            <h1>{{this.collection.name}}</h1>
 
-      <section id= "horizontal-collection" v-for="comic in this.comics" v-bind:key="comic.id">
+      <section id= "horizontal-collection" v-for="comic in this.collection.comics" v-bind:key="comic.id">
         <img :src='comic.img' alt="">
       </section>
-            <h3><router-link v-bind:to="{ name: 'userDetails', params: { userId: this.userId } }">
+            <h3><router-link v-bind:to="{ name: 'userDetails', params: { userId: this.collection.userId } }">
+              {{this.collection.userId}}
 </router-link></h3>
   </div>
 </template>
@@ -18,13 +19,14 @@ export default {
   name: "collection",
   data() {
     return {
+      collection:{
       collectionId: 3,
       userId: 3,
       name: 'still testing',
       comics: [
         
 
-      ],
+      ]}
     };
   },
   methods: {
@@ -32,9 +34,7 @@ export default {
      /*  axios.get(`/collection`).then((response) => {
         this.collections = response.data.results;
       }); */
-      return this.$store.state.collections.find((collection) => {
-        collection.collectionId == this.$route.params.collectionId
-      }); 
+      
     },
     findStoreData(){
       return this.$store.state.collections.find((collection) => {
@@ -70,7 +70,7 @@ export default {
 }
 
 */
-this.data = this.findStoreData();
+//this.collection = this.findStoreData();
   }
 
   
