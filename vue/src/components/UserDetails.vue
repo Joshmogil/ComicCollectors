@@ -1,33 +1,24 @@
 <template>
-  <div id="home">
-    <div class="collections-list">
-      <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
-      <!--
-      <div class="loading" v-if="isLoading">
-        <img src="../src/assets/marvel.gif" />
-      </div>
-      add a v-else to router link before div tag
-      -->
-      <router-link :to="{ name: 'Collection', params: { id: collection.collectionId } }"
-        class="collection"
-        v-for="collection in this.$store.state.collections"
-        v-bind:key="collection.collectionId"
-   
-        tag="div"
-      >
-        {{ collection.collectionName }}
-      </router-link>
-      <button class="btn newCollection" v-if="!isLoading && !showNewCollection && $store.state.token != ''" v-on:click="showNewCollection = !showNewCollection">New Collection</button>
-      <form v-if="showNewCollection">
-        Collection Name:
-        <input type="text" class="form-control" v-model="newCollection.collectionName" />
-        <button class="btn btn-submit" v-on:click="saveNewCollection">Save</button>
-        <button class="btn btn-cancel" v-on:click="showNewCollection = !showNewCollection">Cancel</button>
-      </form>
+  <div>
+  <h1>{{this.userId}}</h1>
+  <div id="collection-table">
+    
+    <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
+      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionid } }">
+        {{collection.name}}
+        </router-link>  </h3>
+<!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
 
-      
-    </div>
+      <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
+        <img :src='comic.img' alt="">
+      </section>
+<!-- </vue-custom-scrollbar> -->
+    </section>
+
+
+
   </div>
+</div>
 </template>
 
 <script>
@@ -37,11 +28,9 @@ export default {
   data() {
     return {
       isLoading: true,
-      showNewCollection: false,
-      newCollection: {
-        collectionName: ''
-      },
-      errorMsg: ''
+      errorMsg: '',
+      userId: "",
+      collections: []
     };
   },
   created() {
@@ -59,21 +48,6 @@ export default {
         }
       });
     },
-    saveNewCollection() {
-      this.isLoading = true;
-      collectionService.addCollection(this.newCollection).then(response => {
-        if (response.status === 201) {
-          this.retrieveCollections();
-          this.showNewCollection = false;
-          this.newCollection = {
-            collectionName: ''
-          }
-        }
-      }).catch(error => {
-        this.handleErrorResponse(error, "adding");
-        this.isLoading = false;
-      });
-    },
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =
@@ -87,12 +61,6 @@ export default {
         this.errorMsg =
           "Error " + verb + " collection. Request could not be created.";
       }},
-      //unnecessary hex code
-    generateHexCode() {
-      var bg = Math.floor(Math.random()*16777215).toString(16);
-      if (bg.length !== 6) bg = this.generateHexCode();
-      return bg;
-    }
   }
 };
 </script>

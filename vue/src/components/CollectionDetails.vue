@@ -18,9 +18,9 @@ export default {
   name: "collection",
   data() {
     return {
-      collectionId: "",
-      userId: "",
-      name: "",
+      collectionId: 3,
+      userId: 3,
+      name: 'still testing',
       comics: [
         
 
@@ -28,7 +28,21 @@ export default {
     };
   },
   methods: {
-    
+    getCollectionData() {
+     /*  axios.get(`/collection`).then((response) => {
+        this.collections = response.data.results;
+      }); */
+      return this.$store.state.collections.find((collection) => {
+        collection.collectionId == this.$route.params.collectionId
+      }); 
+    },
+    findStoreData(){
+      return this.$store.state.collections.find((collection) => {
+        collection.collectionId == this.$route.params.collectionId
+      }); 
+  },
+  computed: {
+    }
   },
   created() {
     /* collectionService
@@ -44,18 +58,19 @@ export default {
     /* this.data = this.$store.state.collections.find((collection) => {
         collection.id == this.$route.params.collectionId
       }); */
-this.data = {
+/* this.data = {
   collectionId: 1,
       userId: 1,
       name: 'Practice',
       comics: [
         
 
-      ],
+      ], 
 
 }
 
-
+*/
+this.data = this.findStoreData();
   }
 
   
