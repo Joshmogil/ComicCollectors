@@ -18,6 +18,13 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 
     JdbcCollectionComicDataDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
+    //Add Comic to Collection
+//    @Override
+//    public boolean addComicToCollection(long userId, long comicId, long collectionId) {
+//        String sql = "INSERT INTO collection_comic(collection_id, comic_id) " +
+//                     "JOIN collection_comic cc ON collections cl "
+//    }
+
     @Override
     public List<Comic> getAllComicsInCollectionByCollectionId(Long collectionId) {
         List<Comic> comics = new ArrayList<>();
