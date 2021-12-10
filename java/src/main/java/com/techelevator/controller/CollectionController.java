@@ -33,7 +33,7 @@ public class CollectionController {
     MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
     //
 
-    @RequestMapping(path = "collection/create", method = RequestMethod.POST)//make a user not found exception
+    @RequestMapping(path = "collections/create", method = RequestMethod.POST)//make a user not found exception
     public boolean createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
 
         boolean collectionCreated = collectionDao.createCollection(createCollectionDTO.getUser_id(),createCollectionDTO.getCollection_name());
@@ -42,7 +42,7 @@ public class CollectionController {
 
     }
 
-    @RequestMapping(path = "collection/addcomic", method = RequestMethod.POST)//make a user not found exception
+    @RequestMapping(path = "collections/addcomic", method = RequestMethod.POST)//make a user not found exception
     public boolean addComicToCollection(@RequestBody AddComicDTO addComicDTO) {
         /*Example json body
         {
