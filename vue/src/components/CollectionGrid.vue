@@ -22,7 +22,9 @@
 <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
 
       <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
         <img :src='comic.img' alt="">
+        </router-link>
       </section>
 <!-- </vue-custom-scrollbar> -->
     </section>

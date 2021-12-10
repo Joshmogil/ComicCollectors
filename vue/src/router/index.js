@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import CollectionDetails from '../components/CollectionDetails'
 import UserDetails from '../components/UserDetails'
+import ComicDetails from '../components/ComicDetails'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ const router = new Router({
       path: "/collections/:collectionId",
       name: "collectionDetails",
       component: CollectionDetails
+    },
+    {
+      path: "/comics/:id",
+      name: "comicDetails",
+      component: ComicDetails
     }
   ]
 })

@@ -4,7 +4,9 @@
             <h1>{{this.collection.name}}</h1>
 
       <section id= "horizontal-collection" v-for="comic in this.collection.comics" v-bind:key="comic.id">
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
         <img :src='comic.img' alt="">
+        </router-link>
       </section>
             <h3><router-link v-bind:to="{ name: 'userDetails', params: { userId: this.collection.userId } }">
               {{this.collection.userId}}
