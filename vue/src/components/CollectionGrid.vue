@@ -96,8 +96,6 @@ h1{
   
 }
 
-
-
 td{
   align-content: center;
 }
