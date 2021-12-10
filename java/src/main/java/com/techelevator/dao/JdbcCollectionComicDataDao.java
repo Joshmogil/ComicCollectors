@@ -72,6 +72,7 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
         comic.setMarvelId(rowSet.getLong("marvel_id"));
         comic.setComicTitle(rowSet.getString("comic_title"));
         comic.setImgUrl(rowSet.getString("img_url"));
+        comic.setDescription(rowSet.getString("description"));
 
         return comic;
     }
