@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CollectionDataDao {
 
+    boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial);
 
     boolean createCollection(long userId, String collectionName);
 

@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Comic;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,33 @@ public class JdbcComicDataDao implements ComicDataDao {
 
     JdbcComicDataDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+
+    public Integer addComicToComicTable(Long marvelId,String comicTitle,String imgUrl, String description){
+
+        String sql = "INSERT INTO comics(marvel_id, comic_title, img_url, description)\n"+
+                "VALUES(?,?,?,?) RETURNING comic_id";
+
+        Integer comicId = null;
+
+        try {
+            comicId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId, comicTitle, imgUrl, description);
+
+        }catch (DataAccessException e) {
+            System.out.println("Adding comic to comics table failed");
+        }
+
+        return comicId;
+    }
+
+
+    public Integer getComicSerialByMarvelId(long marvelId){
+
+        String sql = "SELECT comic_id FROM comics WHERE comic_id = ?;";
+
+        return jdbcTemplate.queryForObject(sql,Integer.class, marvelId);
+
     }
 
     public String getComicDataByID(int comic_id){

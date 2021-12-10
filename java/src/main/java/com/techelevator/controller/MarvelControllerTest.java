@@ -1,6 +1,5 @@
 package com.techelevator.controller;
 
-import com.techelevator.marvelmodel.MarvelComicData;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
 import net.minidev.json.JSONObject;

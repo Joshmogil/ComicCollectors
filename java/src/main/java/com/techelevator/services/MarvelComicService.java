@@ -1,10 +1,6 @@
 package com.techelevator.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techelevator.marvelmodel.MarvelComicData;
+
 import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelComic;
 import net.minidev.json.JSONObject;
@@ -234,49 +230,6 @@ public class MarvelComicService {
     }
 
     //Approach to deserializing 1 -- NOT USEFUL
-    public MarvelComicData getComicData(long comicId){
-
-        JSONObject marvelComicJsonObj = getComicJsonObj(comicId);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        MarvelComicData comicData = null;
-
-        try{
-            comicData = mapper.readValue(marvelComicJsonObj.toString(), MarvelComicData.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(comicData.toString());
-//        ///TESTING WITH JSON NODE!!!
-//        ObjectMapper mapper2 =  new ObjectMapper();
-//        try {
-//            JsonNode node = mapper2.readValue(marvelComicJsonObj.toString(), JsonNode.class);
-//            JsonNode copyrightNode = node.get("copyright");
-//            String copyright = copyrightNode.asText();
-//
-//            JsonNode dataArrayNode = node.get("data");
-//            String dataArray = dataArrayNode.asText();
-//
-//
-//            JsonNode jsonNode = mapper2.readTree(marvelComicJsonObj.toString());
-//            String copyright = jsonNode.get("copyright").asText();
-//            String dataArray = jsonNode.get("data");
-//            System.out.println(copyright);
-//            System.out.println(dataArray);
-//
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-
-
-        /////
-
-        return comicData;
-
-    }
 
     private HttpEntity<Void> makeHeaders() {
         HttpHeaders headers = new HttpHeaders();

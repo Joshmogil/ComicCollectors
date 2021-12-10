@@ -25,8 +25,9 @@ CREATE TABLE comics (
 
         comic_id serial,
         marvel_id int,
-	comic_title varchar(60) not null,
+	comic_title varchar(200) not null,
 	img_url varchar(185),
+	description varchar(1500),
 	
         constraint pk_comics primary key (comic_id)
 );

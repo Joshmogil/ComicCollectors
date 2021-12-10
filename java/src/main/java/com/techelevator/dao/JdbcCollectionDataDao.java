@@ -21,6 +21,31 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
     }
 
     @Override
+    public boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial){
+
+        String sql = "INSERT INTO collection_comic(collection_id, comic_id)\n"+
+                "VALUES(?,?) RETURNING collection_id";
+
+        long collection_id = -1;
+
+        try {
+
+            collection_id = jdbcTemplate.queryForObject(sql, Integer.class, collectionId, comicIdSerial);
+
+        }catch (DataAccessException e) {
+            System.out.println("Adding comic to collection failed");
+        }
+
+        if(collection_id != -1){
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
     public boolean createCollection(long userId, String collectionName){
 
         String sql = "INSERT INTO collections(collection_name, user_id)\n"+
@@ -32,7 +57,7 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
             collection_id = jdbcTemplate.queryForObject(sql, Long.class, collectionName, userId);
 
         }catch (DataAccessException e) {
-            System.out.println("Transfer creation failed");
+            System.out.println("Collection creation failed");
         }
 
         if(collection_id != -1){

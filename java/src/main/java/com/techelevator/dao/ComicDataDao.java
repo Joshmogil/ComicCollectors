@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface ComicDataDao {
 
-    String getComicDataByID(int id);
+    Integer getComicSerialByMarvelId(long marvelId);
 
+    Integer addComicToComicTable(Long marvelId,String comicTitle,String imgUrl, String description);
+
+    String getComicDataByID(int id);
 
     Comic getComicById(int id);
 
