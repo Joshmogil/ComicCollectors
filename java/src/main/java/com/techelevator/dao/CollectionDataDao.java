@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CollectionDataDao {
 
+
     boolean createCollection(long userId, String collectionName);
 
     Collection getCollectionById(long collectionId);
