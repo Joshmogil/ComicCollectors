@@ -1,18 +1,30 @@
 package com.techelevator.model;
 
 
+import java.util.List;
+
 public class Collection {
 
-    private long collectionId;
+    private Long collectionId;
     private String collectionName;
     private long userId;
+    private List<Comic> listOfComics;
 
     public Collection() {}
 
-    public Collection(long collectionId, String collectionName, long userId) {
+    public Collection(long collectionId, String collectionName, long userId, List<Comic> listOfComics) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;
         this.userId = userId;
+        this.listOfComics = listOfComics;
+    }
+
+    public List<Comic> getListOfComics() {
+        return listOfComics;
+    }
+
+    public void setListOfComics(List<Comic> listOfComics) {
+        this.listOfComics = listOfComics;
     }
 
     public long getCollectionId() {
@@ -45,6 +57,7 @@ public class Collection {
                 "collectionId=" + collectionId +
                 ", collectionName='" + collectionName + '\'' +
                 ", userId=" + userId +
+                ", listOfComics=" + listOfComics +
                 '}';
     }
 }

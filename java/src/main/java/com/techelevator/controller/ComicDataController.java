@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.CollectionComicDataDao;
 import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.Collection;
@@ -21,10 +22,11 @@ public class ComicDataController {
 
     private ComicDataDao cdd;
     private CollectionDataDao collectiondd;
+    private CollectionComicDataDao ccdd;
     
 
-    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd) {
-        this.cdd = cdd; this.collectiondd = collectiondd;
+    public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd) {
+        this.cdd = cdd; this.collectiondd = collectiondd; this.ccdd = ccdd;
     }
 
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
@@ -44,6 +46,13 @@ public class ComicDataController {
         return collectiondd.getUserCollections(userId);
     }
 
+    @RequestMapping(path = "collections/comics/{collectionId}", method = RequestMethod.GET)
+    public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable Long collectionId) {
+        List<Comic> listComicsInCollection = ccdd.getAllComicsInCollectionByCollectionId(collectionId);
+        return listComicsInCollection;
+    }
+
+    //CREATE METHOD NOT WORKING
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "collections", method = RequestMethod.POST)
     public boolean createCollection(@RequestBody Collection newCollection ){

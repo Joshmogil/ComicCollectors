@@ -9,11 +9,11 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcCollectionComicDao implements CollectionComicDao {
+public class XX_JdbcCollectionComicDao implements XX_CollectionComicDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcCollectionComicDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public XX_JdbcCollectionComicDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
 
     @Override
