@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h1>Our top collections</h1>       
-         <div id="collection-table">
+  <h1>Our top collections</h1>
+  <div id="collection-table">
     <!-- <table>
       <tbody>
       <tr v-for="collection in $store.state.collections" v-bind:key="collection.id">
@@ -15,25 +15,18 @@
       </tbody>
     </table>  -->
     
-    <div id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
-      <div>
-        <h3>{{collection.name}} </h3>
-      
-      
-    
+    <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
+      <h3>{{collection.name}} </h3>
 
-        <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
-          <img v-bind:src="comic.img" alt="">
-        </section>
-   
+      <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
+        <img :src='comic.img' alt="">
+      </section>
 
-      </div>
-    </div>  
+    </section>
 
 
-      </div>
-     
-    
+
+  </div>
 </div>
 </template>
 
