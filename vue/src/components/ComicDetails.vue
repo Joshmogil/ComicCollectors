@@ -5,8 +5,8 @@
     </h1>
             <img :src='this.img' alt="">
 <p>
-  {{this.description}
-  </p>}
+  {{this.description}}
+  </p>
   </div>
 </template>
 
