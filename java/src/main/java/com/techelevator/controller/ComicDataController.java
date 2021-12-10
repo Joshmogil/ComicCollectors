@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -74,21 +75,7 @@ public class ComicDataController {
         return sdd.getSingleSeriesById(seriesId);
     }
 
-    //CREATE METHOD NOT WORKING
-    @PreAuthorize("isAuthenticated()")
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "collections/create", method = RequestMethod.POST)
-    public boolean createCollection(@RequestBody Collection newCollection ){
-        if (!collectiondd.createCollection(newCollection.getCollectionName(), newCollection.getUserId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Collection Creation Failed");
-        }
-        return true;
-    }
 
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @RequestMapping(path = "collections", method = RequestMethod.POST)
-//    public boolean createCollection(@RequestBody String collectionName, Principal user) {
-//        return collectiondd.createCollection(collectionName, user.getId())
-//    }
+//Create method
 
 }

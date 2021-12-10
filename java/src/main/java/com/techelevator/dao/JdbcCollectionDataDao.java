@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,23 +66,9 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
         return collections;
     }
 
-    @Override
-    public boolean createCollection(String collection_name, long user_id) {
 
-        String sql = "INSERT INTO collections (collection_name, user_id) " +
-                "VALUES (?, ?) RETURNING collection_id";
 
-        Integer newCollectionId;
 
-        try {
-            newCollectionId = jdbcTemplate.queryForObject(sql, Integer.class, collection_name, user_id);
-        } catch (DataAccessException e) {
-            return false;
-        }
-
-        return true;
-
-    }
 
     private Collection mapRowToCollections(SqlRowSet rowSet) {
         Collection collection = new Collection();

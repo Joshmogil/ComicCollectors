@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Collection;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface CollectionDataDao {
@@ -12,5 +13,5 @@ public interface CollectionDataDao {
 
     List <Collection> getUserCollections(long userId);
 
-    boolean createCollection(String collection_name, long user_id);
+//    Collection createCollection(Collection newCollection, Principal principal);
 }
