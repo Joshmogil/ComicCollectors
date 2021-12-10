@@ -21,6 +21,29 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
     }
 
     @Override
+    public boolean createCollection(long userId, String collectionName){
+
+        String sql = "INSERT INTO collections(collection_name, user_id)\n"+
+                "VALUES(?,?) RETURNING collection_id";
+
+        long collection_id = -1;
+
+        try {
+            collection_id = jdbcTemplate.queryForObject(sql, Long.class, collectionName, userId);
+
+        }catch (DataAccessException e) {
+            System.out.println("Transfer creation failed");
+        }
+
+        if(collection_id != -1){
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public Collection getCollectionById(long collectionId) {
      Collection collection = null;
 
