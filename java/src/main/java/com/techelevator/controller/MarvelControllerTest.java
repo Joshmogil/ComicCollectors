@@ -22,6 +22,15 @@ public class MarvelControllerTest {
 
     MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
 
+    @RequestMapping(path = "marvelcomic/{comicId}", method = RequestMethod.GET)
+    public MarvelComic testGetComic(@PathVariable long comicId){
+
+        MarvelComic marvelComic = marvelComicService.getComic(comicId);
+
+        return marvelComic;
+    }
+
+
     @RequestMapping(path = "marveltest/{comicId}", method = RequestMethod.GET)
     public MarvelComic testGetComicId(@PathVariable long comicId){
 
@@ -31,8 +40,9 @@ public class MarvelControllerTest {
 
         marvelComic.setMarvel_id(Long.valueOf(importantComicInfo.get(0)));
         marvelComic.setTitle(importantComicInfo.get(1));
-        marvelComic.setImg_url(importantComicInfo.get(2));
-        marvelComic.setExtension(importantComicInfo.get(3));
+        marvelComic.setDescription(importantComicInfo.get(2));
+        marvelComic.setImg_url(importantComicInfo.get(3));
+        marvelComic.setExtension(importantComicInfo.get(4));
 
         return marvelComic;
     }
@@ -44,15 +54,15 @@ public class MarvelControllerTest {
 
         return comicString;
     }
-//
-//
-//    @RequestMapping(path = "marveljsontest/{comicId}", method = RequestMethod.GET)
-//    public JSONObject testGetComicJson(@PathVariable long comicId){
-//
-//        JSONObject comicJsonFromMarvel = marvelComicService.getComicJsonObj(comicId);
-//
-//        return comicJsonFromMarvel;
-//    }
+
+
+    @RequestMapping(path = "marveljsontest/{comicId}", method = RequestMethod.GET)
+    public JSONObject testGetComicJson(@PathVariable long comicId){
+
+        JSONObject comicJsonFromMarvel = marvelComicService.getComicJsonObj(comicId);
+
+        return comicJsonFromMarvel;
+    }
 //
 //    @RequestMapping(path = "marvelcomicdatatest/{comicId}", method = RequestMethod.GET)
 //    public MarvelComicData testGetComicData(@PathVariable long comicId){

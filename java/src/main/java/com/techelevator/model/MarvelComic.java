@@ -12,15 +12,17 @@ public class MarvelComic {
     private Long marvel_id;
     private String img_url;
     private String extension;
+    private String description;
 
     public MarvelComic() {
     }
 
-    public MarvelComic(String title, Long marvel_id, String img_url, String extension) {
+    public MarvelComic(String title, Long marvel_id, String img_url, String extension, String description) {
         this.title = title;
         this.marvel_id = marvel_id;
         this.img_url = img_url;
         this.extension = extension;
+        this.description = description;
     }
 
     public String getTitle() {
@@ -53,5 +55,13 @@ public class MarvelComic {
 
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
