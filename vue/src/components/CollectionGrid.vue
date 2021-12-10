@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h1>Our top collections</h1>
-  <div id="collection-table">
+  <h1>Our top collections</h1>       
+         <div id="collection-table">
     <!-- <table>
       <tbody>
       <tr v-for="collection in $store.state.collections" v-bind:key="collection.id">
@@ -15,26 +15,58 @@
       </tbody>
     </table>  -->
     
-    <section id= "vertical-collections" v-for="collection in $store.state.collections" v-bind:key="collection.id">
+      <div id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
+     <div>
+       
+      
       <h3>{{collection.name}} </h3>
-
+      <vue-custom-scrollbar class="scroll-collection"  :settings="settings" @ps-scroll-y="scrollHanle">
       <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
         <img :src='comic.img' alt="">
       </section>
+      </vue-custom-scrollbar>
+      </div>
+    </div>  
 
-    </section>
 
-
-
-  </div>
+      </div>
+     
+    
 </div>
 </template>
 
 <script>
+//import axios from "axios";
+import vueCustomScrollbar from 'vue-custom-scrollbar'
+import "vue-custom-scrollbar/dist/vueScrollbar.css"
+// import { component } from 'vue/types/umd'
 export default {
-  name:"collection-grid"
+   name:"collection-grid",
 
-}
+  components: {
+    vueCustomScrollbar
+  },
+
+   data() {
+    return {
+      collections: [],
+    };
+  },
+  methods: {
+    getCollections() {
+      // axios.get(`/collection`).then((response) => {
+      //   this.collections = response.data.results;
+      //});
+      this.collections = this.$store.state.collections;
+    }
+  },
+  beforeMount() {
+    this.getCollection();
+  }
+
+  
+ 
+ }
 </script>
 
 <style>
