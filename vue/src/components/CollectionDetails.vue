@@ -21,6 +21,7 @@
 
 <script>
 import collectionService from "@/services/CollectionService.js";
+// import apiService from "@/services/apiService.js"
 
 export default {
   name: "collection",
@@ -41,10 +42,11 @@ export default {
      /*  axios.get(`/collection`).then((response) => {
         this.collections = response.data.results;
       }); */
-      collectionService.get(this.$route.params.collection).then(response =>{
-        this.collection.collectionid = response.data.collectionId;
+      collectionService.get(this.$route.params.collectionId).then(response =>{
+         this.collection.collectionid = response.data.collectionId;
           this.collection.userId = response.data.userId;
             this.collection.name = response.data.collectionName;
+       
           
       })
     },
@@ -57,6 +59,24 @@ export default {
     }
   },
   created() {
+    /* this.collection.name = 'created is called';
+       collectionService.get(this.$route.params.collectionId).then(response =>{
+         this.collection = response.data;  
+         this.collection.name = 'is running';
+      }); */
+
+/*       apiService.list().then( (response) =>{
+        this.collection = response.data;
+      }); */
+
+      
+   
+
+
+
+
+
+
     /* collectionService
       .get(this.collectionId)
       .then(response => {
