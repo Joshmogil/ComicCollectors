@@ -76,6 +76,13 @@ public class ComicDataController {
     }
 
 
-//Create method
+    //DELETE COMIC FROM COLLECTION
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "collections/delete/{collectionId}/{comicId}", method = RequestMethod.DELETE)
+    public void deleteComicFromCollection(@PathVariable long collectionId, @PathVariable long comicId) {
+
+        ccdd.deleteComicFromCollection(collectionId, comicId);
+    }
+
 
 }

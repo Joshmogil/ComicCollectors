@@ -54,6 +54,13 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 //        return collection;
     }
 
+    @Override
+    public void deleteComicFromCollection(long collectionId, long comicId) {
+        String sql = "DELETE FROM collection_comic WHERE collection_id = ? AND comic_id = ?;";
+
+        jdbcTemplate.update(sql, collectionId, comicId);
+    }
+
     private CollectionComic mapRowToCollectionComic(SqlRowSet rowSet) {
 
         CollectionComic collectionComic = new CollectionComic();

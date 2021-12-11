@@ -11,4 +11,6 @@ public interface CollectionComicDataDao {
 //    boolean addComicToCollection(long userId, long comicId, long collectionId);
 
     List<Comic> getAllComicsInCollectionByCollectionId(Long collectionId);
+
+    void deleteComicFromCollection(long collectionId, long comicId);
 }
