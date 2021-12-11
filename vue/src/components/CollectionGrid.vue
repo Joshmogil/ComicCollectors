@@ -16,7 +16,7 @@
     </table>  -->
     
     <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
-      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionid } }">
+      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
         {{collection.name}}
         </router-link>  </h3>
 <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import collectionService from "@/services/CollectionService.js";
 //import axios from "axios";
 
 // import { component } from 'vue/types/umd'
@@ -58,10 +59,9 @@ export default {
   },
   methods: {
     getCollections() {
-     /*  axios.get(`/collection`).then((response) => {
-        this.collections = response.data.results;
-      }); */
-      this.collections = this.$store.state.collections;
+       collectionService.getAllCollections().then(response => {
+         this.collections = response.data;
+      })
     }
   },
   created() {
