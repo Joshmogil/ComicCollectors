@@ -21,7 +21,7 @@
 
 <script>
 import collectionService from "@/services/CollectionService.js";
-// import apiService from "@/services/apiService.js"
+
 
 export default {
   name: "collection",
@@ -39,74 +39,41 @@ export default {
   },
   methods: {
     getCollectionData() {
-     /*  axios.get(`/collection`).then((response) => {
-        this.collections = response.data.results;
-      }); */
-      collectionService.get(this.$route.params.collectionId).then(response =>{
+      
+      collectionService.get(this.$route.params.collectionId).then(response => {
          this.collection.collectionid = response.data.collectionId;
           this.collection.userId = response.data.userId;
-            this.collection.name = response.data.collectionName;
-       
-          
+            this.collection.name = response.data.collectionName;  
       })
     },
+
     findStoreData(){
       return this.$store.state.collections.find((collection) => {
         collection.collectionId == this.$route.params.collectionId
-      }); 
-  },
-  computed: {
-    }
-  },
-  created() {
-    /* this.collection.name = 'created is called';
-       collectionService.get(this.$route.params.collectionId).then(response =>{
-         this.collection = response.data;  
-         this.collection.name = 'is running';
-      }); */
+       }); 
+    },
 
-/*       apiService.list().then( (response) =>{
-        this.collection = response.data;
-      }); */
+    getComics() {
+          collectionService.getComics(this.$route.params.collectionId).then(response => {
+            this.collection.comics = response.data;
 
-      
-   
-
-
-
-
-
-
-    /* collectionService
-      .get(this.collectionId)
-      .then(response => {
-        this.$store.commit("SET_COLLECTION", response.data);
       })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push("/not-found");
-        }
-      }); */
-    /* this.data = this.$store.state.collections.find((collection) => {
-        collection.id == this.$route.params.collectionId
-      }); */
-/* this.data = {
-  collectionId: 1,
-      userId: 1,
-      name: 'Practice',
-      comics: [
-        
+    }
 
-      ], 
 
-}
 
-*/
-//this.collection = this.findStoreData();
-  }
+
+  },
+
 
   
-};
+  created() {
+        this.getCollectionData();
+  },
+
+
+
+}
 </script>
 <style>
 
