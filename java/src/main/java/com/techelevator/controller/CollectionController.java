@@ -32,17 +32,17 @@ public class CollectionController {
     String publicKey = "20afbe7ebe8ad8af2c91b02a275e06cc";
 
     MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
-    //
 
+    //Create a New Collection
     @RequestMapping(path = "collections/create", method = RequestMethod.POST)//make a user not found exception
     public boolean createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
 
         boolean collectionCreated = collectionDao.createCollection(createCollectionDTO.getUser_id(),createCollectionDTO.getCollection_name());
 
         return collectionCreated;
-
     }
 
+    //Add Comic To Collection
     @RequestMapping(path = "collections/addcomic", method = RequestMethod.POST)//make a user not found exception
     public boolean addComicToCollection(@RequestBody AddComicDTO addComicDTO) {
         /*Example json body

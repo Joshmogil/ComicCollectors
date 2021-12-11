@@ -56,20 +56,12 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 
     @Override
     public void deleteComicFromCollection(long collectionId, long comicId) {
+
         String sql = "DELETE FROM collection_comic WHERE collection_id = ? AND comic_id = ?;";
 
         jdbcTemplate.update(sql, collectionId, comicId);
     }
 
-    private CollectionComic mapRowToCollectionComic(SqlRowSet rowSet) {
-
-        CollectionComic collectionComic = new CollectionComic();
-
-        collectionComic.setCollectionId(rowSet.getLong("collection_id"));
-        collectionComic.setComic_id(rowSet.getLong("comic_id"));
-
-        return collectionComic;
-    }
 
     private Comic mapRowToComics(SqlRowSet rowSet) {
 
@@ -84,14 +76,25 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
         return comic;
     }
 
-    private Collection mapRowToCollections(SqlRowSet rowSet) {
 
-        Collection collection = new Collection();
 
-        collection.setCollectionId(rowSet.getLong("collection_id"));
-        collection.setCollectionName(rowSet.getString("collection_name"));
-        collection.setUserId(rowSet.getLong("user_id"));
-
-        return collection;
-    }
+//    private CollectionComic mapRowToCollectionComic(SqlRowSet rowSet) {
+//
+//        CollectionComic collectionComic = new CollectionComic();
+//
+//        collectionComic.setCollectionId(rowSet.getLong("collection_id"));
+//        collectionComic.setComic_id(rowSet.getLong("comic_id"));
+//
+//        return collectionComic;
+//    }
+//    private Collection mapRowToCollections(SqlRowSet rowSet) {
+//
+//        Collection collection = new Collection();
+//
+//        collection.setCollectionId(rowSet.getLong("collection_id"));
+//        collection.setCollectionName(rowSet.getString("collection_name"));
+//        collection.setUserId(rowSet.getLong("user_id"));
+//
+//        return collection;
+//    }
 }

@@ -1,10 +1,8 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.*;
+import com.techelevator.model.*;
 import com.techelevator.model.Character;
-import com.techelevator.model.Collection;
-import com.techelevator.model.Comic;
-import com.techelevator.model.Series;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.security.Principal;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -26,62 +25,82 @@ public class ComicDataController {
     private CollectionComicDataDao ccdd;
     private CharacterDataDao characterDataDao;
     private SeriesDataDao sdd;
+    private UserDao ud;
     
 
     public ComicDataController (ComicDataDao cdd, CollectionDataDao collectiondd, CollectionComicDataDao ccdd,
-                                CharacterDataDao characterDataDao, SeriesDataDao sdd) {
+                                CharacterDataDao characterDataDao, SeriesDataDao sdd, UserDao ud) {
         this.cdd = cdd; this.collectiondd = collectiondd;
         this.ccdd = ccdd;
         this.characterDataDao = characterDataDao;
         this.sdd = sdd;
+        this.ud = ud;
     }
 
+    //Get Comic Object By comicID
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
     public Comic getComicById(@PathVariable int comicId) {return cdd.getComicById(comicId);}
 
+    //Get All Comic Objects In Comics Table
     @RequestMapping(path = "comics", method = RequestMethod.GET)
     public List<Comic> getAllComics() {return cdd.getAllComics();}
 
+    //Get Single Collection By collectionId
     @RequestMapping(path ="collections/{collectionId}", method = RequestMethod.GET)
     public Collection getCollectionById(@PathVariable int collectionId) {return collectiondd.getCollectionById(collectionId);}
 
+    //Get All Collection Objects In Collections Table
     @RequestMapping(path = "collections", method = RequestMethod.GET)
     public List<Collection> getAllCollections(){return collectiondd.getAllCollections();}
 
+    //Get All Collections For Single User By userId
     @RequestMapping(path = "collections/user/{userId}", method = RequestMethod.GET)
     public List<Collection> getUserCollections(@PathVariable int userId){
         return collectiondd.getUserCollections(userId);
     }
 
+    //Get All Comic Objects In A Collection By CollectionId
     @RequestMapping(path = "collections/comics/{collectionId}", method = RequestMethod.GET)
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable Long collectionId) {
-        List<Comic> listComicsInCollection = ccdd.getAllComicsInCollectionByCollectionId(collectionId);
-        return listComicsInCollection;
+        return ccdd.getAllComicsInCollectionByCollectionId(collectionId);
     }
 
+    //Delete Single Comic From Collection By collectionId && comicId
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "collections/delete/{collectionId}/{comicId}", method = RequestMethod.DELETE)
+    public void deleteComicFromCollection(@PathVariable long collectionId, @PathVariable long comicId) {
+            ccdd.deleteComicFromCollection(collectionId, comicId);
+    }
+
+    //Get User Object By userId
+    @RequestMapping(path = "users/id/{userId}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable long userId) {
+        return ud.getUserById(userId);
+    }
+
+    //Get User Object By username
+    @RequestMapping(path = "users/username/{username}", method = RequestMethod.GET)
+    public User findByUsername(@PathVariable String username) {
+        return ud.findByUsername(username);
+    }
+
+    //Get Single Character By Character Id
     @RequestMapping(path = "characters/id/{characterId}", method = RequestMethod.GET)
     public Character getCharacterById(@PathVariable long characterId) {
         return characterDataDao.getCharacterById(characterId);
     }
 
-    @RequestMapping(path = "characters/{characterName}", method = RequestMethod.GET)
+    //Get Single Character By Character Name
+    @RequestMapping(path = "characters/name/{characterName}", method = RequestMethod.GET)
     public List<Comic> getAllComicsInCollectionByCollectionId(@PathVariable String characterName) {
         List<Comic> listOfComicsWithCharacter = characterDataDao.getAllComicsWithCharacterName(characterName);
         return listOfComicsWithCharacter;
     }
 
+    //Get Single Series By Series Id
     @RequestMapping(path = "series/{seriesId}", method = RequestMethod.GET)
     public Series getSingleSeriesById(@PathVariable long seriesId) {
         return sdd.getSingleSeriesById(seriesId);
-    }
-
-
-    //DELETE COMIC FROM COLLECTION
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "collections/delete/{collectionId}/{comicId}", method = RequestMethod.DELETE)
-    public void deleteComicFromCollection(@PathVariable long collectionId, @PathVariable long comicId) {
-
-        ccdd.deleteComicFromCollection(collectionId, comicId);
     }
 
 
