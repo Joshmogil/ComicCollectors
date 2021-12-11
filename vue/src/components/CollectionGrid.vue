@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import collectionService from "@/services/CollectionService.js";
+//import collectionService from "@/services/CollectionService.js";
 //import axios from "axios";
 
 // import { component } from 'vue/types/umd'
@@ -59,9 +59,12 @@ export default {
   },
   methods: {
     getCollections() {
-       collectionService.getAllCollections().then(response => {
+       /* collectionService.getAllCollections().then(response => {
          this.collections = response.data;
-      })
+         this.collections[0].name = 'api called';
+      }) */
+
+      this.collections = this.$store.state.collections;
     }
   },
   created() {
