@@ -15,7 +15,7 @@
    
         tag="div"
       >
-        <!-- {{ collection.collectionName }} -->
+        {{ collection.collectionName }}
       </router-link>
       <button class="btn newCollection" v-if="!isLoading && !showNewCollection && $store.state.token != ''" v-on:click="showNewCollection = !showNewCollection">New Collection</button>
       <form v-if="showNewCollection">
@@ -53,11 +53,11 @@ export default {
       collectionService.getAllCollections().then(response => {
         this.$store.commit("SET_ALL_COLLECTIONS", response.data);
         this.isLoading = false;
-
-        if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
+    });
+      /*   if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
           this.$router.push(`/collections/${response.data[0].id}`);
-        }
-      });
+        } */
+ 
     },
     saveNewCollection() {
       this.isLoading = true;

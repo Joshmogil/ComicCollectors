@@ -2,7 +2,7 @@
 <div>
   <h1>Our top collections</h1>
   <div id="collection-table">
-    <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
+    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
       <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
         {{collection.name}}
         </router-link>  </h3>
@@ -51,9 +51,16 @@ export default {
         }) 
 
      // this.collections = this.$store.state.collections;
+    },
+    getCollectionsForStore(){
+          collectionService.getAllCollections().then(response => {
+        this.$store.commit("SET_ALL_COLLECTIONS", response.data);
+        this.isLoading = false;
+    });
     }
   },
   created() {
+   this.getCollectionsForStore();
    this.getCollections();
   }
 
