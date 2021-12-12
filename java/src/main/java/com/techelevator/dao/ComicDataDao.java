@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 
 import com.techelevator.model.Comic;
+import com.techelevator.model.MarvelComic;
 
 import java.util.List;
 

@@ -8,24 +8,16 @@ public class Collection {
     private Long collectionId;
     private String collectionName;
     private long userId;
-    private List<Comic> listOfComics;
+
 
     public Collection() {}
 
-    public Collection(long collectionId, String collectionName, long userId, List<Comic> listOfComics) {
+    public Collection(long collectionId, String collectionName, long userId) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;
         this.userId = userId;
-        this.listOfComics = listOfComics;
     }
 
-    public List<Comic> getListOfComics() {
-        return listOfComics;
-    }
-
-    public void setListOfComics(List<Comic> listOfComics) {
-        this.listOfComics = listOfComics;
-    }
 
     public long getCollectionId() {
         return collectionId;
@@ -57,7 +49,6 @@ public class Collection {
                 "collectionId=" + collectionId +
                 ", collectionName='" + collectionName + '\'' +
                 ", userId=" + userId +
-                ", listOfComics=" + listOfComics +
                 '}';
     }
 }
