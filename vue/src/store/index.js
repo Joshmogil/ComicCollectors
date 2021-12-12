@@ -20,6 +20,14 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+    
+    // collections: [],
+    
+
+
+
+    // For Testing Purposes
+    
     collections:[
       {
         collectionId:1,
@@ -171,6 +179,21 @@ export default new Vuex.Store({
 
 
   },
+
+  //GET COLLECTIONS FROM API
+
+  // getters: {},
+
+  // methods: {
+  //   getCollections({commit}) {
+  //     axios.get('http://localhost:8080')
+  //       .then(response => {
+  //         commit('SET_COLLECTIONS', response.data)
+  //       })
+  //   }
+  // },
+
+
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
