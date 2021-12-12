@@ -162,6 +162,9 @@ export default new Vuex.Store({
 
       },
 
+    ],
+    comicLists: [
+      
     ]
 
 
