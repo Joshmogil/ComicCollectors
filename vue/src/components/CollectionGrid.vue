@@ -1,12 +1,12 @@
 <template>
 <div>
-  <h1>Our top collections</h1>
+
   <div id="collection-table">
     <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
       <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
-        {{collection.name}}
+        {{collection.collectionName}}
         </router-link>  </h3>
-<!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
+
 
       <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
         <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
@@ -19,6 +19,7 @@
         
         </router-link>
       </section>
+ <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->     
 <!-- </vue-custom-scrollbar> -->
     </section>
 
@@ -30,6 +31,7 @@
 
 <script>
 import collectionService from "@/services/CollectionService.js";
+
 //import axios from "axios";
 
 export default {
@@ -57,6 +59,13 @@ export default {
         this.$store.commit("SET_ALL_COLLECTIONS", response.data);
         this.isLoading = false;
     });
+    },
+
+    getComics(){
+ /*      collectionService.getComics(id).then(response => {
+        this.
+      })
+ */
     }
   },
   created() {

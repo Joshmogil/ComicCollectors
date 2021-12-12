@@ -15,7 +15,7 @@
    
         tag="div"
       >
-        {{ collection.collectionName }}
+        <!-- {{ collection.collectionName }} -->
       </router-link>
       <button class="btn newCollection" v-if="!isLoading && !showNewCollection && $store.state.token != ''" v-on:click="showNewCollection = !showNewCollection">New Collection</button>
       <form v-if="showNewCollection">
@@ -25,6 +25,27 @@
         <button class="btn btn-cancel" v-on:click="showNewCollection = !showNewCollection">Cancel</button>
       </form>
 
+<!--   <h1>Our top collections</h1>
+  <div id="collection-table">
+    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
+      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
+        {{collection.collectionName}}
+        </router-link>  </h3>
+
+
+      <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
+          <div class="card-container">
+  <div class="card">
+    <div class="side"><img :src='comic.img' alt=""></div>
+    <div class="side back">{{comic.description}}</div>
+  </div>
+</div>
+        
+        </router-link>
+      </section>
+    </section>
+  </div> -->
       
     </div>
   </div>
