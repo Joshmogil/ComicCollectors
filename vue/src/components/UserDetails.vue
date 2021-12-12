@@ -30,32 +30,35 @@
 </template>
 
 <script>
-import collectionService from '../services/CollectionService';
-
+import userService from '../services/UserService';
 export default {
   data() {
     return {
       isLoading: true,
       errorMsg: '',
-      userId: "",
+      user:{},
       collections: []
     };
   },
   created() {
-    this.retrieveCollections();
+    this.getUserCollections();
+    this.find();
   },
-  methods: {
-    retrieveCollections() {
-        //what ids to put in - random?
-      collectionService.getAllCollections().then(response => {
-        this.$store.commit("SET_ALL_COLLECTIONS", response.data);
-        this.isLoading = false;
 
-        if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
-          this.$router.push(`/collections/${response.data[0].id}`);
-        }
-      });
-    },
+  methods: {
+
+      getUserCollections(){
+          userService.getUserCollections(this.$route.params.id).then (response => {
+              this.collections = response.data;
+          });
+      },
+
+      find(){
+          userService.find(this.$route.params.id).then (response => {
+              this.user = response.data;
+          });
+      },
+
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =

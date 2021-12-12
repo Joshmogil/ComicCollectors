@@ -2,19 +2,6 @@
 <div>
   <h1>Our top collections</h1>
   <div id="collection-table">
-    <!-- <table>
-      <tbody>
-      <tr v-for="collection in $store.state.collections" v-bind:key="collection.id">
-        <td>{{ collection.id }}</td>
-        <td v-for="comic in collection.comics" v-bind:key="comic.id">
-          {{comic.id}} 
-          <img :src='comic.img' alt="">
-        </td>
-
-      </tr>
-      </tbody>
-    </table>  -->
-    
     <section id= "vertical-collections" v-for="collection in this.collections" v-bind:key="collection.id">
       <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
         {{collection.name}}
@@ -42,10 +29,9 @@
 </template>
 
 <script>
-//import collectionService from "@/services/CollectionService.js";
+import collectionService from "@/services/CollectionService.js";
 //import axios from "axios";
 
-// import { component } from 'vue/types/umd'
 export default {
    name:"collection-grid",
 
@@ -59,12 +45,12 @@ export default {
   },
   methods: {
     getCollections() {
-       /* collectionService.getAllCollections().then(response => {
+        collectionService.getAllCollections().then(response => {
          this.collections = response.data;
          this.collections[0].name = 'api called';
-      }) */
+        }) 
 
-      this.collections = this.$store.state.collections;
+     // this.collections = this.$store.state.collections;
     }
   },
   created() {

@@ -19,7 +19,9 @@ export default {
   },
 
   getComics(id){
-      return http.get(`/collections/comics/${id}`)
+      return http.get(`/collections/comics/${id}`);
   }
+
+
 
 }

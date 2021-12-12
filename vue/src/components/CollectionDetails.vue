@@ -58,7 +58,9 @@ export default {
             this.collection.comics = response.data;
 
       })
-    }
+    },
+
+    
 
 
 

@@ -15,7 +15,7 @@
    
         tag="div"
       >
-        {{ collection.collectionName }}
+        <!-- {{ collection.collectionName }} -->
       </router-link>
       <button class="btn newCollection" v-if="!isLoading && !showNewCollection && $store.state.token != ''" v-on:click="showNewCollection = !showNewCollection">New Collection</button>
       <form v-if="showNewCollection">
