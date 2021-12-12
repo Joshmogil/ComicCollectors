@@ -2,20 +2,21 @@
 <div>
 
   <div id="collection-table">
-    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
+    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId" >
       <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
         {{collection.collectionName}}
         </router-link>  </h3>
 
 
-      <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
-        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
+      <section id= "horizontal-collection" v-for="comic in this.listOfComics" v-bind:key="comic.comicId">
+        {{comic.comicId}}
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId}}">
           <div class="card-container">
   <div class="card">
     <div class="side"><img :src='comic.img' alt=""></div>
     <div class="side back">{{comic.description}}</div>
   </div>
-</div>
+         </div>
         
         </router-link>
       </section>
@@ -32,8 +33,6 @@
 <script>
 import collectionService from "@/services/CollectionService.js";
 
-//import axios from "axios";
-
 export default {
    name:"collection-grid",
 
@@ -43,6 +42,9 @@ export default {
         
 
       ],
+      listOfComics: [
+
+      ]
     };
   },
   methods: {
@@ -52,7 +54,6 @@ export default {
          this.collections[0].name = 'api called';
         }) 
 
-     // this.collections = this.$store.state.collections;
     },
     getCollectionsForStore(){
           collectionService.getAllCollections().then(response => {
@@ -61,16 +62,17 @@ export default {
     });
     },
 
-    getComics(){
- /*      collectionService.getComics(id).then(response => {
-        this.
+    getComics(id){
+      collectionService.getComics(id).then(response => {
+        this.listOfComics = response.data;
       })
- */
+
     }
   },
   created() {
    this.getCollectionsForStore();
    this.getCollections();
+  
   }
 
   

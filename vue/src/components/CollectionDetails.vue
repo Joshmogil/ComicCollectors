@@ -3,8 +3,8 @@
     <h2> Test </h2>
             <h1>{{this.collection.name}}</h1>
 
-      <section id= "horizontal-collection" v-for="comic in this.collection.comics" v-bind:key="comic.id">
-        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
+      <section id= "horizontal-collection" v-for="comic in this.collection.comics" v-bind:key="comic.comicId">
+        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId}}">
         <div class="card-container">
   <div class="card">
     <div class="side"><img :src='comic.img' alt=""></div>
