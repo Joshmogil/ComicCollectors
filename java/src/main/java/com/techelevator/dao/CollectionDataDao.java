@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Collection;
+import com.techelevator.model.Comic;
 
 import java.security.Principal;
 import java.util.List;

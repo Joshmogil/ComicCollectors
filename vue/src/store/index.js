@@ -22,11 +22,97 @@ export default new Vuex.Store({
     user: currentUser || {},
     
     // collections: [],
-    
+    // Trigger is you want all the collections including their info and comics
+    // Do is call http://localhost:8080/collections/ to get the info on the collections, add to an array
+    // Then a separate call to http://localhost:8080/collections/comics/ --NEED TO WRITE THIS API ENDPOINT
+    // > to get all the comics in all the collections ordered by collection id
 
+    //Array for JUST the info about the collections use http://localhost:8080/collections/
+    /* allCollectionInfo:[
+      {
+        collectionId:1,
+        userId:1,
+        name: "Josh's Fantastic Collection"
+      },
+      {
+        collectionId:2,
+        userId:2,
+        name: "Jim's Awesome Collection"
+      },
+      {
+        collectionId:3,
+        userId:3,
+        name: "Sav's Awesome Collection"
+      },
+      {
+        collectionId:4,
+        userId:4,
+        name: "Dave's Awesome Collection"
+      }
+      
+    ], */
+    //Array for JUST the comics inside of the collections
+    /* allComicsInCollections:[
 
+      {
+        collectionId: 1,
+        id: 1001,
+        title: "Fantastic Spiderman",
+        img: require("../assets/Amazing_spiderman.jpg"),
+        description: "description"
+      },
+      {
+        collectionId: 1,
+        id: 1002,
+        title: "Gwen Stacy",
+        img: require("../assets/Aqua1.jpg"),
+        description: "description"
+
+      },
+      {
+        collectionId: 1,
+        id: 1003,
+        title: "Green Goblin",
+        img: require("../assets/Hulk1.jpg"),
+        description: "description"
+
+      },
+      {
+        collectionId: 1,
+        id: 1004,
+        title: "Spider Clones",
+        img: require("../assets/Hulk2.jpg"),
+        description: "description"
+
+      }
+          
+    ], */
 
     // For Testing Purposes
+
+    //Not hard coded approach
+
+    //1. Add the basic comic information collectionId, userId, name by looping through http://localhost:8080/collections/
+    //2. Add a empty comics array for each collection
+    //3. For each collection, make a call to http://localhost:8080/collections/comics/the collection id
+    //4. Add those comics to the empty comic array for that collection
+
+    collectionsApiStore:[
+      {
+        collectionId: 0,
+        userId:0,
+        name: "",
+        comics:[
+          {
+            id: 0,
+            title: "",
+            img: "",
+            description: ""
+          },
+        ]
+      },
+
+    ],
     
     collections:[
       {

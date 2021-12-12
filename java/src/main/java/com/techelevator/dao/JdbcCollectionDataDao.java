@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 
 import com.techelevator.model.Collection;
+import com.techelevator.model.Comic;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -93,10 +94,31 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
         while (results.next()) {
             Collection collection = mapRowToCollections(results);
             collections.add(collection);
+
         }
 
         return collections;
     }
+
+//    @Override
+//    public List<List<Comic>> getAllCollectionsWithComics() {
+//        List <List<Comic>> collectionWithComics = new ArrayList<>();
+//
+//        String sql = "SELECT * FROM collections;";
+//
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+//
+//        while (results.next()) {
+//            Collection collection = mapRowToCollections(results);
+//            collectionWithComics.add(collection);
+//
+//        }
+//
+//        return collections;
+//    }
+
+
+
 
     @Override
     public List<Collection> getUserCollections(long userId) {
