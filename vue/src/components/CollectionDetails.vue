@@ -66,9 +66,6 @@ export default {
 
 
   },
-
-
-  
   created() {
         this.getCollectionData();
   },
