@@ -8,6 +8,7 @@ public class Collection {
     private Long collectionId;
     private String collectionName;
     private long userId;
+    private List<Comic> comicList;
 
 
     public Collection() {}
@@ -41,6 +42,18 @@ public class Collection {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public void setCollectionId(Long collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public List<Comic> getComicList() {
+        return comicList;
+    }
+
+    public void setComicList(List<Comic> comicList) {
+        this.comicList = comicList;
     }
 
     @Override

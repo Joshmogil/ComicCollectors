@@ -56,7 +56,17 @@ public class ComicDataController {
     //Get All Collections For Single User By userId
     @RequestMapping(path = "collections/user/{userId}", method = RequestMethod.GET)
     public List<Collection> getUserCollections(@PathVariable int userId){
-        return collectiondd.getUserCollections(userId);
+
+        List<Collection> userCollection = collectiondd.getUserCollections(userId);
+
+        for(Collection collection : userCollection){
+
+            collection.setComicList(ccdd.getAllComicsInCollectionByCollectionId(collection.getCollectionId()));
+
+        }
+
+        return userCollection;
+
     }
 
     //Get All Comic Objects In A Collection By CollectionId

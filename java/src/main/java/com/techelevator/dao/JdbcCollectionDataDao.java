@@ -84,6 +84,9 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
         return collection;
     }
 
+
+
+
     @Override
     public List<Collection> getAllCollections() {
         List <Collection> collections = new ArrayList<>();
