@@ -7,7 +7,7 @@
       <nav class="links">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link v-bind:to="{ name: 'login' }">Login</router-link> 
-        <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.userId }  }">My Collections</router-link>
+        <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.currentUserId }  }">My Collections</router-link>
       </nav>
          <router-view />
   </div>

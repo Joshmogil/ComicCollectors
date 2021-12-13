@@ -10,15 +10,7 @@
       </div>
       add a v-else to router link before div tag
       -->
-      <router-link
-        :to="{ name: 'Collection', params: { id: collection.collectionId } }"
-        class="collection"
-        v-for="collection in this.$store.state.collections"
-        v-bind:key="collection.collectionId"
-        tag="div"
-      >
-        <!-- {{ collection.collectionName }} -->
-      </router-link>
+      
       <button
         class="btn newCollection"
         v-if="!isLoading && !showNewCollection && $store.state.token != ''"
