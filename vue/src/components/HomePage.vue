@@ -30,7 +30,7 @@
         <input
           type="text"
           class="form-control"
-          v-model="newCollection.collectionName"
+          v-model="this.newCollection.collectionName"
         />
         <button class="btn btn-submit" v-on:click="saveNewCollection">
           Save
@@ -103,6 +103,11 @@ export default {
       this.newCollection.userId = this.$store.state.user.id;
       this.creationAttemped = true;
       this.isLoading = true;
+
+
+    console.log(this.newCollection.userId);
+
+
       collectionService
         .addCollection(this.newCollection)
         .then((response) => {
