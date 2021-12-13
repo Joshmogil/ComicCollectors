@@ -75,6 +75,7 @@ export default {
         collectionName: "",
       },
       errorMsg: "",
+      creationSuccess: false,
     };
   },
   created() {
@@ -102,6 +103,7 @@ export default {
             this.newCollection = {
               collectionName: "",
             };
+            this.creationSuccess = response.data;
           }
         })
         .catch((error) => {
