@@ -15,9 +15,15 @@ VALUES('Favorite comics of a strong dude',4);
 INSERT INTO collections(collection_name, user_id)
 VALUES('Anthonys Top Ten',5);
 INSERT INTO collections(collection_name, user_id)
+VALUES('Double Double',5);
+INSERT INTO collections(collection_name, user_id)
 VALUES('Nguyen Win',6);
 INSERT INTO collections(collection_name, user_id)
+VALUES('Hello Marvel',6);
+INSERT INTO collections(collection_name, user_id)
 VALUES('Quick Flashy Collection',7);
+INSERT INTO collections(collection_name, user_id)
+VALUES('Speedster Faves',7);
 INSERT INTO collections(collection_name, user_id)
 VALUES('I love Marvel',8);
 INSERT INTO collections(collection_name, user_id)
@@ -247,5 +253,89 @@ VALUES(7,24);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(7,5);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,10);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,12);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,14);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,16);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,18);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,20);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,22);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,24);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(8,5);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,2);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,5);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,12);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,11);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,13);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,24);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,6);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,1);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(9,13);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,6);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,22);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,3);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,17);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,8);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,11);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,25);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,9);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,24);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(10,14);
 
 COMMIT TRANSACTION;
