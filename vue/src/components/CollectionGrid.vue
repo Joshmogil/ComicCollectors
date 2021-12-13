@@ -1,119 +1,112 @@
 <template>
-<div>
+  <div>
+    <div id="collection-table">
+      <section
+        id="vertical-collections"
+        v-for="collection in this.$store.state.collections"
+        v-bind:key="collection.collectionId"
+      >
+        <h3>
+          <router-link
+            v-bind:to="{
+              name: 'collectionDetails',
+              params: { collectionId: collection.collectionId },
+            }"
+          >
+            {{ collection.collectionName }}
+          </router-link>
+        </h3>
 
-  <div id="collection-table">
-    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId" >
-      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
-        {{collection.collectionName}}
-        </router-link>  </h3>
-
-
-      <section id= "horizontal-collection" v-for="comic in this.listOfComics" v-bind:key="comic.comicId">
-        {{comic.comicId}}
-        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId}}">
-          <div class="card-container">
-  <div class="card">
-    <div class="side"><img :src='comic.img' alt=""></div>
-    <div class="side back">{{comic.description}}</div>
-  </div>
-         </div>
-        
-        </router-link>
+        <section
+          id="horizontal-collection"
+          v-for="comic in collection.comics"
+          v-bind:key="comic.comicId"
+        >
+          {{ comic.comicId }}
+          <router-link
+            v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
+          >
+            <div class="card-container">
+              <div class="card">
+                <div class="side"><img :src="comic.img" alt="" /></div>
+                <div class="side back">{{ comic.description }}</div>
+              </div>
+            </div>
+          </router-link>
+        </section>
+        <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
+        <!-- </vue-custom-scrollbar> -->
       </section>
- <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->     
-<!-- </vue-custom-scrollbar> -->
-    </section>
-
-
-
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 import collectionService from "@/services/CollectionService.js";
 
 export default {
-   name:"collection-grid",
+  name: "collection-grid",
 
-   data() {
+  data() {
     return {
-      collections: [
-        
-
-      ],
-      listOfComics: [
-
-      ]
+      collections: [],
+      listOfComics: [],
     };
   },
   methods: {
     getCollections() {
-        collectionService.getAllCollections().then(response => {
-         this.collections = response.data;
-         this.collections[0].name = 'api called';
-        }) 
-
+      collectionService.getAllCollections().then((response) => {
+        this.collections = response.data;
+        this.collections[0].name = "api called";
+      });
     },
-    getCollectionsForStore(){
-          collectionService.getAllCollections().then(response => {
+    getCollectionsForStore() {
+      collectionService.getAllCollections().then((response) => {
         this.$store.commit("SET_ALL_COLLECTIONS", response.data);
         this.isLoading = false;
-    });
+      });
     },
 
-    getComics(id){
-      collectionService.getComics(id).then(response => {
+    getComics(id) {
+      collectionService.getComics(id).then((response) => {
         this.listOfComics = response.data;
-      })
-
-    }
+      });
+    },
   },
   created() {
-   this.getCollectionsForStore();
-   this.getCollections();
-  
-  }
-
-  
- 
- }
+    this.getCollectionsForStore();
+  },
+};
 </script>
 
 <style>
-
-h1{
+h1 {
   text-align: center;
 }
 
-#vertical-collections{
+#vertical-collections {
   display: flex;
   justify-content: center;
   flex-direction: row;
 }
 
-#horizontal-collection{
+#horizontal-collection {
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 15px 12px;
   box-sizing: border-box;
-  width: 20rem; 
+  width: 20rem;
   height: 20rem;
-  
 }
 
-td{
+td {
   align-content: center;
 }
 
-img{
-    margin: auto;
-    height:100%;
-    width:100%;
-    
+img {
+  margin: auto;
+  height: 100%;
+  width: 100%;
 }
-
-
-
 </style>
