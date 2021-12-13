@@ -21,6 +21,18 @@ VALUES(11,5);
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(11,20);
 
+INSERT INTO collections(collection_name, user_id)
+VALUES('Josh collection 2',10);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(11,19);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(12,15);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(12,5);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(12,20);
+
 
 
 

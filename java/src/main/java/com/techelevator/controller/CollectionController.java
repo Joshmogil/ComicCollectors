@@ -37,7 +37,7 @@ public class CollectionController {
     @RequestMapping(path = "collections/create", method = RequestMethod.POST)//make a user not found exception
     public boolean createCollection(@RequestBody CreateCollectionDTO createCollectionDTO) {
 
-        boolean collectionCreated = collectionDao.createCollection(createCollectionDTO.getUser_id(),createCollectionDTO.getCollection_name());
+        boolean collectionCreated = collectionDao.createCollection(createCollectionDTO.getUserId(),createCollectionDTO.getCollectionName());
 
         return collectionCreated;
     }

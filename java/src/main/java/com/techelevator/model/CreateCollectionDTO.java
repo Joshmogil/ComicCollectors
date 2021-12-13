@@ -2,33 +2,33 @@ package com.techelevator.model;
 
 public class CreateCollectionDTO {
 
-    private Long user_id;
-    private String collection_name;
+    private Long userId;
+    private String collectionName;
 
     public CreateCollectionDTO() {
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getCollection_name() {
-        return collection_name;
+    public String getCollectionName() {
+        return collectionName;
     }
 
-    public void setCollection_name(String collection_name) {
-        this.collection_name = collection_name;
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 
     @Override
     public String toString() {
         return "CreateCollectionDTO{" +
-                "collection_name='" + collection_name + '\'' +
-                ", user_id='" + user_id + '\'' +
+                "collection_name='" + collectionName + '\'' +
+                ", user_id='" + userId + '\'' +
                 '}';
     }
 }
