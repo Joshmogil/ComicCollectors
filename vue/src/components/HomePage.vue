@@ -1,31 +1,50 @@
 <template>
   <div id="home">
     <div class="collections-list">
-      <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
+      <div class="status-message error" v-show="errorMsg !== ''">
+        {{ errorMsg }}
+      </div>
       <!--
       <div class="loading" v-if="isLoading">
         <img src="../src/assets/marvel.gif" />
       </div>
       add a v-else to router link before div tag
       -->
-      <router-link :to="{ name: 'Collection', params: { id: collection.collectionId } }"
+      <router-link
+        :to="{ name: 'Collection', params: { id: collection.collectionId } }"
         class="collection"
         v-for="collection in this.$store.state.collections"
         v-bind:key="collection.collectionId"
-   
         tag="div"
       >
         <!-- {{ collection.collectionName }} -->
       </router-link>
-      <button class="btn newCollection" v-if="!isLoading && !showNewCollection && $store.state.token != ''" v-on:click="showNewCollection = !showNewCollection">New Collection</button>
+      <button
+        class="btn newCollection"
+        v-if="!isLoading && !showNewCollection && $store.state.token != ''"
+        v-on:click="showNewCollection = !showNewCollection"
+      >
+        New Collection
+      </button>
       <form v-if="showNewCollection">
         Collection Name:
-        <input type="text" class="form-control" v-model="newCollection.collectionName" />
-        <button class="btn btn-submit" v-on:click="saveNewCollection">Save</button>
-        <button class="btn btn-cancel" v-on:click="showNewCollection = !showNewCollection">Cancel</button>
+        <input
+          type="text"
+          class="form-control"
+          v-model="newCollection.collectionName"
+        />
+        <button class="btn btn-submit" v-on:click="saveNewCollection">
+          Save
+        </button>
+        <button
+          class="btn btn-cancel"
+          v-on:click="showNewCollection = !showNewCollection"
+        >
+          Cancel
+        </button>
       </form>
 
-<!--   <h1>Our top collections</h1>
+      <!--   <h1>Our top collections</h1>
   <div id="collection-table">
     <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
       <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
@@ -46,13 +65,12 @@
       </section>
     </section>
   </div> -->
-      
     </div>
   </div>
 </template>
 
 <script>
-import collectionService from '../services/CollectionService';
+import collectionService from "../services/CollectionService";
 
 export default {
   data() {
@@ -60,9 +78,9 @@ export default {
       isLoading: true,
       showNewCollection: false,
       newCollection: {
-        collectionName: ''
+        collectionName: "",
       },
-      errorMsg: ''
+      errorMsg: "",
     };
   },
   created() {
@@ -70,35 +88,39 @@ export default {
   },
   methods: {
     retrieveCollections() {
-        //what ids to put in - random?
-      collectionService.getAllCollections().then(response => {
+      //what ids to put in - random?
+      collectionService.getAllCollections().then((response) => {
         this.$store.commit("SET_ALL_COLLECTIONS", response.data);
         this.isLoading = false;
-    });
+      });
       /*   if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
           this.$router.push(`/collections/${response.data[0].id}`);
         } */
- 
     },
     saveNewCollection() {
       this.isLoading = true;
-      collectionService.addCollection(this.newCollection).then(response => {
-        if (response.status === 201) {
-          this.retrieveCollections();
-          this.showNewCollection = false;
-          this.newCollection = {
-            collectionName: ''
+      collectionService
+        .addCollection(this.newCollection)
+        .then((response) => {
+          if (response.status === 201) {
+            this.retrieveCollections();
+            this.showNewCollection = false;
+            this.newCollection = {
+              collectionName: "",
+            };
           }
-        }
-      }).catch(error => {
-        this.handleErrorResponse(error, "adding");
-        this.isLoading = false;
-      });
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, "adding");
+          this.isLoading = false;
+        });
     },
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =
-          "Error " + verb + " collection. Response received was '" +
+          "Error " +
+          verb +
+          " collection. Response received was '" +
           error.response.statusText +
           "'.";
       } else if (error.request) {
@@ -107,18 +129,17 @@ export default {
       } else {
         this.errorMsg =
           "Error " + verb + " collection. Request could not be created.";
-      }},
-      //unnecessary hex code
+      }
+    },
+    //unnecessary hex code
     generateHexCode() {
-      var bg = Math.floor(Math.random()*16777215).toString(16);
+      var bg = Math.floor(Math.random() * 16777215).toString(16);
       if (bg.length !== 6) bg = this.generateHexCode();
       return bg;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-
-
 </style>

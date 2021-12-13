@@ -11,6 +11,7 @@ export default {
   },
 
   getUserCollections(id){
+    
     return http.get(`/collections/user/${id}`);
   }
 

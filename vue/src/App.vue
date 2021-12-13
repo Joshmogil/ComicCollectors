@@ -2,7 +2,7 @@
   <div id="app">  
     <SiteHeader></SiteHeader>
     <div class="side-nav">
-      <SidebarItems></SidebarItems>
+      <!-- <SidebarItems></SidebarItems> -->
     </div>
       <nav class="links">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>

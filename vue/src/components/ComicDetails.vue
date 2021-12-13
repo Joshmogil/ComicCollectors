@@ -1,11 +1,11 @@
 <template>
   <div class="comic">
     <h1>
-      {{this.title}}
+      {{this.comic.comicTitle}}
     </h1>
-            <img :src='this.img' alt="">
+            <img :src='this.comic.imgUrl' alt="">
 <p>
-  {{this.description}}
+  {{this.comic.description}}
   </p>
   </div>
 </template>
@@ -18,9 +18,9 @@ export default {
   data() {
     return  {
         comic:{
-      id: "",
-      title: "",
-      img: "",
+      comicId: "",
+      comicTitle: "",
+      imgUrl: "",
       description: ""
         }
     }

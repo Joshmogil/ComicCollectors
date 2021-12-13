@@ -1,3 +1,4 @@
+
 <template>
   <form v-on:submit.prevent>
     <div class="field">
@@ -24,29 +25,28 @@ export default {
       collection: {
         collectionId: Math.floor(Math.random() * (1000 - 100) + 100),
         comicId: this.comicId,
-        collectionName: ""
-      }
+        collectionName: "",
+      },
     };
   },
   methods: {
     saveCollection() {
-collectionService
-const newCollection = {
-    collectionId: this.collection.collectionId,
-    comicId: this.collection.comicId,
-    collectionName: this.collection.collectionName
-}
-          .addCollection(newCollection)
-          .then(response => {
-            if (response.status === 201) {
-              this.$router.push(`/collections/${newCollection.collectionId}`);
-            }
-          })
-    }
-  }
+      collectionService;
+      const newCollection = {
+        collectionId: this.collection.collectionId,
+        comicId: this.collection.comicId,
+        collectionName: this.collection.collectionName,
+      }
+        .addCollection(newCollection)
+        .then((response) => {
+          if (response.status === 201) {
+            this.$router.push(`/collections/${newCollection.collectionId}`);
+          }
+        });
+    },
+  },
 };
 </script>
 
 <style>
-
 </style>
