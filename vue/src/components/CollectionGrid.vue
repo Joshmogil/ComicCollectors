@@ -19,7 +19,7 @@
 
         <section
           id="horizontal-collection"
-          v-for="comic in collection.comics"
+          v-for="comic in collection.comicList"
           v-bind:key="comic.comicId"
         >
           {{ comic.comicId }}
@@ -28,7 +28,7 @@
           >
             <div class="card-container">
               <div class="card">
-                <div class="side"><img :src="comic.img" alt="" /></div>
+                <div class="side"><img :src="comic.imgUrl" alt="" /></div>
                 <div class="side back">{{ comic.description }}</div>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       collections: [],
-      listOfComics: [],
+      
     };
   },
   methods: {
