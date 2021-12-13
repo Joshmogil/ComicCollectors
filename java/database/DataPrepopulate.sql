@@ -1,3 +1,4 @@
+
 BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('Michael Corleone','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
@@ -7,6 +8,23 @@ INSERT INTO users (username,password_hash,role) VALUES ('Michael Nguyen','$2a$08
 INSERT INTO users (username,password_hash,role) VALUES ('Flash Fan 700','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHQnDwqbHW9pft8uRtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('Marvel Fan1','$2a$08$UkVvwpUXis18S19S5pZFn.YHPZt3oaqHQnDwqbHW9pft8uRtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('711Num1Customer','$2a$08$UkVvwpULis18S19S5pZFn.YHPGt3oaqHQnDwqbHW9pft8uRtkXKDC','ROLE_USER');
+
+INSERT INTO collections(collection_name, user_id)
+VALUES('Josh collection',10);
+
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(11,8);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(11,6);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(11,5);
+INSERT INTO collection_comic(collection_id, comic_id)
+VALUES(11,20);
+
+
+
+
+
 
 INSERT INTO collections(collection_name, user_id)
 VALUES('The Famous Italian Collection',3);

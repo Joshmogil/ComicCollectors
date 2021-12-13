@@ -64,7 +64,7 @@ public class ComicDataController {
 
         for(Collection collection : collections){
 
-            collection.setComicList(ccdd.getAllComicsInCollectionByCollectionId(collection.getCollectionId()));
+            collection.setComicList(ccdd.get5ComicsInCollectionByCollectionId(collection.getCollectionId()));
 
         }
 

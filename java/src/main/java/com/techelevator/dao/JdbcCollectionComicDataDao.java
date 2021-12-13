@@ -44,6 +44,8 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
         return comics;
 
 
+
+
 //        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
 //        while (results.next()) {
 //            Comic comic = mapRowToComics(results);
@@ -52,6 +54,27 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 //        }
 //        collection.setListOfComics(comics);
 //        return collection;
+    }
+
+    @Override
+    public List<Comic> get5ComicsInCollectionByCollectionId(Long collectionId) {
+        List<Comic> comics = new ArrayList<>();
+//        Collection collection = new Collection();
+
+        String sql = "SELECT c.comic_id, c.marvel_id, c.comic_title, c.img_url, c.description FROM comics c " +
+                "JOIN collection_comic l ON c.comic_id = l.comic_id " +
+                "JOIN collections n ON n.collection_id = l.collection_id " +
+                "WHERE n.collection_id = ? " +
+                "LIMIT 5;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
+
+        while (results.next()) {
+            Comic comic = mapRowToComics(results);
+            comics.add(comic);
+        }
+        return comics;
+
     }
 
     @Override

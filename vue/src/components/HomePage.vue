@@ -10,14 +10,16 @@
       </div>
       add a v-else to router link before div tag
       -->
-      
-      <button
-        class="btn newCollection"
-        v-if="!isLoading && !showNewCollection && $store.state.token != ''"
-        v-on:click="showNewCollection = !showNewCollection"
-      >
-        New Collection
-      </button>
+      <div class="btn-container">
+        <button
+          class="btn newCollection"
+          v-if="!isLoading && !showNewCollection && $store.state.token != ''"
+          v-on:click="showNewCollection = !showNewCollection"
+        >
+          New Collection
+        </button>
+      </div>
+
       <form v-if="showNewCollection">
         Collection Name:
         <input
@@ -134,4 +136,8 @@ export default {
 </script>
 
 <style>
+.btn-container{
+  display: flex;
+  justify-content: center;
+}
 </style>

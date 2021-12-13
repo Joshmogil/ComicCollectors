@@ -5,9 +5,15 @@
       <!-- <SidebarItems></SidebarItems> -->
     </div>
       <nav class="links">
-        <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-        <router-link v-bind:to="{ name: 'login' }">Login</router-link> 
-        <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }">My Collections</router-link>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'login' }">Login</router-link> 
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }">My Collections</router-link>
+        </div>
       </nav>
          <router-view />
   </div>
@@ -23,7 +29,8 @@
 
 .links{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 /* @font-face {
@@ -33,10 +40,10 @@
  */
 .card-container {
   cursor: pointer;
-  height: 150px;
+  height: 250px;
   perspective: 600;
   position: relative;
-  width: 150px;
+  width: 188px;
 }
 .card {
   height: 100%;
@@ -63,6 +70,22 @@
   text-align: center;
   transform: rotateY(180deg);
 }
+
+/* .nav-link {
+
+border: 1px Solid rgb(0, 0, 19);
+
+} */
+
+#app{
+  background:#F1F3F4;
+  
+}
+
+
+
+
+
 
 
 </style>

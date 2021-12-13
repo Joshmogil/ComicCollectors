@@ -1,6 +1,7 @@
 <template>
   <div id="header">
-      <header> Comic Collectors</header>
+    
+      <img src="../assets/CapstoneHeader.png" alt="">
     </div>
 </template>
 
@@ -20,7 +21,7 @@ export default {
     font-style: italic, bold ;
     background-color: #DAD53A;
     color: rgb(0, 0, 0);
-    background-image: url("../assets/diamond.jpg");
+    background-image: url("../assets/CapstoneHeader.png");
     
 
 }

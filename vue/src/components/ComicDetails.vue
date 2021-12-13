@@ -3,7 +3,7 @@
     <h1>
       {{this.comic.comicTitle}}
     </h1>
-            <img :src='this.comic.imgUrl' alt="">
+            <img id="comic-photo" :src='this.comic.imgUrl' alt="">
 <p>
   {{this.comic.description}}
   </p>
@@ -45,4 +45,11 @@ export default {
 </script>
 <style>
 
+#comic-photo{
+  
+  width:auto;
+  height: 75vh;
+  display: flex;
+
+}
 </style>

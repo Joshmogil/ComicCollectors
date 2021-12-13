@@ -2,7 +2,7 @@
   <div>
     <h1>{{ this.user.username }}</h1>
     <div id="collection-table">
-      <section id="vertical-collections">
+      <section id="collections">
         <div v-for="collection in this.collections" v-bind:key="collection.collectionId">
           <h3>
             <router-link
@@ -15,7 +15,7 @@
             </router-link>
           </h3>
 
-          <section id="horizontal-collection">
+          <section id="collection-comics">
             <div v-for="comic in collection.comicList" v-bind:key="comic.comicId">
               <router-link
                 v-bind:to="{
@@ -94,4 +94,20 @@ export default {
 </script>
 
 <style>
+
+#collections{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+#collection-comics {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: auto;
+  justify-content: space-evenly;
+  
+}
+
 </style>
