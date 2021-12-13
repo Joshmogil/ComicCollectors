@@ -22,7 +22,6 @@
           v-for="comic in collection.comicList"
           v-bind:key="comic.comicId"
         >
-          {{ comic.comicId }}
           <router-link
             v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
           >

@@ -1,6 +1,7 @@
 <template>
   <div class="collection">
-    <h2>Test</h2>
+    <h2>User: {{ this.user.username }}</h2>
+
     <h1>{{ this.collection.collectionName }}</h1>
 
     <section id="horizontal-collection">
@@ -24,7 +25,7 @@
           params: { userId: this.collection.userId },
         }"
       >
-        {{ this.collection.userId }}
+        
       </router-link>
     </h3>
   </div>
@@ -32,17 +33,19 @@
 
 <script>
 import collectionService from "@/services/CollectionService.js";
+import userService from "@/services/UserService.js";
 
 export default {
   name: "collection",
   data() {
     return {
       collection: {
-        collectionId: 3,
-        userId: 3,
-        name: "still testing",
+        collectionId: "",
+        userId: "",
+        collectionName: "",
         comicList: [],
       },
+      user: {}
     };
   },
   methods: {
@@ -50,10 +53,13 @@ export default {
       collectionService
         .get(this.$route.params.collectionId)
         .then((response) => {
-          this.collection.collectionid = response.data.collectionId;
-          this.collection.userId = response.data.userId;
-          this.collection.name = response.data.collectionName;
+          this.collection = response.data;
         });
+    },
+    getUserData(userId){
+        userService.find(userId).then((response) => {
+          this.user = response.data;
+        })
     },
 
     findStoreData() {
@@ -72,6 +78,7 @@ export default {
   },
   created() {
     this.getCollectionData();
+    this.getUserData(this.collection.userId);
   },
 };
 </script>

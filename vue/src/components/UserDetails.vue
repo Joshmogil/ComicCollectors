@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ this.$route.params.userId }}</h1>
+    <h1>{{ this.user.username }}</h1>
     <div id="collection-table">
       <section id="vertical-collections">
         <div v-for="collection in this.collections" v-bind:key="collection.collectionId">
@@ -53,6 +53,7 @@ export default {
 
   created() {
     this.getUserCollections();
+    this.getUser(this.$route.params.userId);
   },
 
   methods: {
@@ -64,11 +65,13 @@ export default {
         });
     },
 
-    find() {
-      userService.find(this.$route.params.userId).then((response) => {
+    getUser(userId){
+      userService.find(userId).then((response) => {
         this.user = response.data;
-      });
+         });
     },
+
+    
 
     handleErrorResponse(error, verb) {
       if (error.response) {
