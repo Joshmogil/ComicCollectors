@@ -14,8 +14,8 @@ export default {
     return http.get(`/collections/${id}`);
   },
 
-  addCollection(collection) {
-    return http.post(`/collections/${collection.collectionId}`);
+  addCollection(newCollection) {
+    return http.post(`/collections/create`, newCollection);
   },
 
   getComics(id) {

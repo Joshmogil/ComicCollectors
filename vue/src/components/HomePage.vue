@@ -19,13 +19,18 @@
           New Collection
         </button>
       </div>
-
+<!--     <div v-if="creationAttempted" >
+      <select v-model="creationSuccess">
+      <option value="true">Success!</option>
+            <option value="false">Failed</option>
+      </select>
+    </div> -->
       <form v-if="showNewCollection">
         Collection Name:
         <input
           type="text"
           class="form-control"
-          v-model="newCollection.collectionName"
+          v-model="this.newCollection.collectionName"
         />
         <button class="btn btn-submit" v-on:click="saveNewCollection">
           Save
@@ -73,8 +78,11 @@ export default {
       showNewCollection: false,
       newCollection: {
         collectionName: "",
+        userId: "",
       },
       errorMsg: "",
+      creationSuccess: false,
+      creationAttempted: false
     };
   },
   created() {
@@ -92,7 +100,14 @@ export default {
         } */
     },
     saveNewCollection() {
+      this.newCollection.userId = this.$store.state.user.id;
+      this.creationAttemped = true;
       this.isLoading = true;
+
+
+    console.log(this.newCollection.userId);
+
+
       collectionService
         .addCollection(this.newCollection)
         .then((response) => {
@@ -102,6 +117,7 @@ export default {
             this.newCollection = {
               collectionName: "",
             };
+            this.creationSuccess = response.data;
           }
         })
         .catch((error) => {
