@@ -105,7 +105,8 @@ export default {
       this.isLoading = true;
 
 
-    console.log(this.newCollection.userId);
+  /*   console.log(this.newCollection.userId);
+    console.log(this.newCollection.collectionName); */
 
 
       collectionService
