@@ -47,11 +47,29 @@ public class ComicDataController {
 
     //Get Single Collection By collectionId
     @RequestMapping(path ="collections/{collectionId}", method = RequestMethod.GET)
-    public Collection getCollectionById(@PathVariable int collectionId) {return collectiondd.getCollectionById(collectionId);}
+    public Collection getCollectionById(@PathVariable int collectionId) {
+
+        Collection collection = collectiondd.getCollectionById(collectionId);
+
+        collection.setComicList(ccdd.getAllComicsInCollectionByCollectionId(collection.getCollectionId()));
+
+        return collection;
+    }
 
     //Get All Collection Objects In Collections Table
     @RequestMapping(path = "collections", method = RequestMethod.GET)
-    public List<Collection> getAllCollections(){return collectiondd.getAllCollections();}
+    public List<Collection> getAllCollections(){
+
+        List<Collection> collections = collectiondd.getAllCollections();
+
+        for(Collection collection : collections){
+
+            collection.setComicList(ccdd.getAllComicsInCollectionByCollectionId(collection.getCollectionId()));
+
+        }
+
+        return collections;
+    }
 
     //Get All Collections For Single User By userId
     @RequestMapping(path = "collections/user/{userId}", method = RequestMethod.GET)
