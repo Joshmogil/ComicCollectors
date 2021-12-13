@@ -17,6 +17,7 @@
           </router-link>
         </h3>
 
+        
         <section
           id="horizontal-collection"
           v-for="comic in collection.comicList"
