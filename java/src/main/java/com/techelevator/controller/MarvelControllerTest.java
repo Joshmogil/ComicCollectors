@@ -15,7 +15,7 @@ public class MarvelControllerTest {
 
     public MarvelControllerTest () {}
 
-    String MARVEL_BASE_URL = "http://gateway.marvel.com/v1/public/comics/";
+    String MARVEL_BASE_URL = "http://gateway.marvel.com/v1/public/";
     String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";
     String publicKey = "20afbe7ebe8ad8af2c91b02a275e06cc";
 
@@ -27,6 +27,24 @@ public class MarvelControllerTest {
         MarvelComic marvelComic = marvelComicService.getComic(comicId);
 
         return marvelComic;
+    }
+
+    @RequestMapping(path = "marvelcomics/{characterName}", method = RequestMethod.GET)
+    public List<MarvelComic> testGetComicsCharacterName(@PathVariable String characterName){
+
+        List<MarvelComic> comicList = marvelComicService.getComicListByCharacterName(characterName);
+
+        return comicList;
+    }
+
+
+
+    @RequestMapping(path = "character/{characterName}", method = RequestMethod.GET)
+    public long testGetCharacterId(@PathVariable String characterName){
+
+        long id = marvelComicService.getCharacterIdByName(characterName);
+
+        return id;
     }
 
 

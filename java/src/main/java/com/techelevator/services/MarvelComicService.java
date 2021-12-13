@@ -46,6 +46,88 @@ public class MarvelComicService {
         this.timeStamp = (long)1;
     }
 
+    public List<MarvelComic> getComicListByCharacterName(String characterName){
+
+        List<MarvelComic> listOfComics = new ArrayList<MarvelComic>();
+
+        long characterId = getCharacterIdByName(characterName);
+        String listOfComicsJsonString = null;
+
+        try{
+
+            //API base URL = http://gateway.marvel.com/v1/public/
+            List<String> marvelAuthInfo = generateAuthInfo();
+
+            String exchangeUrl = API_BASE_URL + "characters/"+characterId +"/comics?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+            System.out.println(exchangeUrl);
+            ResponseEntity<String> response =
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
+            listOfComicsJsonString = response.getBody();
+            System.out.println("Response body: " +response.getBody());
+//            System.out.println("Response class: " + response.getBody().getClass());
+//            System.out.println("Response body to string: " + response.getBody().toString());
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            System.out.println(e);
+        }
+
+        while(listOfComicsJsonString.contains("\"events\"")) {
+
+            MarvelComic marvelComic = new MarvelComic();
+
+            List<String> comicInfoList = new ArrayList<String>();
+
+            comicInfoList = rawStringToImportantInfo(listOfComicsJsonString);
+
+            marvelComic.setMarvel_id(Long.valueOf(comicInfoList.get(0)));
+            marvelComic.setTitle(comicInfoList.get(1));
+            marvelComic.setDescription(comicInfoList.get(2));
+            marvelComic.setImg_url(comicInfoList.get(3));
+            marvelComic.setExtension(comicInfoList.get(4));
+
+            int endOfComicCutoff = listOfComicsJsonString.indexOf("events") + 3;
+
+            listOfComicsJsonString = listOfComicsJsonString.substring(endOfComicCutoff);
+
+            listOfComics.add(marvelComic);
+        }
+
+        return listOfComics;
+    }
+
+
+
+
+    public long getCharacterIdByName(String characterName){
+
+        String characterJsonString = null;
+        long characterId = 0;
+
+        try{
+
+            //API base URL = http://gateway.marvel.com/v1/public/
+            List<String> marvelAuthInfo = generateAuthInfo();
+
+            //https://gateway.marvel.com:443/v1/public/characters?name=thor&apikey=20afbe7ebe8ad8af2c91b02a275e06cc
+
+            String exchangeUrl = API_BASE_URL + "characters?name="+characterName +"&ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+            System.out.println(exchangeUrl);
+            ResponseEntity<String> response =
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
+            characterJsonString = response.getBody();
+//            System.out.println("Response body: " +response.getBody());
+//            System.out.println("Response class: " + response.getBody().getClass());
+//            System.out.println("Response body to string: " + response.getBody().toString());
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            System.out.println(e);
+        }
+
+        characterId = Long.valueOf(findMyNumber("\"id\"",characterJsonString,1));
+
+        return characterId;
+    }
+
     public MarvelComic getComic(long comicId){
 
         String comicJsonString = null;
@@ -55,19 +137,14 @@ public class MarvelComicService {
 
             //API base URL = http://gateway.marvel.com/v1/public/comics?ts=
             List<String> marvelAuthInfo = generateAuthInfo();
-            String exchangeUrl = API_BASE_URL + comicId +"?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+            String exchangeUrl = API_BASE_URL +"comics/" + comicId +"?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
 
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             comicJsonString = response.getBody();
-//            System.out.println("Response body: " +response.getBody());
-//            System.out.println("Response class: " + response.getBody().getClass());
-//            System.out.println("Response body to string: " + response.getBody().toString());
-
-            //comic class needs an id, title, thumbnail
 
         } catch (RestClientResponseException | ResourceAccessException e) {
-            System.out.println(e);
+            System.out.println("Error getting comics by character name");
         }
         //Returns a list of the id, title, url, extension
 
@@ -105,7 +182,7 @@ public class MarvelComicService {
             //comic class needs an id, title, thumbnail
 
         } catch (RestClientResponseException | ResourceAccessException e) {
-            System.out.println(e);
+            System.out.println("error getting comics by character name");
         }
         //Returns a list of the id, title, url, extension
 
@@ -129,9 +206,9 @@ public class MarvelComicService {
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             comicJsonString = response.getBody();
-            System.out.println("Response body: " +response.getBody());
-            System.out.println("Response class: " + response.getBody().getClass());
-            System.out.println("Response body to string: " + response.getBody().toString());
+//            System.out.println("Response body: " +response.getBody());
+//            System.out.println("Response class: " + response.getBody().getClass());
+//            System.out.println("Response body to string: " + response.getBody().toString());
 
             //comic class needs an id, title, thumbnail
 
