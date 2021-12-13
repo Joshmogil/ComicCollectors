@@ -3,12 +3,12 @@
     <h1>{{ this.$route.params.userId }}</h1>
     <div id="collection-table">
       <section id="vertical-collections">
-        <div v-for="collection in this.collections" v-bind:key="collection.id">
+        <div v-for="collection in this.collections" v-bind:key="collection.collectionId">
           <h3>
             <router-link
               v-bind:to="{
                 name: 'collectionDetails',
-                params: { collectionId: collection.collectionid },
+                params: { collectionId: collection.collectionId },
               }"
             >
               {{ collection.name }}
@@ -16,7 +16,7 @@
           </h3>
 
           <section id="horizontal-collection">
-            <div v-for="comic in collection.comicList" v-bind:key="comic.id">
+            <div v-for="comic in collection.comicList" v-bind:key="comic.comicId">
               <router-link
                 v-bind:to="{
                   name: 'comicDetails',

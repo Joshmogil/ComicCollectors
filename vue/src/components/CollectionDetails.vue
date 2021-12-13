@@ -1,16 +1,16 @@
 <template>
   <div class="collection">
     <h2>Test</h2>
-    <h1>{{ this.collection.name }}</h1>
+    <h1>{{ this.collection.collectionName }}</h1>
 
     <section id="horizontal-collection">
-      <div v-for="comic in this.collection.comic" v-bind:key="comic.comicId">
+      <div v-for="comic in this.collection.comicList" v-bind:key="comic.comicId">
         <router-link
           v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
         >
           <div class="card-container">
             <div class="card">
-              <div class="side"><img :src="comic.img" alt="" /></div>
+              <div class="side"><img :src="comic.imgUrl" alt="" /></div>
               <div class="side back">{{ comic.description }}</div>
             </div>
           </div>
