@@ -38,12 +38,13 @@ export default new Vuex.Store({
 
     ],
     
-    collections:[
+    homeCollections:[
       
     ],
-    comicLists: [
-      
-    ]
+    userCollections: [],
+    detailCollection:[],
+    detailComic: [],
+    
     
   },
 
@@ -64,16 +65,21 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_COLLECTION(state, collection) {
-      state.collection = collection;
-      localStorage.setItem('collection',JSON.stringify(collection));
+    SET_HOME_COLLECTIONS(state, homeCollections) {
+      state.homeCollections = homeCollections;
+      localStorage.setItem('homeCollections',JSON.stringify(homeCollections));
     },
-    SET_ALL_COLLECTIONS(state, data) {
-      state.collections = data;
+    SET_USER_COLLECTIONS(state, userCollections) {
+      state.userCollections = userCollections;
+      localStorage.setItem('userCollections',JSON.stringify(userCollections));
     },
-    SET_COMIC(state, comic) {
-      state.comic = comic;
-      localStorage.setItem('comic',JSON.stringify(comic));
+    SET_DETAIL_COLLECTION(state, collection) {
+      state.detailCollection = collection;
+      localStorage.setItem('detailCollection',JSON.stringify(collection));
+    },
+    SET_DETAIL_COMIC(state, comic) {
+      state.detailComic = comic;
+      localStorage.setItem('detailComic',JSON.stringify(comic));
     }
   }
 })

@@ -3,7 +3,7 @@
     <div id="collection-table">
       <section
         id="vertical-collections"
-        v-for="collection in this.$store.state.collections"
+        v-for="collection in homeCollections"
         v-bind:key="collection.collectionId"
       >
         <h3>
@@ -49,20 +49,14 @@ export default {
 
   data() {
     return {
-      collections: [],
+      isLoading: true
       
     };
   },
   methods: {
-    getCollections() {
-      collectionService.getAllCollections().then((response) => {
-        this.collections = response.data;
-        this.collections[0].name = "api called";
-      });
-    },
     getCollectionsForStore() {
       collectionService.getAllCollections().then((response) => {
-        this.$store.commit("SET_ALL_COLLECTIONS", response.data);
+        this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
     },
@@ -72,6 +66,12 @@ export default {
         this.listOfComics = response.data;
       });
     },
+  },
+  computed: {
+      homeCollections(){
+      return this.$store.state.homeCollections;
+      }
+    
   },
   created() {
     this.getCollectionsForStore();

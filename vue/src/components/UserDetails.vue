@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>{{ this.user.username }}</h1>
+    <h1>{{ user.username }}</h1>
     <div id="collection-table">
       <section id="collections">
-        <div v-for="collection in this.collections" v-bind:key="collection.collectionId">
+        <div v-for="collection in userCollections" v-bind:key="collection.collectionId">
           <h3>
             <router-link
               v-bind:to="{
@@ -46,17 +46,32 @@ export default {
     return {
       isLoading: true,
       errorMsg: "",
-      user: {},
       collections: [],
     };
   },
 
   created() {
-    this.getUserCollections();
-    this.getUser(this.$route.params.userId);
+    this.getUserCollectionsForStore();
+  },
+
+  computed: {
+      userCollections(){
+      return this.$store.state.userCollections;
+      },
+      user(){
+        return this.$store.state.user;
+      }
+    
   },
 
   methods: {
+    getUserCollectionsForStore() {
+      userService
+        .getUserCollections(this.$route.params.userId).then((response) => {
+        this.$store.commit("SET_USER_COLLECTIONS", response.data);
+        this.isLoading = false;
+      });
+    },
     getUserCollections() {
       userService
         .getUserCollections(this.$route.params.userId)

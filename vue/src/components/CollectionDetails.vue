@@ -1,11 +1,11 @@
 <template>
   <div class="collection">
-    <h2>User: {{ this.user.username }}</h2>
+    <h2>User: {{ user.username }}</h2>
 
-    <h1>{{ this.collection.collectionName }}</h1>
+    <h1>{{ detailCollection.collectionName }}</h1>
 
     <section id="horizontal-collection">
-      <div v-for="comic in this.collection.comicList" v-bind:key="comic.comicId">
+      <div v-for="comic in detailCollection.comicList" v-bind:key="comic.comicId">
         <router-link
           v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
         >
@@ -45,10 +45,17 @@ export default {
         collectionName: "",
         comicList: [],
       },
-      user: {}
+      isLoading: true
     };
   },
   methods: {
+    getDetailCollectionForStore() {
+      collectionService
+        .get(this.$route.params.collectionId).then((response) => {
+        this.$store.commit("SET_DETAIL_COLLECTION", response.data);
+        this.isLoading = false;
+      });
+    },
     getCollectionData() {
       collectionService
         .get(this.$route.params.collectionId)
@@ -76,9 +83,17 @@ export default {
         });
     },
   },
+  computed: {
+      detailCollection(){
+      return this.$store.state.detailCollection;
+      },
+      user(){
+        return this.$store.state.user;
+      }
+    
+  },
   created() {
-    this.getCollectionData();
-    this.getUserData(this.collection.userId);
+    this.getDetailCollectionForStore();
   },
 };
 </script>

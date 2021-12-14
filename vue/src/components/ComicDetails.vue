@@ -1,11 +1,11 @@
 <template>
   <div class="comic">
     <h1>
-      {{this.comic.comicTitle}}
+      {{detailComic.comicTitle}}
     </h1>
-            <img id="comic-photo" :src='this.comic.imgUrl' alt="">
+            <img id="comic-photo" :src='detailComic.imgUrl' alt="">
 <p>
-  {{this.comic.description}}
+  {{detailComic.description}}
   </p>
 
 
@@ -35,7 +35,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="collection in this.collections" v-bind:key="collection.collectionId">
+			<tr v-for="collection in userCollections" v-bind:key="collection.collectionId">
 				<td>
 					<label class="form-checkbox">
             <input type="checkbox" :value="collection.collectionName" v-model="selected">
@@ -83,7 +83,26 @@ export default {
         showAddToCollection: false,
     }
   },
+  computed: {
+      detailComic(){
+      return this.$store.state.detailComic;
+      },
+      user(){
+        return this.$store.state.user;
+      },
+      userCollections(){
+        return this.$store.state.userCollections;
+      }
+    
+  },
   methods: {
+
+    getDetailComicForStore() {
+      comicService.find(this.$route.params.id).then((response) => {
+        this.$store.commit("SET_DETAIL_COMIC", response.data);
+        this.isLoading = false;
+      });
+    },
 
       getComic() {
               comicService.find(this.$route.params.id).then (response => {
@@ -92,6 +111,14 @@ export default {
 
       }
   }, 
+
+  getUserCollectionsForStore() {
+      userService
+        .getUserCollections(this.$store.state.user.id).then((response) => {
+        this.$store.commit("SET_USER_COLLECTIONS", response.data);
+        this.isLoading = false;
+      });
+    },
 
   getUserCollections() {
       userService
@@ -103,8 +130,8 @@ export default {
 
   created() {
 
-    this.getComic();
-    this.getUserCollections;
+    this.getDetailComicForStore();
+    this.getUserCollectionsForStore();
 
   }
 }
