@@ -3,10 +3,15 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelComic;
+import com.techelevator.model.StatisticModels.ComicWithStats;
 
 import java.util.List;
 
 public interface ComicDataDao {
+
+    List<ComicWithStats> getComicsWithAppearances();
+
+    List<Long> getAllMarvelIdsOfComics();
 
     Integer getComicSerialByMarvelId(long marvelId);
 

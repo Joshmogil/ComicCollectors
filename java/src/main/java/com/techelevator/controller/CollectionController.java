@@ -68,7 +68,6 @@ public class CollectionController {
             try{
 
                 List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
-                System.out.println(comicCharacters.get(0).getCharacterName());
 
                 for (MarvelCharacter marvelCharacter : comicCharacters){
 

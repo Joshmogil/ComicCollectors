@@ -59,4 +59,15 @@ public class MarvelCharacter {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Character{" +
+                "characterId=" + characterId +
+                ", characterName='" + characterName + '\'' +
+                ", img_url='" + img_url + '\'' +
+                ", extension='" + extension + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }

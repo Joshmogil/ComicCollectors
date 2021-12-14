@@ -58,13 +58,11 @@ public class MarvelComicService {
             List<String> marvelAuthInfo = generateAuthInfo();
 
             String exchangeUrl = API_BASE_URL + "comics/"+marvelComicId +"/characters?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
-            System.out.println(exchangeUrl);
+
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             listOfCharactersJsonString = response.getBody();
-//            System.out.println("Response body: " +response.getBody());
-//            System.out.println("Response class: " + response.getBody().getClass());
-//            System.out.println("Response body to string: " + response.getBody().toString());
+//
 
         } catch (RestClientResponseException | ResourceAccessException e) {
             System.out.println(e);
@@ -107,13 +105,11 @@ public class MarvelComicService {
             List<String> marvelAuthInfo = generateAuthInfo();
 
             String exchangeUrl = API_BASE_URL + "characters/"+characterId +"/comics?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
-            System.out.println(exchangeUrl);
+
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             listOfComicsJsonString = response.getBody();
-//            System.out.println("Response body: " +response.getBody());
-//            System.out.println("Response class: " + response.getBody().getClass());
-//            System.out.println("Response body to string: " + response.getBody().toString());
+
 
         } catch (RestClientResponseException | ResourceAccessException e) {
             System.out.println(e);
@@ -156,13 +152,11 @@ public class MarvelComicService {
             //https://gateway.marvel.com:443/v1/public/characters?name=thor&apikey=20afbe7ebe8ad8af2c91b02a275e06cc
 
             String exchangeUrl = API_BASE_URL + "characters?name="+characterName +"&ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
-            System.out.println(exchangeUrl);
+
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             characterJsonString = response.getBody();
-//            System.out.println("Response body: " +response.getBody());
-//            System.out.println("Response class: " + response.getBody().getClass());
-//            System.out.println("Response body to string: " + response.getBody().toString());
+
 
         } catch (RestClientResponseException | ResourceAccessException e) {
             System.out.println(e);
@@ -220,9 +214,6 @@ public class MarvelComicService {
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             comicJsonString = response.getBody();
-            System.out.println("Response body: " +response.getBody());
-            System.out.println("Response class: " + response.getBody().getClass());
-            System.out.println("Response body to string: " + response.getBody().toString());
 
             //comic class needs an id, title, thumbnail
 
@@ -251,9 +242,6 @@ public class MarvelComicService {
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             comicJsonString = response.getBody();
-//            System.out.println("Response body: " +response.getBody());
-//            System.out.println("Response class: " + response.getBody().getClass());
-//            System.out.println("Response body to string: " + response.getBody().toString());
 
             //comic class needs an id, title, thumbnail
 
@@ -271,23 +259,18 @@ public class MarvelComicService {
 
         String id = findMyNumber("\"id\"",comicJsonString,1);
         characterInfoList.add(id);
-        //System.out.println(id);
 
         String title = findMyString("\"name\"",comicJsonString,2);
         characterInfoList.add(title);
-        //System.out.println(title);
 
         String description = findMyString("\"description\"",comicJsonString,2);
         characterInfoList.add(description);
-        //System.out.println(description);
 
         String path = findMyString("\"path\"",comicJsonString,2);
         characterInfoList.add(path);
-        //System.out.println(path);
 
         String extension = findMyString("\"extension\"",comicJsonString,2);
         characterInfoList.add(extension);
-        //System.out.println(extension);
 
         return characterInfoList;
     }
@@ -298,23 +281,18 @@ public class MarvelComicService {
 
        String id = findMyNumber("\"id\"",comicJsonString,1);
        comicInfoList.add(id);
-       //System.out.println(id);
 
        String title = findMyString("\"title\"",comicJsonString,2);
        comicInfoList.add(title);
-       //System.out.println(title);
 
        String description = findMyString("\"description\"",comicJsonString,2);
        comicInfoList.add(description);
-       //System.out.println(description);
 
        String path = findMyString("\"path\"",comicJsonString,2);
        comicInfoList.add(path);
-       //System.out.println(path);
 
        String extension = findMyString("\"extension\"",comicJsonString,2);
        comicInfoList.add(extension);
-       //System.out.println(extension);
 
        return comicInfoList;
     }
@@ -360,14 +338,10 @@ public class MarvelComicService {
             List<String> marvelAuthInfo = generateAuthInfo();
             String exchangeUrl = API_BASE_URL + comicId +"?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
 
-            System.out.println(exchangeUrl);
 
             ResponseEntity<JSONObject> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), JSONObject.class);
             marvelComicJsonObj = response.getBody();
-            System.out.println("Response body: " +response.getBody());
-            System.out.println("Response class: " + response.getBody().getClass());
-            System.out.println("Response body to string: " + response.getBody().toString());
 
             //comic class needs an id, title, thumbnail
 
@@ -419,7 +393,6 @@ public class MarvelComicService {
             System.out.println("generateAuthInfo in MarvelComicService failed at generating hash");
         }
 
-        System.out.println(listOfAuthInfo.toString());
 
         return listOfAuthInfo;
 

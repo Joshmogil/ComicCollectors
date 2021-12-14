@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Comic;
+import com.techelevator.model.StatisticModels.CharacterWithStats;
+import com.techelevator.model.StatisticModels.ComicWithStats;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -52,6 +54,38 @@ public class JdbcComicDataDao implements ComicDataDao {
         return jdbcTemplate.queryForObject(sql,String.class, comic_id);
 
     }
+    @Override
+    public List<ComicWithStats> getComicsWithAppearances() {
+        List<ComicWithStats> comicsWithStats = new ArrayList<>();
+
+        String sql = "SELECT marvel_id , comic_title, img_url, description, COUNT(marvel_id) " +
+                "FROM comics AS name_count " +
+                "GROUP by marvel_id, comic_title, img_url, description;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            ComicWithStats comicWithStats = mapRowToComicWithStats(results);
+            comicsWithStats.add(comicWithStats);
+
+        }
+        return comicsWithStats;
+    }
+
+    @Override
+    public List<Long> getAllMarvelIdsOfComics(){
+
+        List<Long> marvelIdList= new ArrayList<>();
+
+        String sql = "SELECT marvel_id FROM comics;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            marvelIdList.add(results.getLong(1));
+        }
+        return marvelIdList;
+
+    }
 
     @Override
     public Comic getComicById(int comic_id) {
@@ -80,6 +114,19 @@ public class JdbcComicDataDao implements ComicDataDao {
             comics.add(comic);
         }
         return comics;
+    }
+
+    private ComicWithStats mapRowToComicWithStats (SqlRowSet rowSet) {
+
+        ComicWithStats comicWithStats = new ComicWithStats();
+
+        comicWithStats.setMarvelId(rowSet.getLong("marvel_id"));
+        comicWithStats.setTitle(rowSet.getString("comic_title"));
+        comicWithStats.setImgUrl(rowSet.getString("img_url"));
+        comicWithStats.setDescription(rowSet.getString("description"));
+        comicWithStats.setCount(rowSet.getLong("count"));
+
+        return comicWithStats;
     }
 
     private Comic mapRowToComics (SqlRowSet rowSet) {

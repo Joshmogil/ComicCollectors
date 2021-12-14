@@ -3,8 +3,11 @@ package com.techelevator.controller;
 import com.techelevator.dao.*;
 import com.techelevator.model.*;
 import com.techelevator.model.Character;
+import com.techelevator.model.StatisticModels.CharacterWithStats;
+import com.techelevator.model.StatisticModels.ComicWithStats;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -90,6 +94,12 @@ public class ComicDataController {
 
         return userCollection;
 
+    }
+
+    @RequestMapping(path = "comic/stats", method = RequestMethod.GET)
+    public List<ComicWithStats> getComicStats() {
+
+        return cdd.getComicsWithAppearances();
     }
 
     //Get All Comic Objects In A Collection By CollectionId
