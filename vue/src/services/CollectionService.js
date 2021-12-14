@@ -15,13 +15,17 @@ export default {
   },
 
   addCollection(newCollection) {
-    return http.post(`/collections/create`, newCollection);
+    return http.post('/collections/create', newCollection,
+    {
+      headers:{
+        'Authorization':`Bearer ${localStorage.getItem('token')}`
+      }
+
+    });
   },
 
   getComics(id) {
     return http.get(`/collections/comics/${id}`);
   }
-
-
 
 }

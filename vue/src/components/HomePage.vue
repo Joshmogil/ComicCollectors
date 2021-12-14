@@ -30,9 +30,9 @@
         <input
           type="text"
           class="form-control"
-          v-model="this.newCollection.collectionName"
+          v-model="newCollection.collectionName"
         />
-        <button class="btn btn-submit" v-on:click="saveNewCollection">
+        <button class="btn btn-submit" v-on:click="saveNewCollection" >
           Save
         </button>
         <button
@@ -100,25 +100,26 @@ export default {
         } */
     },
     saveNewCollection() {
-      this.newCollection.userId = this.$store.state.user.id;
-      this.creationAttemped = true;
-      this.isLoading = true;
-
-
-  /*   console.log(this.newCollection.userId);
-    console.log(this.newCollection.collectionName); */
-
-
+      const newCollectionDTO ={
+        collectionName: this.newCollection.collectionName,
+        userId: this.$store.state.user.id
+      };
+      // this.newCollection.userId = this.$store.state.user.id;
+      // this.creationAttemped = true;
+      // this.isLoading = true;
+    console.log(newCollectionDTO.collectionName);
+    console.log(newCollectionDTO.userId);
+      
       collectionService
-        .addCollection(this.newCollection)
+        .addCollection(newCollectionDTO)
         .then((response) => {
           if (response.status === 201) {
-            this.retrieveCollections();
-            this.showNewCollection = false;
-            this.newCollection = {
-              collectionName: "",
-            };
-            this.creationSuccess = response.data;
+            // this.retrieveCollections();
+            // this.showNewCollection = false;
+            // this.newCollection = {
+            //   collectionName: "",
+            // };
+            // this.creationSuccess = response.data;
           }
         })
         .catch((error) => {
