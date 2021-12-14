@@ -107,8 +107,6 @@ export default {
       // this.newCollection.userId = this.$store.state.user.id;
       // this.creationAttemped = true;
       // this.isLoading = true;
-    console.log(newCollectionDTO.collectionName);
-    console.log(newCollectionDTO.userId);
       
       collectionService
         .addCollection(newCollectionDTO)
