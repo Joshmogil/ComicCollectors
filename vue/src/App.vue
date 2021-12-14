@@ -15,7 +15,7 @@
           <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }">My Collections</router-link>
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'statistics' }">Statistcis</router-link>
+          <router-link v-bind:to="{ name: 'statistics' }">Statistics</router-link>
         </div>
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'search' }">Search</router-link>
