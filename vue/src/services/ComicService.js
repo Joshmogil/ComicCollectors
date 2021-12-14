@@ -10,6 +10,13 @@ export default {
     return http.get(`/comics/${id}`);
   },
 
-  
+  addComicToCollection(newComic) {
+    return http.post('/collections/addcomic', newComic,
+    {
+      headers:{
+        'Authorization':`Bearer ${localStorage.getItem('token')}`
+      }
 
+    });
+  }
 }

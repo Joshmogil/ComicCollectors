@@ -97,6 +97,10 @@ export default {
   },
   methods: {
 
+    addingComic(){
+      comicService.addComicToCollection
+    },
+
     getDetailComicForStore() {
       comicService.find(this.$route.params.id).then((response) => {
         this.$store.commit("SET_DETAIL_COMIC", response.data);
