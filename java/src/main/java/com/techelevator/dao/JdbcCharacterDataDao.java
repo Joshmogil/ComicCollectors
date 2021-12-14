@@ -38,10 +38,10 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     public List<Comic> getAllComicsWithCharacterName(String characterName) {
         List<Comic> comics = new ArrayList<>();
 
-        String sql = "SELECT c.comic_id, c.marvel_id, c.comic_title, c.img_url FROM comics c " +
-                "JOIN comic_character ON c.comic_id = comic_character.comic_id " +
-                "JOIN characters h ON comic_character.character_id = h.character_id " +
-                "WHERE h.character_name = ?;";
+        String sql = "SELECT comics.comic_id, comics.marvel_id, comics.comic_title, comics.img_url, comics.description FROM comics " +
+                "JOIN comic_character on comics.comic_id = comic_character.comic_id " +
+                "JOIN characters on comic_character.character_id = characters.character_id " +
+                "WHERE LOWER(characters.character_name) LIKE LOWER(?)";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterName);
 
@@ -71,6 +71,7 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
         comic.setMarvelId(rowSet.getLong("marvel_id"));
         comic.setComicTitle(rowSet.getString("comic_title"));
         comic.setImgUrl(rowSet.getString("img_url"));
+        comic.setDescription(rowSet.getString("description"));
 
         return comic;
     }
