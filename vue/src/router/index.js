@@ -8,6 +8,8 @@ import store from '../store/index'
 import CollectionDetails from '../components/CollectionDetails'
 import UserDetails from '../components/UserDetails'
 import ComicDetails from '../components/ComicDetails'
+import StatisticsPage from '../components/StatisticsPage'
+import SearchPage from '../components/SearchPage'
 
 Vue.use(Router)
 
@@ -70,6 +72,16 @@ const router = new Router({
       path: "/comics/:id",
       name: "comicDetails",
       component: ComicDetails
+    },
+    {
+      path: "/statistics",
+      name: "statistics",
+      component: StatisticsPage
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: SearchPage
     }
   ]
 })

@@ -12,11 +12,15 @@ export default {
 
   addComicToCollections(newComics) {
     return http.post('/collections/addcomics', newComics,
-    {
-      headers:{
-        'Authorization':`Bearer ${localStorage.getItem('token')}`
-      }
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
 
-    });
+      });
+  },
+
+  searchByCharacterName(characterName) {
+    return http.get(`/comics/character/${characterName}`)
   }
 }

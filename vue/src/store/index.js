@@ -12,7 +12,7 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
@@ -21,12 +21,12 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     currentUserId: currentUser.userId || 0,
-    collectionsApiStore:[
+    collectionsApiStore: [
       {
         collectionId: 0,
-        userId:0,
+        userId: 0,
         name: "",
-        comics:[
+        comics: [
           {
             id: 0,
             title: "",
@@ -37,16 +37,17 @@ export default new Vuex.Store({
       },
 
     ],
-    
-    homeCollections:[
-      
+
+    homeCollections: [
+
     ],
     userCollections: [],
-    detailCollection:[],
+    detailCollection: [],
     detailComic: [],
     userViewed: [],
-    
-    
+    results: []
+
+
   },
 
   mutations: {
@@ -57,7 +58,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -68,23 +69,27 @@ export default new Vuex.Store({
     },
     SET_HOME_COLLECTIONS(state, homeCollections) {
       state.homeCollections = homeCollections;
-      localStorage.setItem('homeCollections',JSON.stringify(homeCollections));
+      localStorage.setItem('homeCollections', JSON.stringify(homeCollections));
     },
     SET_USER_COLLECTIONS(state, userCollections) {
       state.userCollections = userCollections;
-      localStorage.setItem('userCollections',JSON.stringify(userCollections));
+      localStorage.setItem('userCollections', JSON.stringify(userCollections));
     },
     SET_DETAIL_COLLECTION(state, collection) {
       state.detailCollection = collection;
-      localStorage.setItem('detailCollection',JSON.stringify(collection));
+      localStorage.setItem('detailCollection', JSON.stringify(collection));
     },
     SET_DETAIL_COMIC(state, comic) {
       state.detailComic = comic;
-      localStorage.setItem('detailComic',JSON.stringify(comic));
+      localStorage.setItem('detailComic', JSON.stringify(comic));
     },
     SET_USER_VIEWED(state, user) {
       state.userViewed = user;
-      localStorage.setItem('userViewed',JSON.stringify(user));
+      localStorage.setItem('userViewed', JSON.stringify(user));
+    },
+    SET_RESULTS(state, results) {
+      state.results = results;
+      localStorage.setItem('results', JSON.stringify(results));
     }
   }
 })

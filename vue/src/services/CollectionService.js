@@ -16,12 +16,12 @@ export default {
 
   addCollection(newCollection) {
     return http.post('/collections/create', newCollection,
-    {
-      headers:{
-        'Authorization':`Bearer ${localStorage.getItem('token')}`
-      }
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
 
-    });
+      });
   },
 
   getComics(id) {
