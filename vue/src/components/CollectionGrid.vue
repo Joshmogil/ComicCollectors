@@ -34,8 +34,6 @@
             </div>
           </router-link>
         </section>
-        <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
-        <!-- </vue-custom-scrollbar> -->
       </section>
     </div>
   </div>
