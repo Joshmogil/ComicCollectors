@@ -34,8 +34,6 @@
             </div>
           </router-link>
         </section>
-        <!-- <vue-custom-scrollbar class="scroll-area"  @ps-scroll-y="scrollHanle"> -->
-        <!-- </vue-custom-scrollbar> -->
       </section>
     </div>
   </div>
@@ -100,9 +98,7 @@ h1 {
   height: 20rem;
 }
 
-td {
-  align-content: center;
-}
+
 
 img {
   margin: auto;

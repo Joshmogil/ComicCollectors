@@ -1,6 +1,16 @@
 <template>
   <div class="collection">
-    <h2>User: {{ user.username }}</h2>
+        <h3>
+      <router-link
+        v-bind:to="{
+          name: 'userDetails',
+          params: { userId: user.id }
+        }"
+      >
+    <h2>User: {{ user.username }}</h2>    
+      </router-link>
+    </h3>
+    
 
     <h1>{{ detailCollection.collectionName }}</h1>
 
@@ -18,16 +28,7 @@
         </router-link>
       </div>
     </section>
-    <h3>
-      <router-link
-        v-bind:to="{
-          name: 'userDetails',
-          params: { userId: this.collection.userId },
-        }"
-      >
-        
-      </router-link>
-    </h3>
+
   </div>
 </template>
 
@@ -98,6 +99,21 @@ export default {
 };
 </script>
 <style>
+
+#horizontal-collection {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  justify-content: center;
+
+}
+
+img {
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
 
 
 </style>
