@@ -4,10 +4,10 @@
       <router-link
         v-bind:to="{
           name: 'userDetails',
-          params: { userId: user.id }
+          params: { userId: userViewedIdOnly }
         }"
       >
-    <h2>User: {{ user.username }}</h2>    
+    <h2>User: {{ userViewed.username }}</h2>    
       </router-link>
     </h3>
     
@@ -64,11 +64,11 @@ export default {
           this.collection = response.data;
         });
     },
-    getUserData(userId){
+    /* getUserData(userId){
         userService.find(userId).then((response) => {
           this.user = response.data;
         })
-    },
+    }, */
 
     findStoreData() {
       return this.$store.state.collections.find((collection) => {
@@ -83,18 +83,30 @@ export default {
           this.collection.comics = response.data;
         });
     },
+    getUserViewed(userId){
+      userService.find(userId).then((response) => {
+this.$store.commit("SET_USER_VIEWED", response.data);         
+});
+    },
   },
   computed: {
       detailCollection(){
       return this.$store.state.detailCollection;
       },
-      user(){
+      currentUser(){
         return this.$store.state.user;
+      },
+      userViewed(){
+        return this.$store.state.userViewed;
+      },
+      userViewedIdOnly(){
+        return this.$store.state.detailCollection.userId;
       }
     
   },
   created() {
     this.getDetailCollectionForStore();
+    this.getUserViewed(this.userViewedIdOnly);
   },
 };
 </script>

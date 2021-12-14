@@ -87,7 +87,7 @@ export default {
       detailComic(){
       return this.$store.state.detailComic;
       },
-      user(){
+      currentUser(){
         return this.$store.state.user;
       },
       userCollections(){
