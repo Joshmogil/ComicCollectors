@@ -92,7 +92,7 @@ export default {
     retrieveCollections() {
       //what ids to put in - random?
       collectionService.getAllCollections().then((response) => {
-        this.$store.commit("SET_ALL_COLLECTIONS", response.data);
+        this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
       /*   if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
