@@ -11,7 +11,7 @@
                 params: { collectionId: collection.collectionId },
               }"
             >
-              {{ collection.name }}
+              {{ collection.collectionName }}
             </router-link>
           </h3>
 
