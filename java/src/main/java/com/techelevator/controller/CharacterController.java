@@ -5,6 +5,7 @@ import com.techelevator.dao.CharacterDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelCharacter;
+import com.techelevator.model.StatisticModels.CharacterWithStats;
 import com.techelevator.services.MarvelComicService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,7 +35,11 @@ public class CharacterController {
 
     MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
 
+    @RequestMapping(path = "character/stats", method = RequestMethod.GET)
+    public List<CharacterWithStats> getCharacterStats() {
 
+        return characterDataDao.getCharactersWithAppearances();
+    }
 
 
     @RequestMapping(path = "getMyCharacters", method = RequestMethod.GET)

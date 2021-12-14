@@ -57,6 +57,23 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     }
 
     @Override
+    public List<CharacterWithStats> getCharactersWithAppearances() {
+        List<CharacterWithStats> charactersWithStats = new ArrayList<>();
+
+        String sql = "SELECT marvel_character_id , character_name, img_url, description, COUNT(character_name) " +
+                "FROM characters AS name_count " +
+                "GROUP by marvel_character_id, character_name, img_url, description;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            CharacterWithStats characterWithStats = mapRowToCharacterWithStats(results);
+            charactersWithStats.add(characterWithStats);
+        }
+        return charactersWithStats;
+    }
+
+    @Override
     public List<Comic> getAllComicsWithCharacterName(String characterName) {
         List<Comic> comics = new ArrayList<>();
 
