@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ComicDataDao {
 
+    List<Long> getAllMarvelIdsOfComics();
+
     Integer getComicSerialByMarvelId(long marvelId);
 
     Integer addComicToComicTable(Long marvelId,String comicTitle,String imgUrl, String description);

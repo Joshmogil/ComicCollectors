@@ -2,6 +2,8 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Character;
 import com.techelevator.model.Comic;
+import com.techelevator.model.MarvelCharacter;
+import com.techelevator.model.StatisticModels.CharacterWithStats;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -72,6 +74,17 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
         return comics;
     }
 
+    private CharacterWithStats mapRowToCharacterWithStats(SqlRowSet rowSet){
+        CharacterWithStats characterWithStats = new CharacterWithStats();
+
+        characterWithStats.setCharacterId(rowSet.getLong("marvel_character_id"));
+        characterWithStats.setCharacterName(rowSet.getString("character_name"));
+        characterWithStats.setImgUrl(rowSet.getString("img_url"));
+        characterWithStats.setDescription(rowSet.getString("description"));
+        characterWithStats.setCount(rowSet.getLong("count"));
+
+        return characterWithStats;
+    }
 
 
     private Character mapRowToCharacters(SqlRowSet rowSet){
