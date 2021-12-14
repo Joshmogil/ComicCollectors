@@ -98,9 +98,7 @@ h1 {
   height: 20rem;
 }
 
-td {
-  align-content: center;
-}
+
 
 img {
   margin: auto;
