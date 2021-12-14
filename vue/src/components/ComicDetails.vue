@@ -56,7 +56,7 @@
         </table>
       </div>
 
-      <button class="btn btn-submit" v-on:click="saveNewCollection">
+      <button class="btn btn-submit" v-on:click="addingComic">
         Save
       </button>
       <button
@@ -100,6 +100,20 @@ export default {
     },
   },
   methods: {
+    mainAddComic(){
+      let collectionList = "";
+        this.userCollections.forEach(collection => {
+
+          if (collection.selected === true){
+            const addComicDTO = {
+        comicId: this.detailComic.comicId,
+        collectionId: collection.collectionId,
+      };
+            collectionList.push(addComicDTO);
+          }
+        });
+        //call service 
+    },
     addingComic() {
       const addComicDTO = {
         comicId: this.detailComic.comicId,
