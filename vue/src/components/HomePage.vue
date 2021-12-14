@@ -19,7 +19,12 @@
           New Collection
         </button>
       </div>
-
+<!--     <div v-if="creationAttempted" >
+      <select v-model="creationSuccess">
+      <option value="true">Success!</option>
+            <option value="false">Failed</option>
+      </select>
+    </div> -->
       <form v-if="showNewCollection">
         Collection Name:
         <input
@@ -27,7 +32,7 @@
           class="form-control"
           v-model="newCollection.collectionName"
         />
-        <button class="btn btn-submit" v-on:click="saveNewCollection">
+        <button class="btn btn-submit" v-on:click="saveNewCollection" >
           Save
         </button>
         <button
@@ -73,8 +78,11 @@ export default {
       showNewCollection: false,
       newCollection: {
         collectionName: "",
+        userId: "",
       },
       errorMsg: "",
+      creationSuccess: false,
+      creationAttempted: false
     };
   },
   created() {
@@ -92,16 +100,26 @@ export default {
         } */
     },
     saveNewCollection() {
-      this.isLoading = true;
+      const newCollectionDTO ={
+        collectionName: this.newCollection.collectionName,
+        userId: this.$store.state.user.id
+      };
+      // this.newCollection.userId = this.$store.state.user.id;
+      // this.creationAttemped = true;
+      // this.isLoading = true;
+    console.log(newCollectionDTO.collectionName);
+    console.log(newCollectionDTO.userId);
+      
       collectionService
-        .addCollection(this.newCollection)
+        .addCollection(newCollectionDTO)
         .then((response) => {
           if (response.status === 201) {
-            this.retrieveCollections();
-            this.showNewCollection = false;
-            this.newCollection = {
-              collectionName: "",
-            };
+            // this.retrieveCollections();
+            // this.showNewCollection = false;
+            // this.newCollection = {
+            //   collectionName: "",
+            // };
+            // this.creationSuccess = response.data;
           }
         })
         .catch((error) => {
