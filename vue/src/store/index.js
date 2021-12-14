@@ -44,6 +44,7 @@ export default new Vuex.Store({
     userCollections: [],
     detailCollection:[],
     detailComic: [],
+    userViewed: [],
     
     
   },
@@ -80,6 +81,10 @@ export default new Vuex.Store({
     SET_DETAIL_COMIC(state, comic) {
       state.detailComic = comic;
       localStorage.setItem('detailComic',JSON.stringify(comic));
+    },
+    SET_USER_VIEWED(state, user) {
+      state.userViewed = user;
+      localStorage.setItem('userViewed',JSON.stringify(user));
     }
   }
 })

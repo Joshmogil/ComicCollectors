@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ user.username }}</h1>
+    <h1>{{ userViewed.username }}</h1>
     <div id="collection-table">
       <section id="collections">
         <div v-for="collection in userCollections" v-bind:key="collection.collectionId">
@@ -11,7 +11,7 @@
                 params: { collectionId: collection.collectionId },
               }"
             >
-              {{ collection.name }}
+              {{ collection.collectionName }}
             </router-link>
           </h3>
 
@@ -52,14 +52,18 @@ export default {
 
   created() {
     this.getUserCollectionsForStore();
+    this.getUserViewed();
   },
 
   computed: {
       userCollections(){
       return this.$store.state.userCollections;
       },
-      user(){
+      currentUser(){
         return this.$store.state.user;
+      },
+      userViewed(){
+        return this.$store.state.userViewed;
       }
     
   },
@@ -80,10 +84,10 @@ export default {
         });
     },
 
-    getUser(userId){
-      userService.find(userId).then((response) => {
-        this.user = response.data;
-         });
+    getUserViewed(){
+      userService.find(this.$route.params.userId).then((response) => {
+this.$store.commit("SET_USER_VIEWED", response.data);         
+});
     },
 
     
