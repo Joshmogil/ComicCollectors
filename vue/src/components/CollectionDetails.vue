@@ -115,9 +115,10 @@ this.$store.commit("SET_USER_VIEWED", response.data);
 #horizontal-collection {
   display: flex;
   flex-direction: row;
-  width: auto;
+  max-width: 800px;
   height: auto;
-  justify-content: center;
+  justify-content: space-between;
+
 
 }
 
@@ -125,6 +126,8 @@ img {
   margin: auto;
   height: 100%;
   width: 100%;
+  margin: 5px;
+  border-radius: 10px;
 }
 
 
