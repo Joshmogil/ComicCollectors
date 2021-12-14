@@ -115,7 +115,7 @@ this.$store.commit("SET_USER_VIEWED", response.data);
 #horizontal-collection {
   display: flex;
   flex-direction: row;
-  width: 800px;
+  max-width: 800px;
   height: auto;
   justify-content: space-between;
 
