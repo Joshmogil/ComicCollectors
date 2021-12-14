@@ -4,6 +4,7 @@ import com.techelevator.dao.CharacterDataDao;
 import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.*;
+import com.techelevator.model.StatisticModels.ComicWithStats;
 import com.techelevator.services.MarvelComicService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,6 +43,13 @@ public class CollectionController {
         long collectionCreated = collectionDao.createCollection(createCollectionDTO.getUserId(),createCollectionDTO.getCollectionName());
 
         return collectionCreated;
+    }
+
+    @RequestMapping(path = "joshcomic/{comicId}", method = RequestMethod.GET)
+    public Long getComicStats(@PathVariable int comicId) {
+
+        return comicDao.getMarvelComicIdByOurComicId(comicId);
+
     }
 
 
@@ -107,7 +115,63 @@ public class CollectionController {
 
         */
 
-        System.out.println(addComicsDTO.toString());
+        boolean comicAddedToCollection = false;
+
+        for(AddComicDTO addComicDTO:addComicsDTO) {
+            try {
+
+                Long marvelIdOfcomic = comicDao.getMarvelComicIdByOurComicId(addComicDTO.getComic_id());
+
+                MarvelComic marvelComic = marvelComicService.getComic(marvelIdOfcomic);
+
+                String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
+
+                Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
+
+                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), comicSerialForCollection);
+
+                try {
+
+                    List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
+
+                    for (MarvelCharacter marvelCharacter : comicCharacters) {
+
+                        String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+
+                        characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+
+                    }
+
+                } catch (Exception thisCouldBeLessGeneral) {
+                    System.out.println("Failed to find comic's characters");
+                }
+
+            } catch (Exception thisNeedToBeLessGeneral) {
+                System.out.println("Failed to add comic to collection");
+            }
+        }
+
+        return true;
+
+    }
+
+    @RequestMapping(path = "collections/addcomics/new", method = RequestMethod.POST)//make a user not found exception
+    public Boolean addNewComicsToCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
+        /*Example json body
+
+        [
+            {
+                "collection_id":2,
+                "comic_id": 27649
+            },
+            {
+                "collection_id":4,
+                "comic_id": 27649
+            }
+         ]
+
+        */
+
         boolean comicAddedToCollection = false;
 
         for(AddComicDTO addComicDTO:addComicsDTO) {

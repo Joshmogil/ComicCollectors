@@ -10,8 +10,8 @@ export default {
     return http.get(`/comics/${id}`);
   },
 
-  addComicToCollection(newComic) {
-    return http.post('/collections/addcomic', newComic,
+  addComicToCollections(newComics) {
+    return http.post('/collections/addcomics', newComics,
     {
       headers:{
         'Authorization':`Bearer ${localStorage.getItem('token')}`

@@ -47,13 +47,15 @@ public class JdbcComicDataDao implements ComicDataDao {
 
     }
 
-    public String getComicDataByID(int comic_id){
+    @Override
+    public Long getMarvelComicIdByOurComicId(int comic_id){
 
-        String sql = "SELECT comic_title FROM comics WHERE comic_id = ?;";
+        String sql = "SELECT marvel_id FROM comics WHERE comic_id = ?;";
 
-        return jdbcTemplate.queryForObject(sql,String.class, comic_id);
+        return jdbcTemplate.queryForObject(sql,Long.class, comic_id);
 
     }
+
     @Override
     public List<ComicWithStats> getComicsWithAppearances() {
         List<ComicWithStats> comicsWithStats = new ArrayList<>();

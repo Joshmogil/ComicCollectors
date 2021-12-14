@@ -26,13 +26,6 @@ class DemoController {
 
     }
 
-    @RequestMapping(path = "comics/data/{comicId}", method = RequestMethod.GET)
-    public String Test(@PathVariable int comicId){
-
-       return cdd.getComicDataByID(comicId);
-
-    }
-
     @RequestMapping(path = "comics/newdata/{comicId}", method = RequestMethod.GET)
     public Comic getComicById(@PathVariable int comicId) {return cdd.getComicById(comicId);}
 

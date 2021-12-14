@@ -56,7 +56,7 @@
         </table>
       </div>
 
-      <button class="btn btn-submit" v-on:click="addingComic">
+      <button class="btn btn-submit" v-on:click="mainAddComic">
         Save
       </button>
       <button
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     mainAddComic(){
-      let collectionList = "";
+      let collectionList = [];
         this.userCollections.forEach(collection => {
 
           if (collection.selected === true){
@@ -110,18 +110,13 @@ export default {
         collectionId: collection.collectionId,
       };
             collectionList.push(addComicDTO);
+            console.log(addComicDTO.comicId)
+  
           }
         });
         //call service 
-    },
-    addingComic() {
-      const addComicDTO = {
-        comicId: this.detailComic.comicId,
-        collectionId: this.collectionId,
-      };
-
-      comicService
-        .addComicToCollection(addComicDTO)
+        comicService
+        .addComicToCollections(collectionList)
         .then((response) => {
           if (response.status === 201) {
             this.message = "success";
@@ -132,6 +127,24 @@ export default {
           this.isLoading = false;
         });
     },
+    // addingComic() {
+    //   const addComicDTO = {
+    //     comicId: this.detailComic.comicId,
+    //     collectionId: this.collectionId,
+    //   };
+
+    //   comicService
+    //     .addComicToCollection(addComicDTO)
+    //     .then((response) => {
+    //       if (response.status === 201) {
+    //         this.message = "success";
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       this.handleErrorResponse(error, "adding");
+    //       this.isLoading = false;
+    //     });
+    // },
 
     getDetailComicForStore() {
       comicService.find(this.$route.params.id).then((response) => {
