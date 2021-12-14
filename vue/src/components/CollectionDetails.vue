@@ -99,5 +99,19 @@ export default {
 </script>
 <style>
 
+#horizontal-collection {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px 12px;
+  box-sizing: border-box;
+  width: 20rem;
+  height: 20rem;
+}
 
+img {
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
 </style>
