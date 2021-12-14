@@ -128,6 +128,7 @@ img {
   width: 100%;
   margin: 5px;
   border-radius: 10px;
+  box-shadow: 5px 10px #888888;
 }
 
 
