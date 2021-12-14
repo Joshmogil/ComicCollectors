@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class Character {
+public class MarvelCharacter {
 
     private long characterId;
     private String characterName;
@@ -9,9 +9,9 @@ public class Character {
     private String description;
 
 
-    public Character(){}
+    public MarvelCharacter(){}
 
-    public Character(long characterId, String characterName, String img_url, String extension, String description) {
+    public MarvelCharacter(long characterId, String characterName, String img_url, String extension, String description) {
         this.characterId = characterId;
         this.characterName = characterName;
         this.img_url = img_url;
@@ -59,11 +59,4 @@ public class Character {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Character{" +
-                "characterId=" + characterId +
-                ", characterName='" + characterName + '\'' +
-                '}';
-    }
 }

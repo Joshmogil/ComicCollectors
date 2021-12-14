@@ -2,6 +2,7 @@ package com.techelevator.services;
 
 
 import com.techelevator.model.Comic;
+import com.techelevator.model.MarvelCharacter;
 import com.techelevator.model.MarvelComic;
 import net.minidev.json.JSONObject;
 import netscape.javascript.JSObject;
@@ -46,10 +47,56 @@ public class MarvelComicService {
         this.timeStamp = (long)1;
     }
 
+    public List<MarvelCharacter> getCharacterListByComicId(long marvelComicId){
+
+        List<MarvelCharacter> listOfCharacters = new ArrayList<MarvelCharacter>();
+        String listOfCharactersJsonString = null;
+
+        try{
+
+            //API base URL = http://gateway.marvel.com/v1/public/
+            List<String> marvelAuthInfo = generateAuthInfo();
+
+            String exchangeUrl = API_BASE_URL + "comics/"+marvelComicId +"/characters?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+            System.out.println(exchangeUrl);
+            ResponseEntity<String> response =
+                    restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
+            listOfCharactersJsonString = response.getBody();
+            System.out.println("Response body: " +response.getBody());
+            System.out.println("Response class: " + response.getBody().getClass());
+            System.out.println("Response body to string: " + response.getBody().toString());
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            System.out.println(e);
+        }
+
+        while(listOfCharactersJsonString.contains("\"urls\"")) {
+
+            MarvelCharacter character = new MarvelCharacter();
+
+            List<String> comicInfoList = new ArrayList<String>();
+
+            comicInfoList = rawStringToImportantCharacterInfo(listOfCharactersJsonString);
+
+            character.setCharacterId(Long.valueOf(comicInfoList.get(0)));
+            character.setCharacterName(comicInfoList.get(1));
+            character.setDescription(comicInfoList.get(2));
+            character.setImg_url(comicInfoList.get(3));
+            character.setExtension(comicInfoList.get(4));
+
+            int endOfCharacterCutoff = listOfCharactersJsonString.indexOf("\"urls\"") + 3;
+
+            listOfCharactersJsonString = listOfCharactersJsonString.substring(endOfCharacterCutoff);
+
+            listOfCharacters.add(character);
+        }
+
+        return listOfCharacters;
+    }
+
     public List<MarvelComic> getComicListByCharacterName(String characterName){
 
         List<MarvelComic> listOfComics = new ArrayList<MarvelComic>();
-
         long characterId = getCharacterIdByName(characterName);
         String listOfComicsJsonString = null;
 
@@ -63,7 +110,7 @@ public class MarvelComicService {
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             listOfComicsJsonString = response.getBody();
-            System.out.println("Response body: " +response.getBody());
+//            System.out.println("Response body: " +response.getBody());
 //            System.out.println("Response class: " + response.getBody().getClass());
 //            System.out.println("Response body to string: " + response.getBody().toString());
 
@@ -77,7 +124,7 @@ public class MarvelComicService {
 
             List<String> comicInfoList = new ArrayList<String>();
 
-            comicInfoList = rawStringToImportantInfo(listOfComicsJsonString);
+            comicInfoList = rawStringToImportantComicInfo(listOfComicsJsonString);
 
             marvelComic.setMarvel_id(Long.valueOf(comicInfoList.get(0)));
             marvelComic.setTitle(comicInfoList.get(1));
@@ -94,9 +141,6 @@ public class MarvelComicService {
 
         return listOfComics;
     }
-
-
-
 
     public long getCharacterIdByName(String characterName){
 
@@ -150,7 +194,7 @@ public class MarvelComicService {
 
         List<String> comicInfoList = new ArrayList<String>();
 
-        comicInfoList = rawStringToImportantInfo(comicJsonString);
+        comicInfoList = rawStringToImportantComicInfo(comicJsonString);
 
         marvelComic.setMarvel_id(Long.valueOf(comicInfoList.get(0)));
         marvelComic.setTitle(comicInfoList.get(1));
@@ -188,7 +232,7 @@ public class MarvelComicService {
 
         List<String> comicInfoList = new ArrayList<String>();
 
-        comicInfoList = rawStringToImportantInfo(comicJsonString);
+        comicInfoList = rawStringToImportantComicInfo(comicJsonString);
 
         return comicInfoList;
     }
@@ -220,7 +264,34 @@ public class MarvelComicService {
 
     }
 
-    public List<String> rawStringToImportantInfo(String comicJsonString){
+    public List<String> rawStringToImportantCharacterInfo(String comicJsonString){
+
+        List<String> characterInfoList = new ArrayList<String>();
+
+        String id = findMyNumber("\"id\"",comicJsonString,1);
+        characterInfoList.add(id);
+        //System.out.println(id);
+
+        String title = findMyString("\"name\"",comicJsonString,2);
+        characterInfoList.add(title);
+        //System.out.println(title);
+
+        String description = findMyString("\"description\"",comicJsonString,2);
+        characterInfoList.add(description);
+        //System.out.println(description);
+
+        String path = findMyString("\"path\"",comicJsonString,2);
+        characterInfoList.add(path);
+        //System.out.println(path);
+
+        String extension = findMyString("\"extension\"",comicJsonString,2);
+        characterInfoList.add(extension);
+        //System.out.println(extension);
+
+        return characterInfoList;
+    }
+
+    public List<String> rawStringToImportantComicInfo(String comicJsonString){
 
        List<String> comicInfoList = new ArrayList<String>();
 
@@ -228,19 +299,19 @@ public class MarvelComicService {
        comicInfoList.add(id);
        //System.out.println(id);
 
-       String title = findMyString("title",comicJsonString,3);
+       String title = findMyString("\"title\"",comicJsonString,2);
        comicInfoList.add(title);
        //System.out.println(title);
 
-       String description = findMyString("description",comicJsonString,3);
+       String description = findMyString("\"description\"",comicJsonString,2);
        comicInfoList.add(description);
        //System.out.println(description);
 
-       String path = findMyString("path",comicJsonString,3);
+       String path = findMyString("\"path\"",comicJsonString,2);
        comicInfoList.add(path);
        //System.out.println(path);
 
-       String extension = findMyString("extension",comicJsonString,3);
+       String extension = findMyString("\"extension\"",comicJsonString,2);
        comicInfoList.add(extension);
        //System.out.println(extension);
 

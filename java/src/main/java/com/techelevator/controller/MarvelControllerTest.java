@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.model.MarvelCharacter;
 import com.techelevator.model.MarvelComic;
 import com.techelevator.services.MarvelComicService;
 import net.minidev.json.JSONObject;
@@ -37,6 +38,13 @@ public class MarvelControllerTest {
         return comicList;
     }
 
+    @RequestMapping(path = "characters/{marvelComicId}", method = RequestMethod.GET)
+    public List<MarvelCharacter> testGetCharactersComic(@PathVariable long marvelComicId){
+
+        List<MarvelCharacter> characterList = marvelComicService.getCharacterListByComicId(marvelComicId);
+
+        return characterList;
+    }
 
 
     @RequestMapping(path = "character/{characterName}", method = RequestMethod.GET)
