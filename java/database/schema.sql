@@ -55,8 +55,11 @@ CREATE TABLE collection_comic (
 
 CREATE TABLE characters (
 
-        character_id int,
+        character_id serial,
+        marvel_character_id int,
 	character_name varchar(60) not null,
+	img_url varchar(185),
+	description varchar(1500),
 	
         constraint pk_characters primary key (character_id)
 );

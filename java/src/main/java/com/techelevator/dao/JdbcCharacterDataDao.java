@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Character;
 import com.techelevator.model.Comic;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,25 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
 
     public JdbcCharacterDataDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Integer addCharacterToCharacterTable(Long marvelId,String characterName,String imgUrl, String description){
+
+        String sql = "INSERT INTO characters(marvel_character_id, character_name, img_url, description)\n"+
+                "VALUES(?,?,?,?) RETURNING character_id";
+
+        Integer characterId = null;
+
+        try {
+            characterId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId, characterName, imgUrl, description);
+
+        }catch (DataAccessException e) {
+            System.out.println("Adding character to characters table failed");
+            System.out.println(e);
+        }
+
+        return characterId;
     }
 
     @Override

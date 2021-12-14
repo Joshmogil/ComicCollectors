@@ -46,7 +46,6 @@ public class MarvelControllerTest {
         return characterList;
     }
 
-
     @RequestMapping(path = "character/{characterName}", method = RequestMethod.GET)
     public long testGetCharacterId(@PathVariable String characterName){
 

@@ -10,7 +10,7 @@ public interface CollectionDataDao {
 
     boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial);
 
-    boolean createCollection(long userId, String collectionName);
+    long createCollection(long userId, String collectionName);
 
     Collection getCollectionById(long collectionId);
 

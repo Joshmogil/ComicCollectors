@@ -10,35 +10,6 @@ INSERT INTO users (username,password_hash,role) VALUES ('Marvel Fan1','$2a$08$Uk
 INSERT INTO users (username,password_hash,role) VALUES ('711Num1Customer','$2a$08$UkVvwpULis18S19S5pZFn.YHPGt3oaqHQnDwqbHW9pft8uRtkXKDC','ROLE_USER');
 
 INSERT INTO collections(collection_name, user_id)
-VALUES('Josh collection',10);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(11,8);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(11,6);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(11,5);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(11,20);
-
-INSERT INTO collections(collection_name, user_id)
-VALUES('Josh collection 2',10);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(11,19);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(12,15);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(12,5);
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(12,20);
-
-
-
-
-
-
-INSERT INTO collections(collection_name, user_id)
 VALUES('The Famous Italian Collection',3);
 INSERT INTO collections(collection_name, user_id)
 VALUES('Favorite comics of a strong dude',4);

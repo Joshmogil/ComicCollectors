@@ -62,9 +62,9 @@ public class MarvelComicService {
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
             listOfCharactersJsonString = response.getBody();
-            System.out.println("Response body: " +response.getBody());
-            System.out.println("Response class: " + response.getBody().getClass());
-            System.out.println("Response body to string: " + response.getBody().toString());
+//            System.out.println("Response body: " +response.getBody());
+//            System.out.println("Response class: " + response.getBody().getClass());
+//            System.out.println("Response body to string: " + response.getBody().toString());
 
         } catch (RestClientResponseException | ResourceAccessException e) {
             System.out.println(e);
@@ -89,6 +89,7 @@ public class MarvelComicService {
             listOfCharactersJsonString = listOfCharactersJsonString.substring(endOfCharacterCutoff);
 
             listOfCharacters.add(character);
+
         }
 
         return listOfCharacters;

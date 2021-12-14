@@ -47,7 +47,7 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
 
 
     @Override
-    public boolean createCollection(long userId, String collectionName){
+    public long createCollection(long userId, String collectionName){
 
         String sql = "INSERT INTO collections(collection_name, user_id)\n"+
                 "VALUES(?,?) RETURNING collection_id";
@@ -63,10 +63,10 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
 
         if(collection_id != -1){
 
-            return true;
+            return collection_id;
         }
 
-        return false;
+        return collection_id;
     }
 
     @Override
