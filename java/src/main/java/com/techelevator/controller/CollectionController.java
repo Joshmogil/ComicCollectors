@@ -138,6 +138,14 @@ public class CollectionController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "collections/delete/{collectionId}", method = RequestMethod.DELETE)
+    public void deleteCollection(@PathVariable Integer collectionId) {
+
+            collectionDao.deleteCollection(collectionId);
+
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "collections/delete/comics", method = RequestMethod.DELETE)
     public Boolean deleteComicFromCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
 
