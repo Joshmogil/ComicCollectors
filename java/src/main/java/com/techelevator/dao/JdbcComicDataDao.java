@@ -52,7 +52,7 @@ public class JdbcComicDataDao implements ComicDataDao {
 
         try {
 
-            String sql = "SELECT comic_id FROM comics WHERE marvel_id = ? ";
+            String sql = "SELECT comic_id FROM comics WHERE marvel_id = ? ;";
 
             comicId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId);
         }catch (DataAccessException e) {

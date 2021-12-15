@@ -9,7 +9,8 @@ import java.util.List;
 public interface CharacterDataDao {
 
 
-    Integer getCharacterIdByMarvelCharacterId(int characterId);
+    Integer getCharacterIdByMarvelCharacterId(Long characterId);
+
     Integer addCharacterToComicCharacterTable(Integer comicId, Integer characterId);
 
     Character getCharacterByMarvelId(long character_id);

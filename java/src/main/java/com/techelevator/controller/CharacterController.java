@@ -62,7 +62,7 @@ public class CharacterController {
 
                     }else{
 
-                        characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId), characterDataDao.getCharacterIdByMarvelCharacterId((int) marvelCharacter.getCharacterId()));
+                        characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId), characterDataDao.getCharacterIdByMarvelCharacterId(marvelCharacter.getCharacterId()));
 
                     }
 

@@ -209,7 +209,13 @@ public class CollectionController {
 
                         for (MarvelCharacter marvelCharacter : comicCharacters) {
 
-                            if(characterDataDao.getCharacterIdByMarvelCharacterId(Math.toIntExact(marvelCharacter.getCharacterId())) != null) {
+                            System.out.println(marvelCharacter.getCharacterName() + " " + marvelCharacter.getCharacterId());
+
+                            Integer characterIdExists = characterDataDao.getCharacterIdByMarvelCharacterId(marvelCharacter.getCharacterId());
+
+                            System.out.println(characterIdExists);
+
+                            if(characterIdExists.equals(null)) {
 
                                 String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
                                 characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
