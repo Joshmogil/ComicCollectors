@@ -38,7 +38,7 @@ public class CharacterController {
 
         return characterDataDao.getCharactersWithAppearances();
     }
-    
+
     @RequestMapping(path = "getMyCharacters", method = RequestMethod.GET)
     public Boolean getAllComicIds() {
 
@@ -61,14 +61,8 @@ public class CharacterController {
                         characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId),characterId);
 
                     }else{
-                        //if character is in character table, do not add the character to that table
-                        //characterDataDao.addCharacterToComicCharacterTable(1,1);
-
-                        //characterDataDao.addCharacterToComicCharacterTable(1, characterDataDao.getCharacterIdByMarvelCharacterId((int) marvelCharacter.getCharacterId()));
 
                         characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId), characterDataDao.getCharacterIdByMarvelCharacterId((int) marvelCharacter.getCharacterId()));
-
-
 
                     }
 

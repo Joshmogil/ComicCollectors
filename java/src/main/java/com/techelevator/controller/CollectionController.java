@@ -169,10 +169,11 @@ public class CollectionController {
         for(AddComicDTO addComicDTO:addComicsDTO) {
 
 
+            //first check to see if the comic is in the database
             if (true) {
+            //if it is in the database, just add to the CollectionComic table, because the characters should already be in the table
 
-
-
+                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), addComicDTO.getComic_id());
 
             } else {
 
@@ -191,6 +192,8 @@ public class CollectionController {
                             String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
                             characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
                         }
+
+
                     } catch (Exception thisCouldBeLessGeneral) {
                         System.out.println("Failed to find comic's characters");
                     }
