@@ -27,8 +27,8 @@ public class AddComicDTO {
     @Override
     public String toString() {
         return "AddComicDTO{" +
-                "collection_id='" + collection_id + '\'' +
-                ", comic_id='" + comic_id + '\'' +
+                "collectionId='" + collection_id + '\'' +
+                ", comicId='" + comic_id + '\'' +
                 '}';
     }
 }
