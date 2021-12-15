@@ -6,22 +6,23 @@
     </div>
       <nav class="links">
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+          <router-link v-bind:to="{ name: 'home' }"><img src="@/assets/Home.png" class="header-button">
+        </router-link>
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'login' }">Login</router-link> 
+          <router-link v-bind:to="{ name: 'login' }"><img src="@/assets/login.png" class="header-button"></router-link> 
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'logout' }">Logout</router-link> 
+          <router-link v-bind:to="{ name: 'logout' }"><img src="@/assets/logout.png" class="header-button"></router-link> 
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }">My Collections</router-link>
+          <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }"><img src="@/assets/mycollections.png" class="header-button"></router-link>
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'statistics' }">Statistics</router-link>
+          <router-link v-bind:to="{ name: 'statistics' }"><img src="@/assets/statistics.png" class="header-button"></router-link>
         </div>
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'search' }">Search</router-link>
+          <router-link v-bind:to="{ name: 'search' }"><img src="@/assets/search.png" class="header-button"></router-link>
         </div>
       </nav>
          <router-view />
@@ -35,6 +36,15 @@
 
 <style>
 
+.header-button{
+  height: 10vh;
+  width: auto;
+}
+
+a{
+  text-decoration: none;
+  color: rgb(196, 37, 196);
+}
 
 .links{
   display: flex;
@@ -42,11 +52,11 @@
   justify-content: space-evenly;
 }
 
-/* @font-face {
+ /* @font-face {
   font-family: "SF Comic Strip";
   src: local("SF Comic Strip"),
  url(./src/Fonts/SFComicStrip-Bold.ttf) format("truetype");
- */
+ } */
 .card-container {
   cursor: pointer;
   height: 250px;
@@ -86,9 +96,11 @@ border: 1px Solid rgb(0, 0, 19);
 
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Readex+Pro&display=swap');
+
 #app{
-  background:#F1F3F4;
-  
+  background-image: url("/assets/Light-Blue-Background.png"); 
+  font-family: 'Bangers';
 }
 
 

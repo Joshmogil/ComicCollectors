@@ -306,6 +306,6 @@ img {
   width: 100%;
   margin: 5px;
   border-radius: 10px;
-  box-shadow: 5px 10px #888888;
+  box-shadow: 2px 2px 4px 5px #888888;
 }
 </style>
