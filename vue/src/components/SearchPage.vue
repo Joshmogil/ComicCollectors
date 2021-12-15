@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" class="form-control" v-model="this.searchInput" />
+    <input type="text" class="form-control" v-model="searchInput" />
     <button class="btn btn-search" v-on:click="characterSearch">Search</button>
 
     <section id="horizontal-collection">

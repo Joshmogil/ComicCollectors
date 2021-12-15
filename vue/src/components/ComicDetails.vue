@@ -116,9 +116,9 @@ export default {
 
           if (collection.selected === true){
             const addComicDTO = {
-        comicId: this.detailComic.comicId,
-        collectionId: collection.collectionId,
-      };
+                comicId: this.detailComic.comicId,
+                collectionId: collection.collectionId,
+              };
             collectionList.push(addComicDTO);
             console.log(addComicDTO.comicId)
   

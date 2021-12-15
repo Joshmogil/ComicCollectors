@@ -152,11 +152,7 @@ export default {
           this.collection = response.data;
         });
     },
-    /* getUserData(userId){
-        userService.find(userId).then(response => {
-          this.user = response.data;
-        })
-    }, */
+
 
     findStoreData() {
       return this.$store.state.collections.find((collection) => {
@@ -202,7 +198,7 @@ export default {
   },
   created() {
     this.getDetailCollectionForStore();
-    this.getUserViewed(this.userViewedIdOnly);
+    this.getUserViewed(this.$route.query.collectionUserId);
     this.seeIfCurrentUserIsUserViewed();
   },
 };

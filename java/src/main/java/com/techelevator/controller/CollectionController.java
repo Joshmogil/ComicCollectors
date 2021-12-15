@@ -4,13 +4,9 @@ import com.techelevator.dao.CharacterDataDao;
 import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.*;
-import com.techelevator.model.StatisticModels.ComicWithStats;
 import com.techelevator.services.MarvelComicService;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientResponseException;
 
 import java.util.List;
 
@@ -66,19 +62,19 @@ public class CollectionController {
 
         try {
 
-            MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComic_id());
+            MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComicId());
 
             String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
 
             Integer comicId = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
 
 
-            comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), comicId);
+            comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicId);
 
 
             try{
 
-                List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
+                List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComicId());
 
                 for (MarvelCharacter marvelCharacter : comicCharacters){
 
@@ -126,7 +122,7 @@ public class CollectionController {
                 //String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
 
                 //Integer comicId = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
-                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), addComicDTO.getComic_id());
+                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), addComicDTO.getComicId());
 //                try {
 //
 //                    List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
@@ -173,20 +169,20 @@ public class CollectionController {
             if (true) {
             //if it is in the database, just add to the CollectionComic table, because the characters should already be in the table
 
-                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), addComicDTO.getComic_id());
+                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), addComicDTO.getComicId());
 
             } else {
 
                 try {
 
-                    MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComic_id());
+                    MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComicId());
                     String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
                     Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
-                    comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), comicSerialForCollection);
+                    comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicSerialForCollection);
 
                     try {
 
-                        List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
+                        List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComicId());
                         for (MarvelCharacter marvelCharacter : comicCharacters) {
 
                             String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();

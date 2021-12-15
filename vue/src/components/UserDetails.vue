@@ -9,6 +9,7 @@
               v-bind:to="{
                 name: 'collectionDetails',
                 params: { collectionId: collection.collectionId },
+                query: { collectionUserId: collection.userId }
               }"
             >
               {{ collection.collectionName }}

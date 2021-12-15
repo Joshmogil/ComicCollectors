@@ -11,13 +11,12 @@
             v-bind:to="{
               name: 'collectionDetails',
               params: { collectionId: collection.collectionId },
+              query: { collectionUserId: collection.userId }
             }"
           >
             {{ collection.collectionName }}
           </router-link>
         </h3>
-
-        
         <section
           id="horizontal-collection"
           v-for="comic in collection.comicList"
@@ -47,29 +46,27 @@ export default {
 
   data() {
     return {
-      isLoading: true
-      
+      isLoading: true,
     };
   },
   methods: {
     getCollectionsForStore() {
-      collectionService.getAllCollections().then(response => {
+      collectionService.getAllCollections().then((response) => {
         this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
     },
 
     getComics(id) {
-      collectionService.getComics(id).then(response => {
+      collectionService.getComics(id).then((response) => {
         this.listOfComics = response.data;
       });
     },
   },
   computed: {
-      homeCollections(){
+    homeCollections() {
       return this.$store.state.homeCollections;
-      }
-    
+    },
   },
   created() {
     this.getCollectionsForStore();
@@ -97,8 +94,6 @@ h1 {
   width: 20rem;
   height: 20rem;
 }
-
-
 
 img {
   margin: auto;

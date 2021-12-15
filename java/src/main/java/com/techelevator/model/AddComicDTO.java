@@ -2,33 +2,33 @@ package com.techelevator.model;
 
 public class AddComicDTO {
 
-    private Integer collection_id;
-    private Integer comic_id;
+    private Integer collectionId;
+    private Integer comicId;
 
     public AddComicDTO() {
     }
 
-    public Integer getCollection_id() {
-        return collection_id;
+    public Integer getCollectionId() {
+        return collectionId;
     }
 
-    public void setCollection_id(Integer collection_id) {
-        this.collection_id = collection_id;
+    public void setCollectionId(Integer collectionId) {
+        this.collectionId = collectionId;
     }
 
-    public Integer getComic_id() {
-        return comic_id;
+    public Integer getComicId() {
+        return comicId;
     }
 
-    public void setComic_id(Integer comic_id) {
-        this.comic_id = comic_id;
+    public void setComicId(Integer comicId) {
+        this.comicId = comicId;
     }
 
     @Override
     public String toString() {
         return "AddComicDTO{" +
-                "collectionId='" + collection_id + '\'' +
-                ", comicId='" + comic_id + '\'' +
+                "collectionId='" + collectionId + '\'' +
+                ", comicId='" + comicId + '\'' +
                 '}';
     }
 }
