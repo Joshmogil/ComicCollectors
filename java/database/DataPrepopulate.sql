@@ -31,12 +31,6 @@ INSERT INTO collections(collection_name, user_id)
 VALUES('Comics To Drink A Slurpee To',9);
 
 INSERT INTO comics(marvel_id, comic_title, img_url, description)
-VALUES(27649,'Incredible Hulks (2010) #604 (DJURDJEVIC 70TH ANNIVERSARY VARIANT)','http://i.annihil.us/u/prod/marvel/i/mg/b/d0/4badb223f33c9/portrait_uncanny.jpg','After picking fights with the Juggernaut, Norman Osborn, and the Wolverine clan, the most insane father and son team in the Marvel Universe might actually be bonding.');
-
-INSERT INTO comics(marvel_id, comic_title, img_url, description)
-VALUES(90363,'Dark Ages (2021) #2','http://i.annihil.us/u/prod/marvel/i/mg/8/f0/614b3fd4ef410/portrait_uncanny.jpg','In the aftermath of Magnetos rampage upon NYC and the Xavier Institute, Cyclops & Emma find themselves at a crossroads. Should the school be rebuilt?');
-
-INSERT INTO comics(marvel_id, comic_title, img_url, description)
 VALUES(57717,'Doctor Strange: Masterworks Vol. 7 (Hardcover)','http://i.annihil.us/u/prod/marvel/i/mg/3/90/581d13687d4c2/portrait_uncanny.jpg','The Master of the Mystic Arts crosses into the Quadriverse, but little does he realize unknown agents have set the Cosmic Wheel of Change in motion. Chaos is unleashed as the universe goes mad. Only with the return of the Ancient One can Doctor Strange hope to restore order to creation, but hell have to conquer the cosmic might of the In-Between to do it.'); 
 
 INSERT INTO comics(marvel_id, comic_title, img_url, description)
