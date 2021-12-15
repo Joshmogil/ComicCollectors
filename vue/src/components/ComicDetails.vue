@@ -137,24 +137,6 @@ export default {
           this.isLoading = false;
         });
     },
-    // addingComic() {
-    //   const addComicDTO = {
-    //     comicId: this.detailComic.comicId,
-    //     collectionId: this.collectionId,
-    //   };
-
-    //   comicService
-    //     .addComicToCollection(addComicDTO)
-    //     .then(response => {
-    //       if (response.status === 201) {
-    //         this.message = "success";
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       this.handleErrorResponse(error, "adding");
-    //       this.isLoading = false;
-    //     });
-    // },
 
     getDetailComicForStore() {
       comicService.find(this.$route.params.id).then(response => {

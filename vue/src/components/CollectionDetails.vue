@@ -1,34 +1,108 @@
 <template>
   <div class="collection">
-        <h3>
+    <h3>
       <router-link
         v-bind:to="{
           name: 'userDetails',
-          params: { userId: userViewedIdOnly }
+          params: { userId: userViewedIdOnly },
         }"
       >
-    <h2>User: {{ userViewed.username }}</h2>    
+        <h2>User: {{ userViewed.username }}</h2>
       </router-link>
     </h3>
-    
 
     <h1>{{ detailCollection.collectionName }}</h1>
-
-    <section id="horizontal-collection">
-      <div v-for="comic in detailCollection.comicList" v-bind:key="comic.comicId">
-        <router-link
-          v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
+    <div class="btn-container">
+      <button
+        class="btn editpage"
+        v-if="!isLoading && !showEditCollection && $store.state.token != ''"
+        v-on:click="changeShowEditCollection()"
+      >
+        Edit Collection
+      </button>
+       <button
+        class="btn deleteButton"
+        v-on:click="deleteCollection()"
+      >
+        Delete Collection
+      </button>
+    </div>
+    <div v-if="!showEditCollection">
+      <section id="horizontal-collection">
+        <div
+          v-for="comic in detailCollection.comicList"
+          v-bind:key="comic.comicId"
         >
-          <div class="card-container">
-            <div class="card">
-              <div class="side"><img :src="comic.imgUrl" alt="" /></div>
-              <div class="side back">{{ comic.description }}</div>
+          <router-link
+            v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
+          >
+            <div class="card-container">
+              <div class="card">
+                <div class="side"><img :src="comic.imgUrl" alt="" /></div>
+                <div class="side back">{{ comic.description }}</div>
+              </div>
             </div>
-          </div>
-        </router-link>
-      </div>
-    </section>
-
+          </router-link>
+        </div>
+      </section>
+    </div>
+    <div v-if="showEditCollection">
+      <section id="horizontal-collection">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                <label class="form-checkbox">
+                  <input
+                    type="checkbox"
+                    v-model="selectAll"
+                    @click="allSelected()"
+                  />
+                  <i class="form-icon"></i>
+                </label>
+              </th>
+              <th>Select All</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="comic in detailCollection.comicList"
+              v-bind:key="comic.comicId"
+            >
+              <td>
+                <label class="form-checkbox">
+                  <input
+                    type="checkbox"
+                    :value="comic.comicId"
+                    v-model="comic.selected"
+                  />
+                  <div class="form-icon"></div>
+                </label>
+              </td>
+              <td>
+                <div>
+                  <router-link
+                    v-bind:to="{
+                      name: 'comicDetails',
+                      params: { id: comic.comicId },
+                    }"
+                  >
+                    <div class="card-container">
+                      <div class="card">
+                        <div class="side">
+                          <img :src="comic.imgUrl" alt="" />
+                        </div>
+                        <div class="side back">{{ comic.description }}</div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -46,32 +120,35 @@ export default {
         collectionName: "",
         comicList: [],
       },
-      isLoading: true
+      isLoading: true,
+      showEditCollection: false,
     };
   },
-  
+
   methods: {
-    seeIfCurrentUserIsUserViewed(){
-      if (this.currentUser.id == this.userViewed.userId){
-      this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", true);
-      }
-      else {
-              this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", false);
+    changeShowEditCollection() {
+      this.showEditCollection = !this.showEditCollection;
+    },
 
+    seeIfCurrentUserIsUserViewed() {
+      if (this.currentUser.id == this.userViewed.userId) {
+        this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", true);
+      } else {
+        this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", false);
       }
-
     },
     getDetailCollectionForStore() {
       collectionService
-        .get(this.$route.params.collectionId).then(response => {
-        this.$store.commit("SET_DETAIL_COLLECTION", response.data);
-        this.isLoading = false;
-      });
+        .get(this.$route.params.collectionId)
+        .then((response) => {
+          this.$store.commit("SET_DETAIL_COLLECTION", response.data);
+          this.isLoading = false;
+        });
     },
     getCollectionData() {
       collectionService
         .get(this.$route.params.collectionId)
-        .then(response => {
+        .then((response) => {
           this.collection = response.data;
         });
     },
@@ -90,39 +167,38 @@ export default {
     getComics() {
       collectionService
         .getComics(this.$route.params.collectionId)
-        .then(response => {
+        .then((response) => {
           this.collection.comics = response.data;
         });
     },
-    getUserViewed(userId){
-      userService.find(userId).then(response => {
-this.$store.commit("SET_USER_VIEWED", response.data);         
-});
+    getUserViewed(userId) {
+      userService.find(userId).then((response) => {
+        this.$store.commit("SET_USER_VIEWED", response.data);
+      });
     },
-    deleteCollection(){
-
+    deleteCollection() {
+      if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
+        return true;
+      }
     },
-    deleteComicFromCollection(){
-
-    }
+    deleteComicFromCollection() {},
   },
   computed: {
-      detailCollection(){
+    detailCollection() {
       return this.$store.state.detailCollection;
-      },
-      currentUser(){
-        return this.$store.state.user;
-      },
-      userViewed(){
-        return this.$store.state.userViewed;
-      },
-      userViewedIdOnly(){
-        return this.$store.state.detailCollection.userId;
-      },
-      currentUserIsUserViewed() {
+    },
+    currentUser() {
+      return this.$store.state.user;
+    },
+    userViewed() {
+      return this.$store.state.userViewed;
+    },
+    userViewedIdOnly() {
+      return this.$store.state.detailCollection.userId;
+    },
+    currentUserIsUserViewed() {
       return this.$store.state.currentUserIsUserViewed;
-    }
-    
+    },
   },
   created() {
     this.getDetailCollectionForStore();
@@ -132,15 +208,12 @@ this.$store.commit("SET_USER_VIEWED", response.data);
 };
 </script>
 <style>
-
 #horizontal-collection {
   display: flex;
   flex-direction: row;
   max-width: 800px;
   height: auto;
   justify-content: space-between;
-
-
 }
 
 img {
@@ -151,6 +224,4 @@ img {
   border-radius: 10px;
   box-shadow: 5px 10px #888888;
 }
-
-
 </style>
