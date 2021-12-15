@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       comic: {
-        comicId: "",
+        marvelId: "",
         comicTitle: "",
         imgUrl: "",
         description: "",

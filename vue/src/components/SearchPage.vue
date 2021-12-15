@@ -1,15 +1,15 @@
 <template>
   <div>
     <input type="text" class="form-control" v-model="searchInput" />
-    <button class="btn btn-search" v-on:click="characterSearch">Search</button>
+    <button class="btn btn-search" v-on:click="marvelCharacterSearch">Search</button>
 
     <section id="horizontal-collection">
       <div
         v-for="comic in getResults"
-        v-bind:key="comic.comicId"
+        v-bind:key="comic.marvelId"
       >
         <router-link
-          v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
+          v-bind:to="{ name: 'comicDetails', params: { id: comic.marvelId } }"
         >
           <div class="card-container">
             <div class="card">
@@ -36,12 +36,20 @@ export default {
   },
 
   methods: {
-    characterSearch() {
+    databaseCharacterSearch() {
       comicService.searchByCharacterName(this.searchInput).then(response => {
         this.$store.commit("SET_RESULTS", response.data);
         this.isLoading = false;
       });
     },
+
+    marvelCharacterSearch(){
+      comicService.searchMarvel(this.searchInput).then(response => {
+        this.$store.commit("SET_RESULTS", response.data);
+        this.isLoading = false;
+       });
+    }
+    
   },
   computed: {
     getResults() {
