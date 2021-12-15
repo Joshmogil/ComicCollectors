@@ -26,5 +26,14 @@ export default {
 
   searchMarvel(characterName) {
     return http.get(`/marvelcomics/${characterName}`)
+  }, 
+
+  deleteComics(oldComics) {
+    return http.delete(`/collections/delete/comics$`, oldComics,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+      });
   }
 }

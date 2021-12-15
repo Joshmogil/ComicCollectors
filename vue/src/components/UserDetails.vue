@@ -3,13 +3,16 @@
     <h1>{{ userViewed.username }}</h1>
     <div id="collection-table">
       <section id="collections">
-        <div v-for="collection in userCollections" v-bind:key="collection.collectionId">
+        <div
+          v-for="collection in userCollections"
+          v-bind:key="collection.collectionId"
+        >
           <h3>
             <router-link
               v-bind:to="{
                 name: 'collectionDetails',
                 params: { collectionId: collection.collectionId },
-                query: { collectionUserId: collection.userId }
+                query: { collectionUserId: collection.userId },
               }"
             >
               {{ collection.collectionName }}
@@ -17,7 +20,10 @@
           </h3>
 
           <section id="collection-comics">
-            <div v-for="comic in collection.comicList" v-bind:key="comic.comicId">
+            <div
+              v-for="comic in collection.comicList"
+              v-bind:key="comic.comicId"
+            >
               <router-link
                 v-bind:to="{
                   name: 'comicDetails',
@@ -33,21 +39,66 @@
               </router-link>
             </div>
           </section>
-         
         </div>
       </section>
+    </div>
+
+    <div class="collections-list">
+      <div class="status-message error" v-show="errorMsg !== ''">
+        {{ errorMsg }}
+      </div>
+      <!--
+      <div class="loading" v-if="isLoading">
+        <img src="../src/assets/marvel.gif" />
+      </div>
+      add a v-else to router link before div tag
+      -->
+      <div class="btn-container">
+        <button
+          class="btn newCollection"
+          v-if="!isLoading && !showNewCollection && $store.state.token != ''"
+          v-on:click="changeShowNewCollection()"
+        >
+          New Collection
+        </button>
+      </div>
+      <!--     <div v-if="creationAttempted" >
+      <select v-model="creationSuccess">
+      <option value="true">Success!</option>
+            <option value="false">Failed</option>
+      </select>
+    </div> -->
+      <form v-if="showNewCollection">
+        Collection Name:
+        <input
+          type="text"
+          class="form-control"
+          v-model="newCollection.collectionName"
+        />
+        <button class="btn btn-submit" v-on:click="saveNewCollection">
+          Save
+        </button>
+        <button class="btn btn-cancel" v-on:click="changeShowNewCollection()">
+          Cancel
+        </button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import userService from "../services/UserService";
+import collectionService from "../services/CollectionService";
+
 export default {
   data() {
     return {
       isLoading: true,
       errorMsg: "",
       collections: [],
+      showNewCollection: false,
+      creationSuccess: false,
+      creationAttempted: false,
     };
   },
 
@@ -57,42 +108,47 @@ export default {
   },
 
   computed: {
-      userCollections(){
+    userCollections() {
       return this.$store.state.userCollections;
-      },
-      currentUser(){
-        return this.$store.state.user;
-      },
-      userViewed(){
-        return this.$store.state.userViewed;
-      }
-    
+    },
+    currentUser() {
+      return this.$store.state.user;
+    },
+    userViewed() {
+      return this.$store.state.userViewed;
+    },
   },
 
   methods: {
-    getUserCollectionsForStore() {
-      userService
-        .getUserCollections(this.$route.params.userId).then(response => {
-        this.$store.commit("SET_USER_COLLECTIONS", response.data);
-        this.isLoading = false;
-      });
+    changeShowNewCollection() {
+      this.showNewCollection = !this.showNewCollection;
     },
-    getUserCollections() {
-      userService
-        .getUserCollections(this.$route.params.userId)
-        .then(response => {
-          this.collections = response.data;
+    saveNewCollection() {
+      const newCollectionDTO = {
+        collectionName: this.newCollection.collectionName,
+        userId: this.$store.state.user.id,
+      };
+      // this.newCollection.userId = this.$store.state.user.id;
+      // this.creationAttemped = true;
+      // this.isLoading = true;
+
+      collectionService
+        .addCollection(newCollectionDTO)
+        .then((response) => {
+          if (response.status === 201) {
+            // this.retrieveCollections();
+            // this.showNewCollection = false;
+            // this.newCollection = {
+            //   collectionName: "",
+            // };
+            // this.creationSuccess = response.data;
+          }
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, "adding");
+          this.isLoading = false;
         });
     },
-
-    getUserViewed(){
-      userService.find(this.$route.params.userId).then(response => {
-this.$store.commit("SET_USER_VIEWED", response.data);         
-});
-    },
-
-    
-
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =
@@ -109,16 +165,35 @@ this.$store.commit("SET_USER_VIEWED", response.data);
           "Error " + verb + " collection. Request could not be created.";
       }
     },
+    getUserCollectionsForStore() {
+      userService
+        .getUserCollections(this.$route.params.userId)
+        .then((response) => {
+          this.$store.commit("SET_USER_COLLECTIONS", response.data);
+          this.isLoading = false;
+        });
+    },
+    getUserCollections() {
+      userService
+        .getUserCollections(this.$route.params.userId)
+        .then((response) => {
+          this.collections = response.data;
+        });
+    },
+
+    getUserViewed() {
+      userService.find(this.$route.params.userId).then((response) => {
+        this.$store.commit("SET_USER_VIEWED", response.data);
+      });
+    },
   },
 };
 </script>
 
 <style>
-
-#collections{
+#collections {
   display: flex;
   flex-direction: column;
-  
 }
 
 #collection-comics {
@@ -127,7 +202,5 @@ this.$store.commit("SET_USER_VIEWED", response.data);
   flex-direction: row;
   width: auto;
   justify-content: space-evenly;
-  
 }
-
 </style>
