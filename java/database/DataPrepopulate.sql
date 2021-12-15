@@ -124,13 +124,13 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(1,11);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(1,25);
+VALUES(1,23);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(2,9);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(2,24);
+VALUES(2,22);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(2,14);
@@ -190,7 +190,7 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(5,13);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(5,24);
+VALUES(5,23);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(5,6);
@@ -205,7 +205,7 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(6,15);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(6,25);
+VALUES(6,21);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(6,17);
@@ -244,7 +244,7 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(7,22);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(7,24);
+VALUES(7,22);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(7,5);
@@ -271,7 +271,7 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(8,22);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(8,24);
+VALUES(8,21);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(8,5);
@@ -292,7 +292,7 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(9,13);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(9,24);
+VALUES(9,21);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(9,6);
@@ -322,13 +322,13 @@ INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(10,11);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,25);
+VALUES(10,23);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(10,9);
 
 INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,24);
+VALUES(10,21);
 
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(10,14);
