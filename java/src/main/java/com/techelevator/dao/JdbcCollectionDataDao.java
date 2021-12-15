@@ -24,14 +24,14 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
     @Override
     public boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial){
 
-        String sql = "INSERT INTO collection_comic(collection_id, comic_id)\n"+
-                "VALUES(?,?) RETURNING collection_id";
+        String sql = "INSERT INTO collection_comic(collection_id, comic_id) "+
+                "SELECT ?,? WHERE NOT EXISTS (SELECT collection_id FROM collection_comic WHERE collection_id = ? AND comic_id = ? ) RETURNING collection_id";
 
         long collection_id = -1;
 
         try {
 
-            collection_id = jdbcTemplate.queryForObject(sql, Integer.class, collectionId, comicIdSerial);
+            collection_id = jdbcTemplate.queryForObject(sql, Integer.class, collectionId, comicIdSerial, collectionId, comicIdSerial);
 
         }catch (DataAccessException e) {
             System.out.println("Adding comic to collection failed");

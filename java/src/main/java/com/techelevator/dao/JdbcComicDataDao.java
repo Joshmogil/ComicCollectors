@@ -23,14 +23,21 @@ public class JdbcComicDataDao implements ComicDataDao {
 
     public Integer addComicToComicTable(Long marvelId,String comicTitle,String imgUrl, String description){
 
-        String sql = "INSERT INTO comics(marvel_id, comic_title, img_url, description)\n"+
-                "VALUES(?,?,?,?) RETURNING comic_id";
+        String sql = "INSERT INTO comics(marvel_id, comic_title, img_url, description) "+
+                "SELECT ?,?,?,? WHERE NOT EXISTS (SELECT comic_id FROM comics WHERE marvel_id = ?) " +
+                "RETURNING comic_id";
 
         Integer comicId = null;
 
         try {
-            comicId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId, comicTitle, imgUrl, description);
+            comicId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId, comicTitle, imgUrl, description, marvelId);
 
+            if(comicId == null){
+                String sql2 = "SELECT comic_ic FROM comics WHERE marvel_id = ? LIMIT 1 ";
+
+                comicId = jdbcTemplate.queryForObject(sql2,Integer.class, marvelId);
+
+            }
         }catch (DataAccessException e) {
             System.out.println("Adding comic to comics table failed");
         }
