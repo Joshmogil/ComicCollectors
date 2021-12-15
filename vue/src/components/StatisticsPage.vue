@@ -1,13 +1,24 @@
 <template>
-  <div>
-      <ul v-for="character in characterStats"
+  <div id="characters-main">
+      <div id="characters" v-for="character in characterStats"
       v-bind:key="character.characterId"
       >
-          <li>{{character.characterName}}</li>
-          <li><img class="stat-img" :src="character.imgUrl" alt="" /></li>
-          <li>Appearances: {{character.count}}</li>
+        <div>
+          <div>{{character.characterName}}</div>
+          <div>
+            <div class="stat-container">
+              <div class="card">
+                <div class="side stat-img"><img :src="character.imgUrl" alt="" /></div>
+                <div class="side back">{{ character.description }}</div>
+              </div>
+            </div>
+          </div>
+    
+            <!-- <img class="stat-img" :src="character.imgUrl" alt="" /></div> -->
+          <div>Appearances: {{character.count}}</div>
+        </div>
 
-      </ul>
+      </div>
 
   </div>
 </template>
@@ -41,7 +52,30 @@ export default {
 </script>
 
 <style>
+
+/* need to fix the width on these */
+
+.stat-container {
+  cursor: pointer;
+  height: 250px;
+  perspective: 600;
+  position: relative;
+  width: 188px;
+}
+
 .stat-img{
   max-width: 150px;
 }
+
+#characters{
+  display: flex;
+}
+
+#characters-main{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 </style>
+
