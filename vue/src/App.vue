@@ -12,6 +12,9 @@
           <router-link v-bind:to="{ name: 'login' }">Login</router-link> 
         </div>
         <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'logout' }">Logout</router-link> 
+        </div>
+        <div class= "nav-link">
           <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }">My Collections</router-link>
         </div>
         <div class= "nav-link">

@@ -4,7 +4,7 @@
       <router-link
         v-bind:to="{
           name: 'userDetails',
-          params: { userId: userViewedIdOnly },
+          params: { userId: this.$route.query.collectionUserId },
         }"
       >
         <h2>User: {{ userViewed.username }}</h2>
@@ -22,7 +22,7 @@
       </button>
        <button
         class="btn deleteButton"
-        v-on:click="deleteCollection(detailCollection.collectionId)"
+        v-on:click="deleteCollection()"
       >
         Delete Collection
       </button>
@@ -178,10 +178,10 @@ export default {
         this.$store.commit("SET_USER_VIEWED", response.data);
       });
     },
-    deleteCollection(id) {
+    deleteCollection() {
       if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
         collectionService
-        .deleteCollection(id)
+        .deleteCollection(this.detailCollection.collectionId)
         .then(response => {
           if (response.status === 200) {
             this.message = "success";

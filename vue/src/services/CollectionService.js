@@ -29,7 +29,12 @@ export default {
   },
 
   deleteCollection(id) {
-    return http.delete(`/collections/delete/${id}`);
+    return http.delete(`/collections/delete/${id}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+      });
   }
 
 }
