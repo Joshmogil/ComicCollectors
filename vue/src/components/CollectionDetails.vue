@@ -12,6 +12,7 @@
     </h3>
 
     <h1>{{ detailCollection.collectionName }}</h1>
+    <div v-if="currentUserIsUserViewed">
     <div class="btn-container">
       <button
         class="btn editpage"
@@ -26,6 +27,7 @@
       >
         Delete Collection
       </button>
+      </div>
     </div>
     <div v-if="!showEditCollection">
       <section id="horizontal-collection">
@@ -109,6 +111,8 @@
 <script>
 import collectionService from "@/services/CollectionService.js";
 import userService from "@/services/UserService.js";
+import comicService from "@/services/ComicService.js";
+
 
 export default {
   name: "collection",
@@ -122,6 +126,7 @@ export default {
       },
       isLoading: true,
       showEditCollection: false,
+      message: "",
     };
   },
 
@@ -131,7 +136,7 @@ export default {
     },
 
     seeIfCurrentUserIsUserViewed() {
-      if (this.currentUser.id == this.userViewed.userId) {
+      if (this.$store.state.user.id == this.userViewed.userId) {
         this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", true);
       } else {
         this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", false);
@@ -153,8 +158,8 @@ export default {
         });
     },
     allSelected(){
-        this.userCollections.forEach(collection => {
-        collection.selected = true;
+        this.detailCollection.comicList.forEach(comic => {
+        comic.selected = true;
           
         });
     },
@@ -180,6 +185,7 @@ export default {
     },
     deleteCollection() {
       if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
+        if (this.currentUserIsUserViewed){
         collectionService
         .deleteCollection(this.detailCollection.collectionId)
         .then(response => {
@@ -191,9 +197,38 @@ export default {
           this.handleErrorResponse(error, "adding");
           this.isLoading = false;
         });
+        }
       }
     },
-    deleteComicFromCollection() {},
+    deleteComicFromCollection() {
+      if (this.currentUserIsUserViewed){
+      let dtoList = [];
+        this.detailCollection.comicList.forEach(comic => {
+
+          if (comic.selected === true){
+            const addComicDTO = {
+                comicId: comic.comicId,
+                collectionId: this.detailCollection.collectionId,
+              };
+            dtoList.push(addComicDTO);
+  
+          }
+        });
+        //call service 
+        comicService
+        .deleteComics(dtoList)
+        .then(response => {
+          if (response.status === 204) {
+            this.message = "success";
+          }
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, "adding");
+          this.isLoading = false;
+        });
+    }
+    },
+      
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =
