@@ -67,8 +67,9 @@ public class JdbcComicDataDao implements ComicDataDao {
     public List<ComicWithStats> getComicsWithAppearances() {
         List<ComicWithStats> comicsWithStats = new ArrayList<>();
 
-        String sql = "SELECT marvel_id , comic_title, img_url, description, COUNT(marvel_id) " +
-                "FROM comics AS name_count " +
+        String sql = "SELECT marvel_id, comic_title, img_url, description, COUNT(comic_title) " +
+                "FROM comics " +
+                "JOIN collection_comic ON comics.comic_id = collection_comic.comic_id " +
                 "GROUP by marvel_id, comic_title, img_url, description;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
