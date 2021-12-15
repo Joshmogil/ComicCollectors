@@ -137,6 +137,22 @@ export default {
           this.isLoading = false;
         });
     },
+    handleErrorResponse(error, verb) {
+      if (error.response) {
+        this.errorMsg =
+          "Error " +
+          verb +
+          " comic. Response received was '" +
+          error.response.statusText +
+          "'.";
+      } else if (error.request) {
+        this.errorMsg =
+          "Error " + verb + " comic. Server could not be reached.";
+      } else {
+        this.errorMsg =
+          "Error " + verb + " comic. Request could not be created.";
+      }
+    },
 
     getDetailComicForStore() {
       comicService.find(this.$route.params.id).then(response => {

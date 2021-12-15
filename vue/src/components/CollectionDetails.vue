@@ -22,7 +22,7 @@
       </button>
        <button
         class="btn deleteButton"
-        v-on:click="deleteCollection()"
+        v-on:click="deleteCollection(detailCollection.collectionId)"
       >
         Delete Collection
       </button>
@@ -152,6 +152,12 @@ export default {
           this.collection = response.data;
         });
     },
+    allSelected(){
+        this.userCollections.forEach(collection => {
+        collection.selected = true;
+          
+        });
+    },
 
 
     findStoreData() {
@@ -172,12 +178,38 @@ export default {
         this.$store.commit("SET_USER_VIEWED", response.data);
       });
     },
-    deleteCollection() {
+    deleteCollection(id) {
       if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
-        return true;
+        collectionService
+        .deleteCollection(id)
+        .then(response => {
+          if (response.status === 200) {
+            this.message = "success";
+          }
+        })
+        .catch((error) => {
+          this.handleErrorResponse(error, "adding");
+          this.isLoading = false;
+        });
       }
     },
     deleteComicFromCollection() {},
+    handleErrorResponse(error, verb) {
+      if (error.response) {
+        this.errorMsg =
+          "Error " +
+          verb +
+          " collection. Response received was '" +
+          error.response.statusText +
+          "'.";
+      } else if (error.request) {
+        this.errorMsg =
+          "Error " + verb + " collection. Server could not be reached.";
+      } else {
+        this.errorMsg =
+          "Error " + verb + " collection. Request could not be created.";
+      }
+    }
   },
   computed: {
     detailCollection() {
