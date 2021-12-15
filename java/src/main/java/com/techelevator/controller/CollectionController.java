@@ -148,7 +148,6 @@ public class CollectionController {
 //                    System.out.println("Failed to find comic's characters");
 //                }
 
-
         }
 
         return true;
@@ -175,36 +174,41 @@ public class CollectionController {
         boolean comicAddedToCollection = false;
 
         for(AddComicDTO addComicDTO:addComicsDTO) {
-            try {
 
-                MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComic_id());
 
-                String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
+            if (true) {
 
-                Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
 
-                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), comicSerialForCollection);
+
+
+            } else {
 
                 try {
 
-                    List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
+                    MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComic_id());
+                    String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
+                    Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
+                    comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollection_id(), comicSerialForCollection);
 
-                    for (MarvelCharacter marvelCharacter : comicCharacters) {
+                    try {
 
-                        String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+                        List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
+                        for (MarvelCharacter marvelCharacter : comicCharacters) {
 
-                        characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
-
+                            String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+                            characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+                        }
+                    } catch (Exception thisCouldBeLessGeneral) {
+                        System.out.println("Failed to find comic's characters");
                     }
-
-                } catch (Exception thisCouldBeLessGeneral) {
-                    System.out.println("Failed to find comic's characters");
+                } catch (Exception thisNeedToBeLessGeneral) {
+                    System.out.println("Failed to add comic to collection");
                 }
 
-            } catch (Exception thisNeedToBeLessGeneral) {
-                System.out.println("Failed to add comic to collection");
+
             }
         }
+
 
         return true;
 
