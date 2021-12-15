@@ -109,11 +109,7 @@ public class ComicDataController {
     }
 
     //Delete Single Comic From Collection By collectionId && comicId
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "collections/delete/{collectionId}/{comicId}", method = RequestMethod.DELETE)
-    public void deleteComicFromCollection(@PathVariable long collectionId, @PathVariable long comicId) {
-        ccdd.deleteComicFromCollection(collectionId, comicId);
-    }
+
 
     //Get User Object By userId
     @RequestMapping(path = "users/id/{userId}", method = RequestMethod.GET)

@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface CollectionDataDao {
 
+    void deleteCollection(Integer collectionId);
+
+    boolean deleteComicFromCollectionComic(Integer collectionId, Integer comicIdSerial);
+
     boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial);
 
     long createCollection(long userId, String collectionName);

@@ -77,6 +77,7 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 
     }
 
+
     @Override
     public void deleteComicFromCollection(long collectionId, long comicId) {
 

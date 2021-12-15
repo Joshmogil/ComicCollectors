@@ -5,6 +5,7 @@ import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.*;
 import com.techelevator.services.MarvelComicService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,32 +117,42 @@ public class CollectionController {
         boolean comicAddedToCollection = false;
 
         for(AddComicDTO addComicDTO:addComicsDTO) {
-//                Long marvelIdOfcomic = comicDao.getMarvelComicIdByOurComicId(addComicDTO.getComic_id());
-//                MarvelComic marvelComic = marvelComicService.getComic(marvelIdOfcomic);
 
-                //String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
-
-                //Integer comicId = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
                 comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), addComicDTO.getComicId());
-//                try {
-//
-//                    List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComic_id());
-//
-//                    for (MarvelCharacter marvelCharacter : comicCharacters) {
-//
-//                        String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
-//
-//                        characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
-//
-//                    }
-//
-//                } catch (Exception thisCouldBeLessGeneral) {
-//                    System.out.println("Failed to find comic's characters");
-//                }
+
         }
         return true;
 
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "collections/delete", method = RequestMethod.DELETE)
+    public void deleteCollection(@RequestBody List<Integer> collectionsToDelete) {
+
+        for(Integer collection:collectionsToDelete) {
+
+            collectionDao.deleteCollection(collection);
+
+        }
+
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "collections/delete/comics", method = RequestMethod.DELETE)
+    public Boolean deleteComicFromCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
+
+        boolean comicDeletedFromCollection = false;
+
+        for(AddComicDTO addComicDTO:addComicsDTO) {
+
+            comicDeletedFromCollection = collectionDao.deleteComicFromCollectionComic(addComicDTO.getCollectionId(),addComicDTO.getComicId());
+
+        }
+
+        return comicDeletedFromCollection;
+
+    }
+
 
     @RequestMapping(path = "collections/addcomics/new", method = RequestMethod.POST)//make a user not found exception
     public Boolean addNewComicsToCollection(@RequestBody List<AddComicDTO> addComicsDTO) {

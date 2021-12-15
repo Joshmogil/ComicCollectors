@@ -22,6 +22,46 @@ public class JdbcCollectionDataDao implements CollectionDataDao {
     }
 
     @Override
+    public void deleteCollection(Integer collectionId){
+
+        String sql = "DELETE FROM collection_comic WHERE collection_id = ? ; " +
+                     "DELETE FROM collections WHERE collection_id = ? ; ";
+
+        try {
+
+            jdbcTemplate.queryForObject(sql, Integer.class, collectionId, collectionId);
+
+        }catch (DataAccessException e) {
+            System.out.println("Delete collection catch, ambiguous");
+        }
+
+    }
+
+    @Override
+    public boolean deleteComicFromCollectionComic(Integer collectionId, Integer comicIdSerial){
+
+        String sql = "DELETE FROM collection_comic WHERE collection_id = ? AND comic_id = ? RETURNING collection_id;";
+
+        long collection_id = -1;
+
+        try {
+
+            collection_id = jdbcTemplate.queryForObject(sql, Integer.class, collectionId, comicIdSerial);
+
+        }catch (DataAccessException e) {
+            System.out.println("Deleting comic from collection failed");
+        }
+
+        if(collection_id != -1){
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
     public boolean addComicToCollectionComic(Integer collectionId, Integer comicIdSerial){
 
         String sql = "INSERT INTO collection_comic(collection_id, comic_id) "+
