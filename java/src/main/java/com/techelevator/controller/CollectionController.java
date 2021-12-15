@@ -147,7 +147,7 @@ public class CollectionController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "collections/delete/comics", method = RequestMethod.DELETE)
-    public Boolean deleteComicFromCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
+    public Boolean deleteComicFromCollection(@RequestBody AddComicDTO[] addComicsDTO) {
 
         boolean comicDeletedFromCollection = false;
 

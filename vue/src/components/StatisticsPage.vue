@@ -4,7 +4,7 @@
       v-bind:key="character.characterId"
       >
           <li>{{character.characterName}}</li>
-          <li>{{character.imgUrl}}</li>
+          <li><img class="stat-img" :src="character.imgUrl" alt="" /></li>
           <li>Appearances: {{character.count}}</li>
 
       </ul>
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getCharacterStats() {
-      comicService.getCharacterStatistics().then((response) => {
+      comicService.getCharacterStatistics().then(response => {
         this.$store.commit("SET_CHARACTER_STATS", response.data);
         this.isLoading = false;
       });
@@ -35,10 +35,13 @@ export default {
   },
 
   created() {
-    this.getCharacterStats;
+    this.getCharacterStats();
   },
 };
 </script>
 
 <style>
+.stat-img{
+  max-width: 150px;
+}
 </style>

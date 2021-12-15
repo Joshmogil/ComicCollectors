@@ -29,12 +29,8 @@ export default {
   }, 
 
   deleteComics(oldComics) {
-    return http.delete(`/collections/delete/comics$`, oldComics,
-    {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-      });
+    return http.delete(`/collections/delete/comics`, {data: oldComics})
+       
   },
 
   getCharacterStatistics() {

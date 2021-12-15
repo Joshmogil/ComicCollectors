@@ -12,7 +12,7 @@
     </h3>
 
     <h1>{{ detailCollection.collectionName }}</h1>
-    <div v-if="currentUserIsUserViewed">
+    <div v-if="isCurrentUserTheUserViewed">
     <div class="btn-container">
       <button
         class="btn editpage"
@@ -103,6 +103,15 @@
             </tr>
           </tbody>
         </table>
+        <button class="delete-comics-btn" v-on:click="deleteComicFromCollection()">
+        Delete
+      </button>
+      <button
+        class="delete-comics-btn"
+        v-on:click="changeShowEditCollection()"
+      >
+        Cancel
+      </button>
       </section>
     </div>
   </div>
@@ -127,6 +136,8 @@ export default {
       isLoading: true,
       showEditCollection: false,
       message: "",
+      selectAll: false,
+      // isCurrentUserTheUserViewed: false
     };
   },
 
@@ -185,7 +196,7 @@ export default {
     },
     deleteCollection() {
       if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
-        if (this.currentUserIsUserViewed){
+        if (this.isCurrentUserTheUserViewed){
         collectionService
         .deleteCollection(this.detailCollection.collectionId)
         .then(response => {
@@ -201,7 +212,7 @@ export default {
       }
     },
     deleteComicFromCollection() {
-      if (this.currentUserIsUserViewed){
+      if (this.isCurrentUserTheUserViewed){
       let dtoList = [];
         this.detailCollection.comicList.forEach(comic => {
 
@@ -262,12 +273,22 @@ export default {
     currentUserIsUserViewed() {
       return this.$store.state.currentUserIsUserViewed;
     },
+    collectionUserId(){
+      return this.$route.query.collectionUserId;
+    },
+     isCurrentUserTheUserViewed(){
+      return this.$store.state.user.id === this.$store.state.detailCollection.userId;
+    } 
   },
   created() {
     this.getDetailCollectionForStore();
     this.getUserViewed(this.$route.query.collectionUserId);
-    this.seeIfCurrentUserIsUserViewed();
-  },
+    
+  }
+  /* beforeMount(){
+        this.isCurrentUserTheUserViewed = this.$store.state.user.id === this.$route.query.collectionUserId;
+
+  } */
 };
 </script>
 <style>
