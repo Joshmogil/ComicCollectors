@@ -22,5 +22,9 @@ export default {
 
   searchByCharacterName(characterName) {
     return http.get(`/comics/character/${characterName}`)
+  },
+
+  searchMarvel(characterName) {
+    return http.get(`/marvelcomics/${characterName}`)
   }
 }

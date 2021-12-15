@@ -8,15 +8,17 @@ public class Comic {
     private String comicTitle;
     private String imgUrl;
     private String description;
+    private boolean selected = false;
 
     public Comic(){}
 
-    public Comic(long comicId, long marvelId, String comicTitle, String imgUrl, String description) {
+    public Comic(long comicId, long marvelId, String comicTitle, String imgUrl, String description, boolean selected) {
         this.comicId = comicId;
         this.marvelId = marvelId;
         this.comicTitle = comicTitle;
         this.imgUrl = imgUrl;
         this.description = description;
+        this.selected = selected;
 
 
     }
@@ -61,6 +63,14 @@ public class Comic {
         this.description = description;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     @Override
     public String toString() {
         return "Comic{" +
@@ -69,6 +79,7 @@ public class Comic {
                 ", comicTitle='" + comicTitle + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", description='" + description + '\'' +
+                ", selected=" + selected +
                 '}';
     }
 }
