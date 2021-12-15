@@ -1,11 +1,9 @@
 package com.techelevator.services;
 
 
-import com.techelevator.model.Comic;
 import com.techelevator.model.MarvelCharacter;
 import com.techelevator.model.MarvelComic;
 import net.minidev.json.JSONObject;
-import netscape.javascript.JSObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,10 +12,6 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.DataInput;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -123,10 +117,10 @@ public class MarvelComicService {
 
             comicInfoList = rawStringToImportantComicInfo(listOfComicsJsonString);
 
-            marvelComic.setMarvel_id(Long.valueOf(comicInfoList.get(0)));
+            marvelComic.setMarvelId(Long.valueOf(comicInfoList.get(0)));
             marvelComic.setTitle(comicInfoList.get(1));
             marvelComic.setDescription(comicInfoList.get(2));
-            marvelComic.setImg_url(comicInfoList.get(3));
+            marvelComic.setImgUrl(comicInfoList.get(3));
             marvelComic.setExtension(comicInfoList.get(4));
 
             int endOfComicCutoff = listOfComicsJsonString.indexOf("events") + 3;
@@ -192,10 +186,10 @@ public class MarvelComicService {
 
         comicInfoList = rawStringToImportantComicInfo(comicJsonString);
 
-        marvelComic.setMarvel_id(Long.valueOf(comicInfoList.get(0)));
+        marvelComic.setMarvelId(Long.valueOf(comicInfoList.get(0)));
         marvelComic.setTitle(comicInfoList.get(1));
         marvelComic.setDescription(comicInfoList.get(2));
-        marvelComic.setImg_url(comicInfoList.get(3));
+        marvelComic.setImgUrl(comicInfoList.get(3));
         marvelComic.setExtension(comicInfoList.get(4));
 
         return marvelComic;

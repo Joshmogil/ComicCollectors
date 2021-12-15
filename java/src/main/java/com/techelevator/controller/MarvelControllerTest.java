@@ -62,10 +62,10 @@ public class MarvelControllerTest {
 
         MarvelComic marvelComic = new MarvelComic();
 
-        marvelComic.setMarvel_id(Long.valueOf(importantComicInfo.get(0)));
+        marvelComic.setMarvelId(Long.valueOf(importantComicInfo.get(0)));
         marvelComic.setTitle(importantComicInfo.get(1));
         marvelComic.setDescription(importantComicInfo.get(2));
-        marvelComic.setImg_url(importantComicInfo.get(3));
+        marvelComic.setImgUrl(importantComicInfo.get(3));
         marvelComic.setExtension(importantComicInfo.get(4));
 
         return marvelComic;

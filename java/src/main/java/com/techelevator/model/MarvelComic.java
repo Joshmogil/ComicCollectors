@@ -1,28 +1,24 @@
 package com.techelevator.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.web.JsonPath;
-
-import java.util.List;
-import java.util.Map;
-
 public class MarvelComic {
 
     private String title;
-    private Long marvel_id;
-    private String img_url;
+    private Long marvelId;
+    private String imgUrl;
     private String extension;
     private String description;
+    private Boolean selected = false;
 
     public MarvelComic() {
     }
 
-    public MarvelComic(String title, Long marvel_id, String img_url, String extension, String description) {
+    public MarvelComic(String title, Long marvelId, String imgUrl, String extension, String description, Boolean selected) {
         this.title = title;
-        this.marvel_id = marvel_id;
-        this.img_url = img_url;
+        this.marvelId = marvelId;
+        this.imgUrl = imgUrl;
         this.extension = extension;
         this.description = description;
+        this.selected = selected;
     }
 
     public String getTitle() {
@@ -33,20 +29,20 @@ public class MarvelComic {
         this.title = title;
     }
 
-    public Long getMarvel_id() {
-        return marvel_id;
+    public Long getMarvelId() {
+        return marvelId;
     }
 
-    public void setMarvel_id(Long marvel_id) {
-        this.marvel_id = marvel_id;
+    public void setMarvelId(Long marvelId) {
+        this.marvelId = marvelId;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getExtension() {
@@ -63,5 +59,25 @@ public class MarvelComic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "MarvelComic{" +
+                "title='" + title + '\'' +
+                ", marvelId=" + marvelId +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", extension='" + extension + '\'' +
+                ", description='" + description + '\'' +
+                ", selected=" + selected +
+                '}';
     }
 }

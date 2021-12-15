@@ -65,9 +65,9 @@ public class CollectionController {
 
             MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComicId());
 
-            String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
+            String useableImgUrl = marvelComic.getImgUrl() + "/portrait_uncanny." + marvelComic.getExtension();
 
-            Integer comicId = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
+            Integer comicId = comicDao.addComicToComicTable(marvelComic.getMarvelId(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
 
 
             comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicId);
@@ -199,8 +199,8 @@ public class CollectionController {
                 try {
                     MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComicId());
 
-                    String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
-                    Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
+                    String useableImgUrl = marvelComic.getImgUrl() + "/portrait_uncanny." + marvelComic.getExtension();
+                    Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvelId(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
                     comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicSerialForCollection);
 
                     try {
