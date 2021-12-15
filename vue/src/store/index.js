@@ -45,7 +45,8 @@ export default new Vuex.Store({
     detailCollection: [],
     detailComic: [],
     userViewed: [],
-    results: []
+    results: [],
+    currentUserIsUserViewed: false
 
 
   },
@@ -90,6 +91,10 @@ export default new Vuex.Store({
     SET_RESULTS(state, results) {
       state.results = results;
       localStorage.setItem('results', JSON.stringify(results));
+    },
+    SET_CURRENT_USER_IS_USER_VIEWED(state, boolean) {
+      state.currentUserIsUserViewed = boolean;
+      localStorage.setItem('currentUserIsUserViewed', JSON.stringify(boolean));
     }
   }
 })

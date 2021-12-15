@@ -14,7 +14,7 @@
         <button
           class="btn newCollection"
           v-if="!isLoading && !showNewCollection && $store.state.token != ''"
-          v-on:click="showNewCollection = !showNewCollection"
+          v-on:click="changeShowNewCollection()"
         >
           New Collection
         </button>
@@ -37,7 +37,7 @@
         </button>
         <button
           class="btn btn-cancel"
-          v-on:click="showNewCollection = !showNewCollection"
+          v-on:click="changeShowNewCollection()"
         >
           Cancel
         </button>
@@ -89,9 +89,12 @@ export default {
     this.retrieveCollections();
   },
   methods: {
+    changeShowNewCollection(){
+        this.showNewCollection = !this.showNewCollection;
+    },
     retrieveCollections() {
       //what ids to put in - random?
-      collectionService.getAllCollections().then((response) => {
+      collectionService.getAllCollections().then(response => {
         this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
@@ -110,7 +113,7 @@ export default {
       
       collectionService
         .addCollection(newCollectionDTO)
-        .then((response) => {
+        .then(response => {
           if (response.status === 201) {
             // this.retrieveCollections();
             // this.showNewCollection = false;

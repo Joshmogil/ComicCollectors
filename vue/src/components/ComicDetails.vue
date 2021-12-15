@@ -11,8 +11,8 @@
     <div class="btn-container">
       <button
         class="btn"
-        v-if="!isLoading && !showNewCollection && $store.state.token != ''"
-        v-on:click="showAddToCollection = !showAddToCollection"
+        v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
+        v-on:click="changeShowAddToCollection()"
       >
         Add To Collection
       </button>
@@ -21,14 +21,13 @@
       Which collections would you like to add this comic to?
       <div id="listOfUserCollections">
         <div class="text-uppercase text-bold">
-          Collections selected: {{ selected }}
         </div>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
               <th>
                 <label class="form-checkbox">
-                  <input type="checkbox" v-model="selectAll" @click="select" />
+                  <input type="checkbox" v-model="selectAll" @click="allSelected()" />
                   <i class="form-icon"></i>
                 </label>
               </th>
@@ -45,9 +44,9 @@
                   <input
                     type="checkbox"
                     :value="collection.collectionName"
-                    v-model="selected"
+                    v-model="collection.selected"
                   />
-                  <collection class="form-icon"></collection>
+                  <div class="form-icon"></div>
                 </label>
               </td>
               <td>{{ collection.collectionName }}</td>
@@ -61,7 +60,7 @@
       </button>
       <button
         class="btn btn-cancel"
-        v-on:click="showNewCollection = !showNewCollection"
+        v-on:click="changeShowAddToCollection()"
       >
         Cancel
       </button>
@@ -85,7 +84,9 @@ export default {
       },
       collections: [],
       showAddToCollection: false,
-      message: ""
+      message: "",
+      isLoading: true,
+      selectAll: false
     };
   },
   computed: {
@@ -100,6 +101,15 @@ export default {
     },
   },
   methods: {
+    allSelected(){
+        this.userCollections.forEach(collection => {
+        collection.selected = true;
+          
+        });
+    },
+    changeShowAddToCollection(){
+        this.showAddToCollection = !this.showAddToCollection;
+    },
     mainAddComic(){
       let collectionList = [];
         this.userCollections.forEach(collection => {
@@ -117,7 +127,7 @@ export default {
         //call service 
         comicService
         .addComicToCollections(collectionList)
-        .then((response) => {
+        .then(response => {
           if (response.status === 201) {
             this.message = "success";
           }
@@ -135,7 +145,7 @@ export default {
 
     //   comicService
     //     .addComicToCollection(addComicDTO)
-    //     .then((response) => {
+    //     .then(response => {
     //       if (response.status === 201) {
     //         this.message = "success";
     //       }
@@ -147,14 +157,14 @@ export default {
     // },
 
     getDetailComicForStore() {
-      comicService.find(this.$route.params.id).then((response) => {
+      comicService.find(this.$route.params.id).then(response => {
         this.$store.commit("SET_DETAIL_COMIC", response.data);
         this.isLoading = false;
       });
     },
 
     getComic() {
-      comicService.find(this.$route.params.id).then((response) => {
+      comicService.find(this.$route.params.id).then(response => {
         this.comic = response.data;
       });
     },
@@ -163,7 +173,7 @@ export default {
   getUserCollectionsForStore() {
     userService
       .getUserCollections(this.$store.state.user.id)
-      .then((response) => {
+      .then(response => {
         this.$store.commit("SET_USER_COLLECTIONS", response.data);
         this.isLoading = false;
       });
@@ -172,14 +182,20 @@ export default {
   getUserCollections() {
     userService
       .getUserCollections(this.$route.params.userId)
-      .then((response) => {
+      .then(response => {
         this.collections = response.data;
       });
   },
 
   created() {
     this.getDetailComicForStore();
-    this.getUserCollectionsForStore();
+
+    userService
+      .getUserCollections(this.$store.state.user.id)
+      .then(response => {
+        this.$store.commit("SET_USER_COLLECTIONS", response.data);
+        this.isLoading = false;
+      });
   },
 };
 </script>

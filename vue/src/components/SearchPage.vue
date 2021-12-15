@@ -37,7 +37,7 @@ export default {
 
   methods: {
     characterSearch() {
-      comicService.searchByCharacterName(this.searchInput).then((response) => {
+      comicService.searchByCharacterName(this.searchInput).then(response => {
         this.$store.commit("SET_RESULTS", response.data);
         this.isLoading = false;
       });

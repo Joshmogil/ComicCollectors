@@ -71,7 +71,7 @@ export default {
   methods: {
     getUserCollectionsForStore() {
       userService
-        .getUserCollections(this.$route.params.userId).then((response) => {
+        .getUserCollections(this.$route.params.userId).then(response => {
         this.$store.commit("SET_USER_COLLECTIONS", response.data);
         this.isLoading = false;
       });
@@ -79,13 +79,13 @@ export default {
     getUserCollections() {
       userService
         .getUserCollections(this.$route.params.userId)
-        .then((response) => {
+        .then(response => {
           this.collections = response.data;
         });
     },
 
     getUserViewed(){
-      userService.find(this.$route.params.userId).then((response) => {
+      userService.find(this.$route.params.userId).then(response => {
 this.$store.commit("SET_USER_VIEWED", response.data);         
 });
     },

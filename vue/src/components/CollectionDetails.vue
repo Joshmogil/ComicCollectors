@@ -49,10 +49,21 @@ export default {
       isLoading: true
     };
   },
+  
   methods: {
+    seeIfCurrentUserIsUserViewed(){
+      if (this.currentUser.id == this.userViewed.userId){
+      this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", true);
+      }
+      else {
+              this.$store.commit("SET_CURRENT_USER_IS_USER_VIEWED", false);
+
+      }
+
+    },
     getDetailCollectionForStore() {
       collectionService
-        .get(this.$route.params.collectionId).then((response) => {
+        .get(this.$route.params.collectionId).then(response => {
         this.$store.commit("SET_DETAIL_COLLECTION", response.data);
         this.isLoading = false;
       });
@@ -60,12 +71,12 @@ export default {
     getCollectionData() {
       collectionService
         .get(this.$route.params.collectionId)
-        .then((response) => {
+        .then(response => {
           this.collection = response.data;
         });
     },
     /* getUserData(userId){
-        userService.find(userId).then((response) => {
+        userService.find(userId).then(response => {
           this.user = response.data;
         })
     }, */
@@ -79,15 +90,21 @@ export default {
     getComics() {
       collectionService
         .getComics(this.$route.params.collectionId)
-        .then((response) => {
+        .then(response => {
           this.collection.comics = response.data;
         });
     },
     getUserViewed(userId){
-      userService.find(userId).then((response) => {
+      userService.find(userId).then(response => {
 this.$store.commit("SET_USER_VIEWED", response.data);         
 });
     },
+    deleteCollection(){
+
+    },
+    deleteComicFromCollection(){
+
+    }
   },
   computed: {
       detailCollection(){
@@ -101,12 +118,16 @@ this.$store.commit("SET_USER_VIEWED", response.data);
       },
       userViewedIdOnly(){
         return this.$store.state.detailCollection.userId;
-      }
+      },
+      currentUserIsUserViewed() {
+      return this.$store.state.currentUserIsUserViewed;
+    }
     
   },
   created() {
     this.getDetailCollectionForStore();
     this.getUserViewed(this.userViewedIdOnly);
+    this.seeIfCurrentUserIsUserViewed();
   },
 };
 </script>

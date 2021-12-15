@@ -38,7 +38,7 @@ export default {
         collectionName: this.collection.collectionName,
       }
         .addCollection(newCollection)
-        .then((response) => {
+        .then(response => {
           if (response.status === 201) {
             this.$router.push(`/collections/${newCollection.collectionId}`);
           }

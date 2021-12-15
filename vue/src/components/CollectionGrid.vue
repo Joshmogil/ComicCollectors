@@ -53,14 +53,14 @@ export default {
   },
   methods: {
     getCollectionsForStore() {
-      collectionService.getAllCollections().then((response) => {
+      collectionService.getAllCollections().then(response => {
         this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
     },
 
     getComics(id) {
-      collectionService.getComics(id).then((response) => {
+      collectionService.getComics(id).then(response => {
         this.listOfComics = response.data;
       });
     },
