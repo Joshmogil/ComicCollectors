@@ -19,12 +19,7 @@
           New Collection
         </button>
       </div>
-<!--     <div v-if="creationAttempted" >
-      <select v-model="creationSuccess">
-      <option value="true">Success!</option>
-            <option value="false">Failed</option>
-      </select>
-    </div> -->
+
       <form v-if="showNewCollection">
         Collection Name:
         <input
@@ -32,38 +27,13 @@
           class="form-control"
           v-model="newCollection.collectionName"
         />
-        <button class="btn btn-submit" v-on:click="saveNewCollection" >
+        <button class="btn btn-submit" v-on:click="saveNewCollection">
           Save
         </button>
-        <button
-          class="btn btn-cancel"
-          v-on:click="changeShowNewCollection()"
-        >
+        <button class="btn btn-cancel" v-on:click="changeShowNewCollection()">
           Cancel
         </button>
       </form>
-
-      <!--   <h1>Our top collections</h1>
-  <div id="collection-table">
-    <section id= "vertical-collections" v-for="collection in this.$store.state.collections" v-bind:key="collection.collectionId">
-      <h3><router-link v-bind:to="{ name: 'collectionDetails', params: { collectionId: collection.collectionId } }">
-        {{collection.collectionName}}
-        </router-link>  </h3>
-
-
-      <section id= "horizontal-collection" v-for="comic in collection.comics" v-bind:key="comic.id">
-        <router-link v-bind:to="{ name: 'comicDetails', params: { id: comic.id}}">
-          <div class="card-container">
-  <div class="card">
-    <div class="side"><img :src='comic.img' alt=""></div>
-    <div class="side back">{{comic.description}}</div>
-  </div>
-</div>
-        
-        </router-link>
-      </section>
-    </section>
-  </div> -->
     </div>
   </div>
 </template>
@@ -82,19 +52,19 @@ export default {
       },
       errorMsg: "",
       creationSuccess: false,
-      creationAttempted: false
+      creationAttempted: false,
     };
   },
   created() {
     this.retrieveCollections();
   },
   methods: {
-    changeShowNewCollection(){
-        this.showNewCollection = !this.showNewCollection;
+    changeShowNewCollection() {
+      this.showNewCollection = !this.showNewCollection;
     },
     retrieveCollections() {
       //what ids to put in - random?
-      collectionService.getAllCollections().then(response => {
+      collectionService.getAllCollections().then((response) => {
         this.$store.commit("SET_HOME_COLLECTIONS", response.data);
         this.isLoading = false;
       });
@@ -103,17 +73,17 @@ export default {
         } */
     },
     saveNewCollection() {
-      const newCollectionDTO ={
+      const newCollectionDTO = {
         collectionName: this.newCollection.collectionName,
-        userId: this.$store.state.user.id
+        userId: this.$store.state.user.id,
       };
       // this.newCollection.userId = this.$store.state.user.id;
       // this.creationAttemped = true;
       // this.isLoading = true;
-      
+
       collectionService
         .addCollection(newCollectionDTO)
-        .then(response => {
+        .then((response) => {
           if (response.status === 201) {
             // this.retrieveCollections();
             // this.showNewCollection = false;
@@ -155,7 +125,7 @@ export default {
 </script>
 
 <style>
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: center;
 }

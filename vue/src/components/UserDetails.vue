@@ -62,12 +62,7 @@
           New Collection
         </button>
       </div>
-      <!--     <div v-if="creationAttempted" >
-      <select v-model="creationSuccess">
-      <option value="true">Success!</option>
-            <option value="false">Failed</option>
-      </select>
-    </div> -->
+
       <form v-if="showNewCollection">
         Collection Name:
         <input
@@ -99,6 +94,10 @@ export default {
       showNewCollection: false,
       creationSuccess: false,
       creationAttempted: false,
+      newCollection: {
+        collectionName: "",
+        userId: "",
+      },
     };
   },
 

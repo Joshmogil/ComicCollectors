@@ -35,5 +35,9 @@ export default {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
       });
+  },
+
+  getCharacterStatistics() {
+    return http.get(`/character/stats`)
   }
 }
