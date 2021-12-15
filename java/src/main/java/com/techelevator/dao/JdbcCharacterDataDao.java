@@ -104,8 +104,9 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     public List<CharacterWithStats> getCharactersWithAppearances() {
         List<CharacterWithStats> charactersWithStats = new ArrayList<>();
 
-        String sql = "SELECT marvel_character_id , character_name, img_url, description, COUNT(character_name) " +
-                "FROM characters AS name_count " +
+        String sql = "SELECT marvel_character_id, character_name, img_url, description, COUNT(character_name) " +
+                "FROM characters " +
+                "JOIN comic_character ON characters.character_id = comic_character.character_id "+
                 "GROUP by marvel_character_id, character_name, img_url, description;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
