@@ -48,10 +48,17 @@ public class JdbcComicDataDao implements ComicDataDao {
 
     public Integer getComicSerialByMarvelId(long marvelId){
 
-        String sql = "SELECT comic_id FROM comics WHERE marvel_id = ?;";
+        Integer comicId = null;
 
-        return jdbcTemplate.queryForObject(sql,Integer.class, marvelId);
+        try {
 
+            String sql = "SELECT comic_id FROM comics WHERE marvel_id = ? ";
+
+            comicId = jdbcTemplate.queryForObject(sql, Integer.class, marvelId);
+        }catch (DataAccessException e) {
+
+        }
+        return comicId;
     }
 
     @Override

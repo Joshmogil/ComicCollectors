@@ -25,9 +25,19 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     @Override
     public Integer getCharacterIdByMarvelCharacterId(int characterId){
 
-        String sql = "SELECT character_id FROM characters WHERE marvel_character_id = ?;";
+        Integer characterIdResult = null;
 
-        return jdbcTemplate.queryForObject(sql,Integer.class, characterId);
+        try {
+
+            String sql = "SELECT character_id FROM characters WHERE marvel_character_id = ?;";
+
+            characterIdResult = jdbcTemplate.queryForObject(sql, Integer.class, characterId);
+
+        }catch(DataAccessException e){
+
+        }
+
+        return characterIdResult;
 
     }
 

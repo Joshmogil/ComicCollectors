@@ -164,7 +164,10 @@ public class CollectionController {
 
     @RequestMapping(path = "collections/addcomics/new", method = RequestMethod.POST)//make a user not found exception
     public Boolean addNewComicsToCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
-        /*Example json body
+        /*
+        This method takes in a marvel id NOT a comic_id from our database
+
+        Example json body
 
         [
             {
@@ -185,16 +188,17 @@ public class CollectionController {
 
 
             //first check to see if the comic is in the database
-            if (true) {
+
+            if (comicDao.getComicSerialByMarvelId(addComicDTO.getComicId()) != null) {
             //if it is in the database, just add to the CollectionComic table, because the characters should already be in the table
 
-                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), addComicDTO.getComicId());
+                comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicDao.getComicSerialByMarvelId(addComicDTO.getComicId()));
 
             } else {
 
                 try {
-
                     MarvelComic marvelComic = marvelComicService.getComic(addComicDTO.getComicId());
+
                     String useableImgUrl = marvelComic.getImg_url() + "/portrait_uncanny." + marvelComic.getExtension();
                     Integer comicSerialForCollection = comicDao.addComicToComicTable(marvelComic.getMarvel_id(), marvelComic.getTitle(), useableImgUrl, marvelComic.getDescription());
                     comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), comicSerialForCollection);
@@ -202,10 +206,15 @@ public class CollectionController {
                     try {
 
                         List<MarvelCharacter> comicCharacters = marvelComicService.getCharacterListByComicId(addComicDTO.getComicId());
+
                         for (MarvelCharacter marvelCharacter : comicCharacters) {
 
-                            String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
-                            characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+                            if(characterDataDao.getCharacterIdByMarvelCharacterId(Math.toIntExact(marvelCharacter.getCharacterId())) != null) {
+
+                                String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+                                characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+
+                            }
                         }
 
 

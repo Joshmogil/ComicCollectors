@@ -177,6 +177,7 @@ public class MarvelComicService {
             //API base URL = http://gateway.marvel.com/v1/public/comics?ts=
             List<String> marvelAuthInfo = generateAuthInfo();
             String exchangeUrl = API_BASE_URL +"comics/" + comicId +"?ts="+ marvelAuthInfo.get(0) + "&apikey="+marvelAuthInfo.get(2)+"&hash="+marvelAuthInfo.get(3);
+            System.out.println(exchangeUrl);
 
             ResponseEntity<String> response =
                     restTemplate.exchange(exchangeUrl, HttpMethod.GET, makeHeaders(), String.class);
