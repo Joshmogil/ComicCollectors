@@ -23,6 +23,35 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     }
 
     @Override
+    public Integer getCharacterIdByMarvelCharacterId(int characterId){
+
+        String sql = "SELECT character_id FROM characters WHERE marvel_character_id = ?;";
+
+        return jdbcTemplate.queryForObject(sql,Integer.class, characterId);
+
+    }
+
+    @Override
+    public Integer addCharacterToComicCharacterTable(Integer comicId, Integer characterId){
+
+        String sql = "INSERT INTO comic_character(comic_id, character_id) "+
+                "VALUES(?,?) RETURNING character_id;";
+
+        Integer characterNum = null;
+
+        try {
+            characterNum = jdbcTemplate.queryForObject(sql, Integer.class, comicId, characterId);
+
+        }catch (DataAccessException e) {
+            System.out.println("Adding character to characters table failed");
+            System.out.println(e);
+        }
+
+        return characterNum;
+    }
+
+
+    @Override
     public Integer addCharacterToCharacterTable(Long marvelId,String characterName,String imgUrl, String description){
 
         String sql = "INSERT INTO characters(marvel_character_id, character_name, img_url, description)\n"+
@@ -48,6 +77,21 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
         String sql = "SELECT * " +
                     "FROM characters " +
                     "WHERE character_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character_id);
+        if (results.next()){
+            character = mapRowToCharacters(results);
+        }
+        return character;
+    }
+
+    @Override
+    public Character getCharacterByMarvelId(long character_id){
+        Character character = null;
+
+        String sql = "SELECT * " +
+                "FROM characters " +
+                "WHERE marvel_character_id = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character_id);
         if (results.next()){

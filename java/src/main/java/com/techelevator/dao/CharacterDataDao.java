@@ -8,6 +8,12 @@ import java.util.List;
 
 public interface CharacterDataDao {
 
+
+    Integer getCharacterIdByMarvelCharacterId(int characterId);
+    Integer addCharacterToComicCharacterTable(Integer comicId, Integer characterId);
+
+    Character getCharacterByMarvelId(long character_id);
+
     List<CharacterWithStats> getCharactersWithAppearances();
 
     Integer addCharacterToCharacterTable(Long marvelId,String characterName,String imgUrl, String description);

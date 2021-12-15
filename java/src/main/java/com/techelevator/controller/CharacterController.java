@@ -8,12 +8,10 @@ import com.techelevator.model.MarvelCharacter;
 import com.techelevator.model.StatisticModels.CharacterWithStats;
 import com.techelevator.services.MarvelComicService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
@@ -40,8 +38,7 @@ public class CharacterController {
 
         return characterDataDao.getCharactersWithAppearances();
     }
-
-
+    
     @RequestMapping(path = "getMyCharacters", method = RequestMethod.GET)
     public Boolean getAllComicIds() {
 
@@ -55,9 +52,25 @@ public class CharacterController {
 
                 for (MarvelCharacter marvelCharacter : comicCharacters) {
 
-                    String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+                    if(characterDataDao.getCharacterByMarvelId(marvelCharacter.getCharacterId())==null){
+                        //if character is not in character table, add the character
+                        String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
 
-                    characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+                        Integer characterId = characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());
+
+                        characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId),characterId);
+
+                    }else{
+                        //if character is in character table, do not add the character to that table
+                        //characterDataDao.addCharacterToComicCharacterTable(1,1);
+
+                        //characterDataDao.addCharacterToComicCharacterTable(1, characterDataDao.getCharacterIdByMarvelCharacterId((int) marvelCharacter.getCharacterId()));
+
+                        characterDataDao.addCharacterToComicCharacterTable(comicDao.getComicSerialByMarvelId(comicId), characterDataDao.getCharacterIdByMarvelCharacterId((int) marvelCharacter.getCharacterId()));
+
+
+
+                    }
 
                 }
             }
