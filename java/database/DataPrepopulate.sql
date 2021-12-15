@@ -303,34 +303,4 @@ VALUES(9,1);
 INSERT INTO collection_comic(collection_id, comic_id)
 VALUES(9,13);
 
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,6);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,22);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,3);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,17);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,8);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,11);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,23);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,9);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,21);
-
-INSERT INTO collection_comic(collection_id, comic_id)
-VALUES(10,14);
-
 COMMIT TRANSACTION;
