@@ -148,7 +148,6 @@ export default {
           this.isLoading = false;
         });
       this.$router.go();
-
     },
     handleErrorResponse(error, verb) {
       if (error.response) {
@@ -204,4 +203,9 @@ export default {
   width: auto;
   justify-content: space-evenly;
 }
+.newcollection-user{
+  display: flex;
+  align-content: center;
+}
+
 </style>
