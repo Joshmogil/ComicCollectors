@@ -16,14 +16,14 @@
       <div class="btn-container">
         <img
           src="@/assets/editcollection.png"
-          class="header-button"
+          class="small-button"
           v-if="!isLoading && !showEditCollection && $store.state.token != ''"
           v-on:click="changeShowEditCollection()"
         />
 
         <img
           src="@/assets/deletecollection.png"
-          class="header-button"
+          class="small-button"
           v-on:click="deleteCollection()"
         />
       </div>
@@ -105,13 +105,13 @@
 
         <img
           src="@/assets/delete.png"
-          class="header-button"
+          class="small-button"
           v-on:click="deleteComicFromCollection()"
         />
 
         <img
           src="@/assets/cancel.png"
-          class="header-button"
+          class="small-button"
           v-on:click="changeShowEditCollection()"
         />
       </section>

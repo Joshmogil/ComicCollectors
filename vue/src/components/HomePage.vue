@@ -12,7 +12,7 @@
       -->
       <div class="btn-container">
         <img
-          class="btn newCollection header-button"
+          class="btn newCollection small-button"
           v-if="!isLoading && !showNewCollection && $store.state.token != ''"
           v-on:click="changeShowNewCollection()"
            src="@/assets/newcollection.png" 
@@ -20,7 +20,7 @@
          
       
       </div>
-
+<div class="contains-buttons-etc">
       <form v-if="showNewCollection">
         Collection Name:
         <input
@@ -29,10 +29,11 @@
           v-model="newCollection.collectionName"
         />
         
-        <img src="@/assets/save.png" class="header-button" v-on:click="saveNewCollection" >
+        <img src="@/assets/save.png" class="small-button" v-on:click="saveNewCollection" >
         
-        <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowNewCollection()">
+        <img src="@/assets/cancel.png" class="small-button" v-on:click="changeShowNewCollection()">
       </form>
+      </div>
     </div>
   </div>
 </template>

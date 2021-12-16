@@ -3,13 +3,14 @@
     <h1>{{ userViewed.username }}</h1>
     <div class="btn-container">
       <img
-        class="btn newCollection header-button"
+        class="btn newCollection small-button"
         v-if="!isLoading && !showNewCollection && $store.state.token != ''"
         v-on:click="changeShowNewCollection()"
         src="@/assets/newcollection.png"
       />
     </div>
 
+<div class="contains-buttons-etc">
     <form v-if="showNewCollection">
       Collection Name:
       <input
@@ -19,16 +20,17 @@
       />
       <img
         src="@/assets/save.png"
-        class="header-button"
+        class="small-button"
         v-on:click="saveNewCollection"
       />
 
       <img
         src="@/assets/cancel.png"
-        class="header-button"
+        class="small-button"
         v-on:click="changeShowNewCollection()"
       />
     </form>
+    </div>
     <div id="collection-table">
       <section id="collections">
         <div

@@ -142,6 +142,14 @@ a{
 .small-button {
   height: 7vh;
   width: auto;
+  /* display: flex; */
+}
+
+.contains-buttons-etc {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
 }
 
 

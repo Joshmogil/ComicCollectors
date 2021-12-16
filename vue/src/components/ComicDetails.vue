@@ -10,7 +10,7 @@
     {{this.message}}
     <div class="btn-container">
       
-      <img src="@/assets/addtocollection.png" class="header-button"
+      <img src="@/assets/addtocollection.png" class="small-button"
       v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
         v-on:click="changeShowAddToCollection()">
     </div>
@@ -53,9 +53,9 @@
       </div>
 
       
-      <img src="@/assets/save.png" class="header-button" v-on:click="mainAddComic">
+      <img src="@/assets/save.png" class="small-button" v-on:click="mainAddComic">
       
-      <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowAddToCollection()">
+      <img src="@/assets/cancel.png" class="small-button" v-on:click="changeShowAddToCollection()">
     </form>
   </div>
 </template>
