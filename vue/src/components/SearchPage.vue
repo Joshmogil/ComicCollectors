@@ -3,15 +3,15 @@
     <input type="text" class="form-control" v-model="searchInput" />
     <button class="btn btn-search" v-on:click="marvelCharacterSearch">Search</button>
 
-    <section id="horizontal-collection">
+    <section id="search-container">
       <div
         v-for="comic in getResults"
-        v-bind:key="comic.marvelId"
+        v-bind:key="comic.comicId"
       >
         <router-link
-          v-bind:to="{ name: 'comicDetails', params: { id: comic.marvelId } }"
+          v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
         >
-          <div class="card-container">
+          <div class="search-card">
             <div class="card">
               <div class="side"><img :src="comic.imgUrl" alt="" /></div>
               <div class="side back">{{ comic.description }}</div>
@@ -60,4 +60,18 @@ export default {
 </script>
 
 <style>
+#search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: auto;
+}
+.search-card {
+  cursor: pointer;
+  height: 250px;
+  perspective: 600;
+  position: relative;
+  width: 188px;
+}
+
 </style>
