@@ -1,19 +1,20 @@
 <template>
   <div id="app">  
+
     <SiteHeader></SiteHeader>
+    <!-- <SidebarItems></SidebarItems> -->
     <div class="side-nav">
-      <!-- <SidebarItems></SidebarItems> -->
     </div>
       <nav class="links">
-        <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'home' }"><img src="@/assets/Home.png" class="header-button">
-        </router-link>
-        </div>
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'login' }"><img src="@/assets/login.png" class="header-button"></router-link> 
         </div>
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'logout' }"><img src="@/assets/logout.png" class="header-button"></router-link> 
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'home' }"><img src="@/assets/Home.png" class="header-button">
+        </router-link>
         </div>
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }"><img src="@/assets/mycollections.png" class="header-button"></router-link>
@@ -30,6 +31,7 @@
 </template>
 
   <script>
+
 
 
   </script>
@@ -85,13 +87,6 @@ a{
   text-align: center;
   transform: rotateY(180deg);
 }
-
-/* .nav-link {
-
-border: 1px Solid rgb(0, 0, 19);
-
-} */
-
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Readex+Pro&display=swap');
 
 #app{

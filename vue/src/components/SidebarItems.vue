@@ -1,8 +1,24 @@
 <template>
   <div id="sidebar">
-      <router-link id="home" class="nav" v-bind:to="{ name: 'home' }">Home</router-link>
-          <router-link id="login" class="nav" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>       
-          <router-link id="logout" class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+             <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'login' }"><img src="@/assets/login.png" class="header-button"></router-link> 
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'logout' }"><img src="@/assets/logout.png" class="header-button"></router-link> 
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'home' }"><img src="@/assets/Home.png" class="header-button">
+        </router-link>
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  }"><img src="@/assets/mycollections.png" class="header-button"></router-link>
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'statistics' }"><img src="@/assets/statistics.png" class="header-button"></router-link>
+        </div>
+        <div class= "nav-link">
+          <router-link v-bind:to="{ name: 'search' }"><img src="@/assets/search.png" class="header-button"></router-link>
+        </div>
     </div>
 </template>
 
