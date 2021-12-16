@@ -126,11 +126,12 @@ public class MarvelComicService {
             String useableImgUrl = marvelComic.getImgUrl() + "/portrait_uncanny." + marvelComic.getExtension();
             marvelComic.setImgUrl(useableImgUrl);
 
-            int endOfComicCutoff = listOfComicsJsonString.indexOf("events") + 3;
+            int endOfComicCutoff = listOfComicsJsonString.indexOf("\"events\"") + 3;
 
             listOfComicsJsonString = listOfComicsJsonString.substring(endOfComicCutoff);
 
             listOfComics.add(marvelComic);
+
         }
 
         return listOfComics;
