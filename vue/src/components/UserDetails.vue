@@ -10,26 +10,28 @@
       />
     </div>
 
-<div class="contains-buttons-etc">
-    <form v-if="showNewCollection">
-      Collection Name:
-      <input
-        type="text"
-        class="form-control"
-        v-model="newCollection.collectionName"
-      />
-      <img
-        src="@/assets/save.png"
-        class="small-button"
-        v-on:click="saveNewCollection"
-      />
+    <div class="contains-buttons-etc">
+      <form v-if="showNewCollection">
+        <div class="newcollection-user">
+          <h3>Collection Name:</h3>
+          <input
+            type="text"
+            class="form-control"
+            v-model="newCollection.collectionName"
+          />
+          <img
+            src="@/assets/save.png"
+            class="small-button"
+            v-on:click="saveNewCollection"
+          />
 
-      <img
-        src="@/assets/cancel.png"
-        class="small-button"
-        v-on:click="changeShowNewCollection()"
-      />
-    </form>
+          <img
+            src="@/assets/cancel.png"
+            class="small-button"
+            v-on:click="changeShowNewCollection()"
+          />
+        </div>
+      </form>
     </div>
     <div id="collection-table">
       <section id="collections">
@@ -150,7 +152,6 @@ export default {
           this.isLoading = false;
         });
       this.$router.go();
-
     },
     handleErrorResponse(error, verb) {
       if (error.response) {
@@ -206,4 +207,9 @@ export default {
   width: auto;
   justify-content: space-evenly;
 }
+.newcollection-user{
+  display: flex;
+  align-content: center;
+}
+
 </style>
