@@ -130,4 +130,9 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+form{
+  align-items: center;
+}
+
 </style>

@@ -6,7 +6,8 @@
         v-for="collection in homeCollections"
         v-bind:key="collection.collectionId"
       >
-        <h3>
+        <div>
+        <h1>
           <router-link
             v-bind:to="{
               name: 'collectionDetails',
@@ -16,7 +17,8 @@
           >
             {{ collection.collectionName }}
           </router-link>
-        </h3>
+        </h1>
+        </div> 
         <section
           id="horizontal-collection"
           v-for="comic in collection.comicList"
@@ -81,7 +83,7 @@ h1 {
 
 #vertical-collections {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-direction: row;
 }
 

@@ -32,14 +32,14 @@
 </template>
 
   <script>
-export default {
+// export default {
 
-  computed: {
-    isLoggedIn() {
-        return this.$store.state.isLoggedIn;
-    }
-  }
-};
+//   computed: {
+//     isLoggedIn() {
+//         return this.$store.state.isLoggedIn;
+//     }
+//   }
+// };
 
 
   </script>

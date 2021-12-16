@@ -48,7 +48,7 @@ export default new Vuex.Store({
     results: [],
     currentUserIsUserViewed: false,
     characterStats: [],
-    isLoggedIn: ""
+    isLoggedIn: false
 
 
   },
