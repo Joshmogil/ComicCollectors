@@ -40,7 +40,7 @@
             <div class="search-card">
               <div class="card">
                 <div class="side"><img :src="comic.imgUrl" alt="" /></div>
-                <div class="side back">{{ comic.description }}</div>
+                <div class="side back">{{ comic.comicTitle }}</div>
               </div>
             </div>
           </router-link>
@@ -93,7 +93,7 @@
                         <div class="side">
                           <img :src="comic.imgUrl" alt="" />
                         </div>
-                        <div class="side back">{{ comic.description }}</div>
+                        <div class="side back">{{ comic.comicTitle }}</div>
                       </div>
                     </div>
                   </router-link>
@@ -308,6 +308,6 @@ img {
   width: 100%;
   margin: 5px;
   border-radius: 10px;
-  box-shadow: 2px 2px 4px 5px #888888;
+  /* box-shadow: 2px 2px 4px 5px #888888; */
 }
 </style>

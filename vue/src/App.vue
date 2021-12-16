@@ -86,6 +86,7 @@ a{
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg);
+  background-image: url(../src/assets/site-background.jpeg);
 }
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Readex+Pro&display=swap');
 
@@ -128,6 +129,11 @@ a{
   width: 20rem;
   height: 20rem;
 
+}
+
+.small-button {
+  height: 7vh;
+  width: auto;
 }
 
 

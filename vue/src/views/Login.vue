@@ -34,7 +34,7 @@
         />
       </div>
       <router-link :to="{ name: 'register' }"><h2>Need an account?</h2></router-link>
-      <button type="submit">Sign in</button>
+      <button id = "submitButton" type="submit"> <img src="@/assets/signin.png" class="small-button"></button>
     </form>
   </div>
 </template>
@@ -78,6 +78,10 @@ export default {
 </script>
 
 <style>
+
+form {
+  text-align: center;
+}
 .text-center {
   display: flex;
   justify-content: flex-start;
@@ -85,7 +89,7 @@ export default {
 
 .Promt {
   display: flex;
-  justify-content: start;
+  justify-content: center;
 }
 
 #login {
@@ -94,5 +98,10 @@ export default {
 
 }
 
+
+#submitButton {
+  background: transparent;
+  border: none;
+}
 
 </style>
