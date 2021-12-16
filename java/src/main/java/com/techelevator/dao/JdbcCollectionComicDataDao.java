@@ -26,6 +26,26 @@ public class JdbcCollectionComicDataDao implements CollectionComicDataDao {
 //    }
 
     @Override
+    public Integer checkIfComicIdInCollectionComic(Integer comicId){
+
+        Integer comicIdOfComicId = -1;
+
+        try {
+
+            String sql = "Select comic_id FROM collection_comic WHERE comic_id = ? GROUP BY comic_id ;";
+
+            comicIdOfComicId = jdbcTemplate.queryForObject(sql, Integer.class, comicId);
+
+        }catch (Exception e) {
+
+        }
+        return comicIdOfComicId;
+
+
+
+    }
+
+    @Override
     public List<Comic> getAllComicsInCollectionByCollectionId(Long collectionId) {
         List<Comic> comics = new ArrayList<>();
 //        Collection collection = new Collection();

@@ -45,7 +45,7 @@ public class JdbcComicDataDao implements ComicDataDao {
         return comicId;
     }
 
-
+    @Override
     public Integer getComicSerialByMarvelId(long marvelId){
 
         Integer comicId = -1;

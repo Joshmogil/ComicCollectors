@@ -49,8 +49,6 @@ public class ComicDataController {
 
     MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
 
-
-
     @RequestMapping(path = "marvelcomics/{characterName}", method = RequestMethod.GET)
     public List<MarvelComic> testGetComicsCharacterName(@PathVariable String characterName){
 

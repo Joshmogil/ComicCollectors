@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CharacterDataDao;
+import com.techelevator.dao.CollectionComicDataDao;
 import com.techelevator.dao.CollectionDataDao;
 import com.techelevator.dao.ComicDataDao;
 import com.techelevator.model.*;
@@ -19,11 +20,13 @@ public class CollectionController {
     private CollectionDataDao collectionDao;
     private ComicDataDao comicDao;
     private CharacterDataDao characterDataDao;
+    private CollectionComicDataDao collectionComicDataDao;
 
-    public CollectionController(CollectionDataDao collectionDao, ComicDataDao comicDao, CharacterDataDao characterDataDao) {
+    public CollectionController(CollectionDataDao collectionDao, ComicDataDao comicDao, CharacterDataDao characterDataDao, CollectionComicDataDao collectionComicDataDao) {
         this.collectionDao = collectionDao;
         this.comicDao = comicDao;
         this.characterDataDao = characterDataDao;
+        this.collectionComicDataDao = collectionComicDataDao;
     }
 
     //Marvel Service Declaration
@@ -41,14 +44,6 @@ public class CollectionController {
 
         return collectionCreated;
     }
-
-    @RequestMapping(path = "joshcomic/{comicId}", method = RequestMethod.GET)
-    public Long getComicStats(@PathVariable int comicId) {
-
-        return comicDao.getMarvelComicIdByOurComicId(comicId);
-
-    }
-
 
     //Add Comic To Collection
     @RequestMapping(path = "collections/addcomic", method = RequestMethod.POST)//make a user not found exception
@@ -99,26 +94,41 @@ public class CollectionController {
 
     @RequestMapping(path = "collections/addcomics", method = RequestMethod.POST)//make a user not found exception
     public Boolean addComicsToCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
-        /*Example json body
-
-        [
-            {
-                "collection_id":2,
-                "comic_id": 20
-            },
-            {
-                "collection_id":4,
-                "comic_id": 25
-            }
-         ]
-
-        */
 
         boolean comicAddedToCollection = false;
 
         for(AddComicDTO addComicDTO:addComicsDTO) {
 
+                Integer check = collectionComicDataDao.checkIfComicIdInCollectionComic(addComicDTO.getComicId());
+
                 comicAddedToCollection = collectionDao.addComicToCollectionComic(addComicDTO.getCollectionId(), addComicDTO.getComicId());
+
+                //check if comic exists in collection_comic, if not add that comic's characters
+
+                if(check == -1){
+
+                    Long marvelComicId = comicDao.getMarvelComicIdByOurComicId(addComicDTO.getComicId());
+
+                    List<MarvelCharacter> characterList = marvelComicService.getCharacterListByComicId(marvelComicId);
+
+                    for(MarvelCharacter marvelCharacter:characterList){
+
+                        //check if that character is in the character table, add them to the character table and link them to the comicId if they are not
+
+                        Integer characterId = characterDataDao.getCharacterIdByMarvelCharacterId(marvelCharacter.getCharacterId());
+
+                        if(characterId == -1){
+
+                            Integer newCharacterId = characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(),marvelCharacter.getCharacterName(),marvelCharacter.getImg_url(),marvelCharacter.getDescription());
+
+                            characterDataDao.addCharacterToComicCharacterTable(addComicDTO.getComicId(),newCharacterId);
+
+                        }
+
+
+                    }
+
+                }
 
         }
         return true;

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ComicDataDao {
 
+
+
     Long getMarvelComicIdByOurComicId(int comic_id);
 
     List<ComicWithStats> getComicsWithAppearances();
