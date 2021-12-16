@@ -96,6 +96,7 @@ export default {
           this.handleErrorResponse(error, "adding");
           this.isLoading = false;
         });
+        this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  })
     },
     handleErrorResponse(error, verb) {
       if (error.response) {

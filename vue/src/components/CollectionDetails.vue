@@ -13,13 +13,19 @@
 
     <h1>{{ detailCollection.collectionName }}</h1>
     <div v-if="isCurrentUserTheUserViewed">
-    <div class="btn-container">
-      
-      <img src="@/assets/editcollection.png" class="header-button" 
-      v-if="!isLoading && !showEditCollection && $store.state.token != ''"
-        v-on:click="changeShowEditCollection()">
-       
-      <img src="@/assets/deletecollection.png" class="header-button" v-on:click="deleteCollection()">
+      <div class="btn-container">
+        <img
+          src="@/assets/editcollection.png"
+          class="header-button"
+          v-if="!isLoading && !showEditCollection && $store.state.token != ''"
+          v-on:click="changeShowEditCollection()"
+        />
+
+        <img
+          src="@/assets/deletecollection.png"
+          class="header-button"
+          v-on:click="deleteCollection()"
+        />
       </div>
     </div>
     <div v-if="!showEditCollection">
@@ -96,11 +102,18 @@
             </tr>
           </tbody>
         </table>
-        
-      <img src="@/assets/delete.png" class="header-button" v-on:click="deleteComicFromCollection()" >
-      
-            <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowEditCollection()" >
 
+        <img
+          src="@/assets/delete.png"
+          class="header-button"
+          v-on:click="deleteComicFromCollection()"
+        />
+
+        <img
+          src="@/assets/cancel.png"
+          class="header-button"
+          v-on:click="changeShowEditCollection()"
+        />
       </section>
     </div>
   </div>
@@ -110,7 +123,6 @@
 import collectionService from "@/services/CollectionService.js";
 import userService from "@/services/UserService.js";
 import comicService from "@/services/ComicService.js";
-
 
 export default {
   name: "collection",
@@ -157,13 +169,11 @@ export default {
           this.collection = response.data;
         });
     },
-    allSelected(){
-        this.detailCollection.comicList.forEach(comic => {
+    allSelected() {
+      this.detailCollection.comicList.forEach((comic) => {
         comic.selected = true;
-          
-        });
+      });
     },
-
 
     findStoreData() {
       return this.$store.state.collections.find((collection) => {
@@ -184,51 +194,57 @@ export default {
       });
     },
     deleteCollection() {
-      if (confirm("Are you sure you want to delete this collection and all associated comics? This action cannot be undone.")) {
-        if (this.isCurrentUserTheUserViewed){
-        collectionService
-        .deleteCollection(this.detailCollection.collectionId)
-        .then(response => {
-          if (response.status === 200) {
-            this.message = "success";
-          }
-        })
-        .catch((error) => {
-          this.handleErrorResponse(error, "adding");
-          this.isLoading = false;
-        });
+      if (
+        confirm(
+          "Are you sure you want to delete this collection and all associated comics? This action cannot be undone."
+        )
+      ) {
+        if (this.isCurrentUserTheUserViewed) {
+          collectionService
+            .deleteCollection(this.detailCollection.collectionId)
+            .then((response) => {
+              if (response.status === 200) {
+                this.message = "success";
+              }
+            })
+            .catch((error) => {
+              this.handleErrorResponse(error, "adding");
+              this.isLoading = false;
+            });
         }
       }
+      this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  });
+      this.$router.go();
     },
     deleteComicFromCollection() {
-      if (this.isCurrentUserTheUserViewed){
-      let dtoList = [];
-        this.detailCollection.comicList.forEach(comic => {
-
-          if (comic.selected === true){
+      if (this.isCurrentUserTheUserViewed) {
+        let dtoList = [];
+        this.detailCollection.comicList.forEach((comic) => {
+          if (comic.selected === true) {
             const addComicDTO = {
-                comicId: comic.comicId,
-                collectionId: this.detailCollection.collectionId,
-              };
+              comicId: comic.comicId,
+              collectionId: this.detailCollection.collectionId,
+            };
             dtoList.push(addComicDTO);
-  
           }
         });
-        //call service 
+        //call service
         comicService
-        .deleteComics(dtoList)
-        .then(response => {
-          if (response.status === 204) {
-            this.message = "success";
-          }
-        })
-        .catch((error) => {
-          this.handleErrorResponse(error, "adding");
-          this.isLoading = false;
-        });
-    }
-    },
+          .deleteComics(dtoList)
+          .then((response) => {
+            if (response.status === 204) {
+              this.message = "success";
+            }
+          })
+          .catch((error) => {
+            this.handleErrorResponse(error, "adding");
+            this.isLoading = false;
+          });
+      }
       
+      this.$router.go();
+    },
+
     handleErrorResponse(error, verb) {
       if (error.response) {
         this.errorMsg =
@@ -244,7 +260,7 @@ export default {
         this.errorMsg =
           "Error " + verb + " collection. Request could not be created.";
       }
-    }
+    },
   },
   computed: {
     detailCollection() {
@@ -262,22 +278,19 @@ export default {
     currentUserIsUserViewed() {
       return this.$store.state.currentUserIsUserViewed;
     },
-    collectionUserId(){
+    collectionUserId() {
       return this.$route.query.collectionUserId;
     },
-     isCurrentUserTheUserViewed(){
-      return this.$store.state.user.id === this.$store.state.detailCollection.userId;
-    } 
+    isCurrentUserTheUserViewed() {
+      return (
+        this.$store.state.user.id === this.$store.state.detailCollection.userId
+      );
+    },
   },
   created() {
     this.getDetailCollectionForStore();
     this.getUserViewed(this.$route.query.collectionUserId);
-    
-  }
-  /* beforeMount(){
-        this.isCurrentUserTheUserViewed = this.$store.state.user.id === this.$route.query.collectionUserId;
-
-  } */
+  },
 };
 </script>
 <style>

@@ -2,26 +2,33 @@
   <div>
     <h1>{{ userViewed.username }}</h1>
     <div class="btn-container">
-        
-        <img
-          class="btn newCollection header-button"
-          v-if="!isLoading && !showNewCollection && $store.state.token != ''"
-          v-on:click="changeShowNewCollection()"
-           src="@/assets/newcollection.png" 
-        >
-      </div>
+      <img
+        class="btn newCollection header-button"
+        v-if="!isLoading && !showNewCollection && $store.state.token != ''"
+        v-on:click="changeShowNewCollection()"
+        src="@/assets/newcollection.png"
+      />
+    </div>
 
-      <form v-if="showNewCollection">
-        Collection Name:
-        <input
-          type="text"
-          class="form-control"
-          v-model="newCollection.collectionName"
-        />
-        <img src="@/assets/save.png" class="header-button" v-on:click="saveNewCollection" >
-        
-        <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowNewCollection()">
-      </form>
+    <form v-if="showNewCollection">
+      Collection Name:
+      <input
+        type="text"
+        class="form-control"
+        v-model="newCollection.collectionName"
+      />
+      <img
+        src="@/assets/save.png"
+        class="header-button"
+        v-on:click="saveNewCollection"
+      />
+
+      <img
+        src="@/assets/cancel.png"
+        class="header-button"
+        v-on:click="changeShowNewCollection()"
+      />
+    </form>
     <div id="collection-table">
       <section id="collections">
         <div
@@ -42,7 +49,7 @@
 
           <section id="collection-comics">
             <div
-              v-for="comic in collection.comicList.slice(0,5)"
+              v-for="comic in collection.comicList.slice(0, 5)"
               v-bind:key="comic.comicId"
             >
               <router-link
@@ -74,7 +81,6 @@
       </div>
       add a v-else to router link before div tag
       -->
-      
     </div>
   </div>
 </template>
@@ -125,10 +131,6 @@ export default {
         collectionName: this.newCollection.collectionName,
         userId: this.$store.state.user.id,
       };
-      // this.newCollection.userId = this.$store.state.user.id;
-      // this.creationAttemped = true;
-      // this.isLoading = true;
-
       collectionService
         .addCollection(newCollectionDTO)
         .then((response) => {
@@ -145,6 +147,7 @@ export default {
           this.handleErrorResponse(error, "adding");
           this.isLoading = false;
         });
+      this.$router.go();
     },
     handleErrorResponse(error, verb) {
       if (error.response) {
