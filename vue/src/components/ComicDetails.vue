@@ -10,9 +10,18 @@
     {{this.message}}
     <div class="btn-container">
       
-      <img src="@/assets/addtocollection.png" class="small-button"
+      <!-- <img src="@/assets/addtocollection.png" class="small-button"
       v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
-        v-on:click="changeShowAddToCollection()">
+        v-on:click="changeShowAddToCollection()"/> -->
+      <button
+        class="btn"
+        v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
+        v-on:click="changeShowAddToCollection()"
+      >
+        Add To Collection
+      </button>
+
+
     </div>
     <form v-if="showAddToCollection">
       Which collections would you like to add this comic to?
@@ -53,9 +62,15 @@
       </div>
 
       
-      <img src="@/assets/save.png" class="small-button" v-on:click="mainAddComic">
-      
-      <img src="@/assets/cancel.png" class="small-button" v-on:click="changeShowAddToCollection()">
+      <button class="btn btn-submit" v-on:click="mainAddComic">
+       Save
+      </button>
+      <button
+        class="btn btn-cancel"
+        v-on:click="changeShowAddToCollection()"
+      >
+        Cancel
+      </button>
     </form>
   </div>
 </template>
@@ -129,7 +144,7 @@ export default {
         });
 
         this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  });
-        this.$router.go();
+        //this.$router.go();
 
     },
     handleErrorResponse(error, verb) {
