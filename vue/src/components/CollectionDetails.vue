@@ -215,6 +215,7 @@ export default {
       }
       this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  });
       this.$router.go();
+
     },
     deleteComicFromCollection() {
       if (this.isCurrentUserTheUserViewed) {
@@ -243,6 +244,7 @@ export default {
       }
       
       this.$router.go();
+
     },
 
     handleErrorResponse(error, verb) {

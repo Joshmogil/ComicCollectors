@@ -47,7 +47,8 @@ export default new Vuex.Store({
     userViewed: [],
     results: [],
     currentUserIsUserViewed: false,
-    characterStats: []
+    characterStats: [],
+    isLoggedIn: ""
 
 
   },
@@ -100,6 +101,10 @@ export default new Vuex.Store({
     SET_CHARACTER_STATS(state, stats) {
       state.characterStats = stats;
       localStorage.setItem('characterStats', JSON.stringify(stats));
+    },
+    SET_IS_LOGGED_IN(state, boolean) {
+      state.isLoggedIn = boolean;
+      localStorage.setItem('isLoggedIn', JSON.stringify(boolean));
     }
   }
 })

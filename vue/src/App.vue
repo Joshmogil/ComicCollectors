@@ -7,11 +7,9 @@
     </div>
       <nav class="links">
         <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'login' }"><img src="@/assets/login.png" class="header-button"></router-link> 
+          <router-link  v-bind:to="{ name: 'login' }"><img src="@/assets/login.png" class="header-button"></router-link> 
         </div>
-        <div class= "nav-link">
-          <router-link v-bind:to="{ name: 'logout' }"><img src="@/assets/logout.png" class="header-button"></router-link> 
-        </div>
+        
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'home' }"><img src="@/assets/Home.png" class="header-button">
         </router-link>
@@ -25,13 +23,23 @@
         <div class= "nav-link">
           <router-link v-bind:to="{ name: 'search' }"><img src="@/assets/search.png" class="header-button"></router-link>
         </div>
+        <div class= "nav-link">
+          <router-link  v-bind:to="{ name: 'logout' }"><img src="@/assets/logout.png" class="header-button"></router-link> 
+        </div>
       </nav>
          <router-view />
   </div>
 </template>
 
   <script>
+export default {
 
+  computed: {
+    isLoggedIn() {
+        return this.$store.state.isLoggedIn;
+    }
+  }
+};
 
 
   </script>

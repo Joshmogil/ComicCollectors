@@ -148,6 +148,7 @@ export default {
           this.isLoading = false;
         });
       this.$router.go();
+
     },
     handleErrorResponse(error, verb) {
       if (error.response) {

@@ -130,6 +130,7 @@ export default {
 
         this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  });
         this.$router.go();
+
     },
     handleErrorResponse(error, verb) {
       if (error.response) {
