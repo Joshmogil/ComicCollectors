@@ -11,13 +11,14 @@
       add a v-else to router link before div tag
       -->
       <div class="btn-container">
-        <button
-          class="btn newCollection"
+        <img
+          class="btn newCollection header-button"
           v-if="!isLoading && !showNewCollection && $store.state.token != ''"
           v-on:click="changeShowNewCollection()"
+           src="@/assets/newcollection.png" 
         >
-          New Collection
-        </button>
+         
+      
       </div>
 
       <form v-if="showNewCollection">

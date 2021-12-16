@@ -7,7 +7,7 @@
           v-for="collection in userCollections"
           v-bind:key="collection.collectionId"
         >
-          <h3>
+          <h2>
             <router-link
               v-bind:to="{
                 name: 'collectionDetails',
@@ -17,11 +17,11 @@
             >
               {{ collection.collectionName }}
             </router-link>
-          </h3>
+          </h2>
 
           <section id="collection-comics">
             <div
-              v-for="comic in collection.comicList"
+              v-for="comic in collection.comicList.slice(0,5)"
               v-bind:key="comic.comicId"
             >
               <router-link
