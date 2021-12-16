@@ -9,13 +9,10 @@
     </p>
     {{this.message}}
     <div class="btn-container">
-      <button
-        class="btn"
-        v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
-        v-on:click="changeShowAddToCollection()"
-      >
-        Add To Collection
-      </button>
+      
+      <img src="@/assets/addtocollection.png" class="header-button"
+      v-if="!isLoading && !showAddToCollection && $store.state.token != ''"
+        v-on:click="changeShowAddToCollection()">
     </div>
     <form v-if="showAddToCollection">
       Which collections would you like to add this comic to?
