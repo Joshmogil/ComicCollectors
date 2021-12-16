@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 public class MarvelComic {
 
+    private Long comicId;
     private String title;
     private Long marvelId;
     private String imgUrl;
@@ -12,13 +13,22 @@ public class MarvelComic {
     public MarvelComic() {
     }
 
-    public MarvelComic(String title, Long marvelId, String imgUrl, String extension, String description, Boolean selected) {
+    public MarvelComic(Long comicId, String title, Long marvelId, String imgUrl, String extension, String description, Boolean selected) {
+        this.comicId = comicId;
         this.title = title;
         this.marvelId = marvelId;
         this.imgUrl = imgUrl;
         this.extension = extension;
         this.description = description;
         this.selected = selected;
+    }
+
+    public Long getComicId() {
+        return comicId;
+    }
+
+    public void setComicId(Long comicId) {
+        this.comicId = comicId;
     }
 
     public String getTitle() {
@@ -72,7 +82,8 @@ public class MarvelComic {
     @Override
     public String toString() {
         return "MarvelComic{" +
-                "title='" + title + '\'' +
+                "comicId=" + comicId +
+                ", title='" + title + '\'' +
                 ", marvelId=" + marvelId +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", extension='" + extension + '\'' +

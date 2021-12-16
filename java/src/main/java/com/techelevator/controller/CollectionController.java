@@ -162,6 +162,14 @@ public class CollectionController {
     }
 
 
+
+
+
+
+
+
+
+
     @RequestMapping(path = "collections/addcomics/new", method = RequestMethod.POST)//make a user not found exception
     public Boolean addNewComicsToCollection(@RequestBody List<AddComicDTO> addComicsDTO) {
         /*

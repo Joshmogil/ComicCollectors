@@ -5,6 +5,7 @@ import com.techelevator.model.*;
 import com.techelevator.model.Character;
 import com.techelevator.model.StatisticModels.CharacterWithStats;
 import com.techelevator.model.StatisticModels.ComicWithStats;
+import com.techelevator.services.MarvelComicService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -41,6 +42,46 @@ public class ComicDataController {
         this.sdd = sdd;
         this.ud = ud;
     }
+    //Marvel Service Declaration
+    String MARVEL_BASE_URL = "http://gateway.marvel.com/v1/public/";
+    String privateKey = "197ef818f572516a2966e997ee7268e0cd590e21";
+    String publicKey = "20afbe7ebe8ad8af2c91b02a275e06cc";
+
+    MarvelComicService marvelComicService = new MarvelComicService(MARVEL_BASE_URL, privateKey,publicKey);
+
+
+
+    @RequestMapping(path = "marvelcomics/{characterName}", method = RequestMethod.GET)
+    public List<MarvelComic> testGetComicsCharacterName(@PathVariable String characterName){
+
+        List<MarvelComic> comicListWithComicIds = new ArrayList<>();
+
+        List<MarvelComic> comicList = marvelComicService.getComicListByCharacterName(characterName);
+
+
+        for(MarvelComic marvelComic:comicList){
+            //set comic id
+
+            if(cdd.getComicSerialByMarvelId(marvelComic.getMarvelId()) == -1){
+
+                Integer comicSerialForCollection = cdd.addComicToComicTable(marvelComic.getMarvelId(), marvelComic.getTitle(), marvelComic.getImgUrl(), marvelComic.getDescription());
+
+                marvelComic.setComicId(Long.valueOf(comicSerialForCollection));
+
+            }else{
+
+                marvelComic.setComicId(Long.valueOf(cdd.getComicSerialByMarvelId(marvelComic.getMarvelId())));
+
+            }
+
+            comicListWithComicIds.add(marvelComic);
+
+        }
+
+        return comicListWithComicIds;
+
+    }
+
 
     //Get Comic Object By comicID
     @RequestMapping(path = "comics/{comicId}", method = RequestMethod.GET)
