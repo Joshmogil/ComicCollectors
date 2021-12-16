@@ -36,7 +36,7 @@ align-items: flex-end;
 }
 
 a:visited{
-  color: #806300;
+color: rgb(196, 37, 196);
 }
 
 
