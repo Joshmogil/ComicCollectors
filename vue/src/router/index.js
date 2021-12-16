@@ -82,7 +82,13 @@ const router = new Router({
       path: "/search",
       name: "search",
       component: SearchPage
+    },
+    {
+      path: "*",
+      name: "default",
+      component: Home
     }
+
   ]
 })
 

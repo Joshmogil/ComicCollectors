@@ -119,8 +119,7 @@ export default {
                 comicId: this.detailComic.comicId,
                 collectionId: collection.collectionId,
               };
-            collectionList.push(addComicDTO);
-            console.log(addComicDTO.comicId)
+            collectionList.push(addComicDTO);         
   
           }
         });
@@ -194,7 +193,7 @@ export default {
         this.$store.commit("SET_USER_COLLECTIONS", response.data);
         this.isLoading = false;
       });
-  },
+  }
 };
 </script>
 <style>

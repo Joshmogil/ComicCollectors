@@ -12,13 +12,13 @@ INSERT INTO users (username,password_hash,role) VALUES ('711Num1Customer','$2a$0
 INSERT INTO collections(collection_name, user_id)
 VALUES('The Famous Italian Collection',3);
 INSERT INTO collections(collection_name, user_id)
-VALUES('Favorite comics of a strong dude',4);
+VALUES('Favorite comics of a strong guy',4);
 INSERT INTO collections(collection_name, user_id)
 VALUES('Anthonys Top Ten',5);
 INSERT INTO collections(collection_name, user_id)
 VALUES('Double Double',5);
 INSERT INTO collections(collection_name, user_id)
-VALUES('Nguyen Win',6);
+VALUES('Nguyens win',6);
 INSERT INTO collections(collection_name, user_id)
 VALUES('Hello Marvel',6);
 INSERT INTO collections(collection_name, user_id)

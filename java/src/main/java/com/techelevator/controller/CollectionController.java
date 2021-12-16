@@ -119,7 +119,9 @@ public class CollectionController {
 
                         if(characterId == -1){
 
-                            Integer newCharacterId = characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(),marvelCharacter.getCharacterName(),marvelCharacter.getImg_url(),marvelCharacter.getDescription());
+                            String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
+
+                            Integer newCharacterId = characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(),marvelCharacter.getCharacterName(),characterUrl,marvelCharacter.getDescription());
 
                             characterDataDao.addCharacterToComicCharacterTable(addComicDTO.getComicId(),newCharacterId);
 
