@@ -14,19 +14,12 @@
     <h1>{{ detailCollection.collectionName }}</h1>
     <div v-if="isCurrentUserTheUserViewed">
     <div class="btn-container">
-      <button
-        class="btn editpage"
-        v-if="!isLoading && !showEditCollection && $store.state.token != ''"
-        v-on:click="changeShowEditCollection()"
-      >
-        Edit Collection
-      </button>
-       <button
-        class="btn deleteButton"
-        v-on:click="deleteCollection()"
-      >
-        Delete Collection
-      </button>
+      
+      <img src="@/assets/editcollection.png" class="header-button" 
+      v-if="!isLoading && !showEditCollection && $store.state.token != ''"
+        v-on:click="changeShowEditCollection()">
+       
+      <img src="@/assets/deletecollection.png" class="header-button" v-on:click="deleteCollection()">
       </div>
     </div>
     <div v-if="!showEditCollection">
@@ -103,15 +96,11 @@
             </tr>
           </tbody>
         </table>
-        <button class="delete-comics-btn" v-on:click="deleteComicFromCollection()">
-        Delete
-      </button>
-      <button
-        class="delete-comics-btn"
-        v-on:click="changeShowEditCollection()"
-      >
-        Cancel
-      </button>
+        
+      <img src="@/assets/delete.png" class="header-button" v-on:click="deleteComicFromCollection()" >
+      
+            <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowEditCollection()" >
+
       </section>
     </div>
   </div>

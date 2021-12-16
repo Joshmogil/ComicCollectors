@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" class="form-control" v-model="searchInput" />
-    <button class="btn btn-search" v-on:click="marvelCharacterSearch">Search</button>
+    <img src="@/assets/search.png" class="header-button" v-on:click="marvelCharacterSearch">
 
     <section id="search-container">
       <div

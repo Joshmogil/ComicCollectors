@@ -28,12 +28,10 @@
           class="form-control"
           v-model="newCollection.collectionName"
         />
-        <button class="btn btn-submit" v-on:click="saveNewCollection">
-          Save
-        </button>
-        <button class="btn btn-cancel" v-on:click="changeShowNewCollection()">
-          Cancel
-        </button>
+        
+        <img src="@/assets/save.png" class="header-button" v-on:click="saveNewCollection" >
+        
+        <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowNewCollection()">
       </form>
     </div>
   </div>

@@ -55,15 +55,10 @@
         </table>
       </div>
 
-      <button class="btn btn-submit" v-on:click="mainAddComic">
-        Save
-      </button>
-      <button
-        class="btn btn-cancel"
-        v-on:click="changeShowAddToCollection()"
-      >
-        Cancel
-      </button>
+      
+      <img src="@/assets/save.png" class="header-button" v-on:click="mainAddComic">
+      
+      <img src="@/assets/cancel.png" class="header-button" v-on:click="changeShowAddToCollection()">
     </form>
   </div>
 </template>
