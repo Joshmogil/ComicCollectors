@@ -215,7 +215,7 @@ public class CollectionController {
 
                             System.out.println(characterIdExists);
 
-                            if(characterIdExists.equals(null)) {
+                            if(characterIdExists == -1) {
 
                                 String characterUrl = marvelCharacter.getImg_url() + "/portrait_uncanny." + marvelCharacter.getExtension();
                                 characterDataDao.addCharacterToCharacterTable(marvelCharacter.getCharacterId(), marvelCharacter.getCharacterName(), characterUrl, marvelCharacter.getDescription());

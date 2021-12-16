@@ -25,7 +25,7 @@ public class JdbcCharacterDataDao implements CharacterDataDao{
     @Override
     public Integer getCharacterIdByMarvelCharacterId(Long characterId){
 
-        Integer characterIdResult = null;
+        Integer characterIdResult = -1;
 
         try {
 
