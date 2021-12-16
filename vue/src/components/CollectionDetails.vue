@@ -30,7 +30,7 @@
       </div>
     </div>
     <div v-if="!showEditCollection">
-      <section id="horizontal-collection">
+      <section id="search-container">
         <div
           v-for="comic in detailCollection.comicList"
           v-bind:key="comic.comicId"
@@ -38,7 +38,7 @@
           <router-link
             v-bind:to="{ name: 'comicDetails', params: { id: comic.comicId } }"
           >
-            <div class="card-container">
+            <div class="search-card">
               <div class="card">
                 <div class="side"><img :src="comic.imgUrl" alt="" /></div>
                 <div class="side back">{{ comic.description }}</div>
@@ -49,7 +49,7 @@
       </section>
     </div>
     <div v-if="showEditCollection">
-      <section id="horizontal-collection">
+      <section id="search-container">
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -89,7 +89,7 @@
                       params: { id: comic.comicId },
                     }"
                   >
-                    <div class="card-container">
+                    <div class="search-card">
                       <div class="card">
                         <div class="side">
                           <img :src="comic.imgUrl" alt="" />

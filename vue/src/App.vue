@@ -52,11 +52,7 @@ a{
   justify-content: space-evenly;
 }
 
- /* @font-face {
-  font-family: "SF Comic Strip";
-  src: local("SF Comic Strip"),
- url(./src/Fonts/SFComicStrip-Bold.ttf) format("truetype");
- } */
+
 .card-container {
   cursor: pointer;
   height: 250px;
@@ -103,7 +99,41 @@ border: 1px Solid rgb(0, 0, 19);
   font-family: 'Bangers';
 }
 
+#search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: auto;
+}
+.search-card {
+  cursor: pointer;
+  height: 250px;
+  perspective: 600;
+  position: relative;
+  width: 188px;
+}
 
+.user-card-container {
+  display: flex;
+  cursor: pointer;
+  height: 250px;
+  perspective: 600;
+  position: relative;
+  width: 188px;
+   overflow: hidden;
+  
+}
+
+.collection-comics {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px 12px;
+  box-sizing: border-box;
+  width: 20rem;
+  height: 20rem;
+
+}
 
 
 

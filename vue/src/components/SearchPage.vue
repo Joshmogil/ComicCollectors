@@ -60,18 +60,6 @@ export default {
 </script>
 
 <style>
-#search-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  max-width: auto;
-}
-.search-card {
-  cursor: pointer;
-  height: 250px;
-  perspective: 600;
-  position: relative;
-  width: 188px;
-}
+
 
 </style>
