@@ -20,7 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    currentUserId: currentUser.userId || 0,
+    currentUserId: 0,
     collectionsApiStore: [
       {
         collectionId: 0,
