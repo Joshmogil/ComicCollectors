@@ -43,6 +43,8 @@ export default {
             this.$router.push(`/collections/${newCollection.collectionId}`);
           }
         });
+      this.$router.push({ name: 'userDetails', params: { userId: this.$store.state.user.id || 0 }  });
+
     },
   },
 };
